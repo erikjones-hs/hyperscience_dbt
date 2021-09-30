@@ -1,7 +1,6 @@
 {{ config
 (
-    materialized='incremental',
-    unique_key = 'date_ran'
+    materialized='incremental'
 )
 }}
 
@@ -250,6 +249,6 @@ select * from agg_opportunity
 
 {% if is_incremental() %}
 
-  where date_ran > (select max(date_ran) from {{ this }})
+  where date_ran >= (select max(date_ran) from {{ this }})
 
 {% endif %}
