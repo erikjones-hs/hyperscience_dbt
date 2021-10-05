@@ -1,6 +1,6 @@
 {{ config
 (
-    materialized="table",
+    materialized='table',
     database = 'DBT',
     schema = 'DBT_EJONES'
 )
