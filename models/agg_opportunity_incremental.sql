@@ -1,6 +1,8 @@
 {{ config
 (
-    materialized='incremental'
+    materialized ='incremental'
+    database = 'DBT'
+    schema = 'DBT_EJONES'
 )
 }}
 
