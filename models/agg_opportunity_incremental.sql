@@ -1,7 +1,7 @@
 {{ config
 (
-    materialized ='incremental'
-    database = 'DBT'
+    materialized ='incremental',
+    database = 'DBT',
     schema = 'DBT_EJONES'
 )
 }}
