@@ -1,8 +1,8 @@
 {{ config
 (
     materialized='table',
-    database = 'DBT',
-    schema = 'DBT_EJONES'
+    database = 'PROD',
+    schema = 'MARKETING'
 )
 }}
 
