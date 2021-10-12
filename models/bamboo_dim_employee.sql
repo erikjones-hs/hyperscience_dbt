@@ -1,6 +1,6 @@
 {{ config
 (
-    materialized='table',
+    materialized='incremental',
     database = 'PROD',
     schema = 'HR'
 )
@@ -133,3 +133,9 @@ left join current_job as cj on (emp.employee_eid = cj.employee_id)
 )
 
 select * from dim_employee order by employee_eid
+
+{% if is_incremental() %}
+
+  where date_ran >= (select max(date_ran) from {{ this }})
+
+{% endif %}

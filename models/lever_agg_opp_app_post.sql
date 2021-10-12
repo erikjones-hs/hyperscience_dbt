@@ -1,6 +1,6 @@
 {{ config
 (
-    materialized='table',
+    materialized='incremental',
     database = 'PROD',
     schema = 'HR'
 )
@@ -58,10 +58,17 @@ post.post_owner_id,
 post.post_owner_name,
 post.post_owner_email,
 post.post_tags,
-post.post_dist_channels
+post.post_dist_channels,
+to_date(current_date()) as date_ran
 from "DEV"."HR"."LEVER_DIM_OPPORTUNITY" as opp 
 left join "DEV"."HR"."LEVER_DIM_APPLICATION" as app on (app.application_opp_id = opp.opp_id)
 left join "DEV"."HR"."LEVER_DIM_POSTING" as post on (app.application_posting_id = post.post_id)
 )
 
 select * from analysis_table order by opp_id
+
+{% if is_incremental() %}
+
+  where date_ran >= (select max(date_ran) from {{ this }})
+
+{% endif %}
