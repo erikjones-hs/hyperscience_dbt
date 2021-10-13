@@ -18,14 +18,18 @@ employees.id as employee_id,
 employees.supervisor_eid as manager_id
 from "FIVETRAN_DATABASE"."BAMBOOHR"."EMPLOYEE" as employees 
 join managers on (employees.supervisor_eid = managers.employee_id)
-)
+),
 
+fct_dim_reporting_sales as (
 select 
 employee_id,
 manager_id,
 to_date(current_date()) as date_ran 
 from managers
 order by manager_id nulls first, employee_id
+)
+
+select * from fct_dim_reporting_sales 
 
 {% if is_incremental() %}
 
