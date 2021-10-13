@@ -130,9 +130,10 @@ left join current_status as cs on (emp.employee_eid = cs.employee_id)
 left join current_level as cl on (emp.employee_eid = cl.employee_id)
 left join current_salary as c_sal on (emp.employee_eid = c_sal.employee_id)
 left join current_job as cj on (emp.employee_eid = cj.employee_id)
+order by employee_eid
 )
 
-select * from dim_employee order by employee_eid
+select * from dim_employee
 
 {% if is_incremental() %}
 
