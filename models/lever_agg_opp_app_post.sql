@@ -63,9 +63,10 @@ to_date(current_date()) as date_ran
 from "DEV"."HR"."LEVER_DIM_OPPORTUNITY" as opp 
 left join "DEV"."HR"."LEVER_DIM_APPLICATION" as app on (app.application_opp_id = opp.opp_id)
 left join "DEV"."HR"."LEVER_DIM_POSTING" as post on (app.application_posting_id = post.post_id)
+order by opp_id
 )
 
-select * from analysis_table order by opp_id
+select * from analysis_table
 
 {% if is_incremental() %}
 
