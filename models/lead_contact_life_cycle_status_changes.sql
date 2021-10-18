@@ -49,15 +49,29 @@ SELECT PERSON_ID, LEAD_ID, CONTACT_ID, MQL_DATE_FROM_SAL as date, 'MQL from SAL'
 
 ),
 
-fct_status as (
+fct_status_stg as (
     SELECT
     PERSON_ID,
     LEAD_ID,
     CONTACT_ID,
     DATE(DATE) as DATE,
-    STATUS_CHANGE
+    STATUS_CHANGE,
+    CASE WHEN lead_id is null then '1000000001' else lead_id end as lead_id_surrogate,
+    CASE WHEN contact_id is null then '1000000001' else contact_id end as contact_id_surrogate,
+    person_id||'-'||lead_id_surrogate||'-'||contact_id_surrogate||'-'||to_date(date)||'-'||status_change as id 
 FROM base_table
 ORDER BY STATUS_CHANGE
+),
+
+fct_status as (
+    SELECT 
+    id,
+    person_id,
+    lead_id,
+    contact_id,
+    date,
+    status_change
+    from fct_status_stg
 )
 
 select * from fct_status

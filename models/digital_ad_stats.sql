@@ -1,0 +1,105 @@
+{{ config
+(
+    materialized='table',
+    database = 'PROD',
+    schema = 'MARKETING'
+)
+}}
+
+WITH linkedin_campaigns AS (
+
+    SELECT 
+    
+    ID as CAMPAIGN_ID, 
+    NAME as CAMPAIGN_NAME, 
+    STATUS as CAMPAIGN_STATUS, 
+    TYPE as CAMPAIGN_AD_TYPE,
+    LAST_MODIFIED_TIME as CAMPAIGN_LAST_UPDATED
+    
+    FROM (
+        SELECT *,
+        RANK() OVER (PARTITION BY ID
+                     ORDER BY LAST_MODIFIED_TIME DESC) as rank
+        FROM FIVETRAN_DATABASE.LINKEDIN_ADS.CAMPAIGN_HISTORY
+        ORDER BY LAST_MODIFIED_TIME ASC
+       ) AS latest
+    WHERE latest.rank = 1
+
+
+),
+
+linkedin AS (
+    
+    SELECT
+    
+    DATE(DAY) AS DATE,
+    STATS.CAMPAIGN_ID,
+    CAMPAIGN_NAME,
+    CAMPAIGN_STATUS,
+    CAMPAIGN_AD_TYPE,
+    CAMPAIGN_LAST_UPDATED,
+    'LinkedIn' as CAMPAIGN_PLATFORM,
+    IMPRESSIONS,
+    CLICKS,
+    (ONE_CLICK_LEADS + EXTERNAL_WEBSITE_CONVERSIONS + EXTERNAL_WEBSITE_POST_CLICK_CONVERSIONS + EXTERNAL_WEBSITE_POST_VIEW_CONVERSIONS) as CONVERSIONS,
+    COST_IN_USD as COST
+    
+    FROM FIVETRAN_DATABASE.LINKEDIN_ADS.AD_ANALYTICS_BY_CAMPAIGN STATS
+        LEFT JOIN LINKEDIN_CAMPAIGNS CAMPAIGNS
+            ON STATS.CAMPAIGN_ID = CAMPAIGNS.CAMPAIGN_ID
+        
+        
+
+),
+
+google_campaigns AS (
+    
+    SELECT 
+    
+    ID as CAMPAIGN_ID, 
+    NAME as CAMPAIGN_NAME, 
+    STATUS as CAMPAIGN_STATUS, 
+    ADVERTISING_CHANNEL_TYPE as CAMPAIGN_AD_TYPE,
+    UPDATED_AT as CAMPAIGN_LAST_UPDATED
+    
+    FROM (
+        SELECT *,
+        RANK() OVER (PARTITION BY ID
+                     ORDER BY UPDATED_AT DESC) as rank
+        FROM "FIVETRAN_DATABASE"."GOOGLE_ADS"."CAMPAIGN_HISTORY"
+        ORDER BY UPDATED_AT ASC
+       ) AS latest
+    WHERE latest.rank = 1
+    
+),
+
+google_ads AS (
+    
+    SELECT 
+    
+        DATE as DATE,
+        STATS.CAMPAIGN_ID,
+        CAMPAIGN_NAME,
+        CAMPAIGN_STATUS,
+        CAMPAIGN_AD_TYPE,
+        CAMPAIGN_LAST_UPDATED,
+        'Google' as CAMPAIGN_PLATFORM,
+        IMPRESSIONS,
+        CLICKS,
+        CONVERSIONS,
+        COST
+    
+    FROM FIVETRAN_DATABASE.GOOGLE_ADS.CAMPAIGN_STATS STATS
+        LEFT JOIN GOOGLE_CAMPAIGNS
+            ON STATS.CAMPAIGN_ID = GOOGLE_CAMPAIGNS.CAMPAIGN_ID
+            
+
+)
+
+
+SELECT *
+FROM linkedin
+UNION
+SELECT *
+FROM google_ads
+
