@@ -68,6 +68,16 @@ models:
     enabled: false
   snapchat_ads_source:
     enabled: false
+  
+  linkedin:
+    +schema: linkedin
+  linkedin_source:
+    +schema: linkedin_source
+
+  google_ads:
+    +schema: google_ads
+  google_ads_source:
+    +schema: google_ads_source
 
 vars:
   ad_reporting__pinterest_enabled: False
@@ -77,3 +87,8 @@ vars:
   ad_reporting__twitter_ads_enabled: False
   ad_reporting__facebook_ads_enabled: False
   ad_reporting__snapchat_ads_enabled: False
+  linkedin_schema: linkedin_ads 
+  linkedin_database: FIVETRAN_DATABASE  
+  google_ads_schema: GOOGLE_ADS
+  google_ads_database: FIVETRAN_DATABASE 
+
