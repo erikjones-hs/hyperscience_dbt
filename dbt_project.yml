@@ -90,5 +90,6 @@ vars:
   linkedin_schema: linkedin_ads 
   linkedin_database: FIVETRAN_DATABASE  
   google_ads_schema: GOOGLE_ADS
-  google_ads_database: FIVETRAN_DATABASE 
+  google_ads_database: FIVETRAN_DATABASE
+  api_source: google_ads
 
