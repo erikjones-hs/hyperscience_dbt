@@ -34,7 +34,7 @@ and opp_id not in ('0061R00000kRNPDQA4')
 order by account_name, opp_name, rev_schedule_name asc, period_start_dte desc
 )
 
-select * from rev_schedule_w_orders;
+select * from rev_schedule_w_orders
 
 {% if is_incremental() %}
 

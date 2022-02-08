@@ -157,4 +157,4 @@ from growth_acct as ga
 order by ga.qtr_end_dte asc
 )
 
-select * from growth_acct_with_metrics; 
+select * from growth_acct_with_metrics 

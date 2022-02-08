@@ -128,4 +128,4 @@ left join num_first_active_qtr as nfaq on (fcrci.first_active_quarter = nfaq.fir
 order by first_active_quarter asc, num_quarters_since_start asc
 )
 
-select * from fct_customer_retention_cohort;
+select * from fct_customer_retention_cohort

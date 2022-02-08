@@ -60,4 +60,4 @@ where to_date(dte_month) <= to_date(date_trunc('month',current_date()))
 order by fy_year asc, dte_month asc
 )
 
-select * from fy_mqls_agg;
+select * from fy_mqls_agg
