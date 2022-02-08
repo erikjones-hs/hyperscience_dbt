@@ -129,4 +129,4 @@ left join rev_first_active_qtr as rfaq on (frrci.first_active_quarter = rfaq.fir
 order by first_active_quarter asc, num_quarters_since_start asc
 )
 
-select * from fct_net_rev_retention_cohort;
+select * from fct_net_rev_retention_cohort
