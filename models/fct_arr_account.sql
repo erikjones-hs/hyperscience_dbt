@@ -7,6 +7,7 @@
 }}
 
 with agg_account_arr as (
+    
 select distinct
 to_timestamp(date_month) as date_month,
 account_id,
