@@ -66,6 +66,26 @@ and imh.value IS NOT NULL
 order by imh.issue_id
 ),
 
+feedback_category as (
+select distinct
+imh.issue_id,
+fo.name as feedback_category
+from "FIVETRAN_DATABASE"."JIRA"."ISSUE_MULTISELECT_HISTORY" as imh
+left join "FIVETRAN_DATABASE"."JIRA"."FIELD_OPTION" as fo on (imh.value = fo.id)
+where imh.field_id = 'customfield_10669'
+order by imh.issue_id
+),
+
+customer_name as (
+select distinct
+imh.issue_id,
+fo.name as customer_name
+from "FIVETRAN_DATABASE"."JIRA"."ISSUE_MULTISELECT_HISTORY" as imh
+left join "FIVETRAN_DATABASE"."JIRA"."FIELD_OPTION" as fo on (imh.value = fo.id)
+where imh.field_id = 'customfield_10666'
+order by imh.issue_id
+),
+
 fct_issue_component_version as (
 select distinct 
 i.issue_id,
@@ -90,13 +110,17 @@ i.created_dte,
 c.component_name as component,
 c.component_is_active,
 v.version_name,
-v.version_is_active
+v.version_is_active,
+fc.feedback_category,
+cn.customer_name
 from issues as i
 left join components as c on (i.issue_id = c.issue_id)
 left join versions as v on (i.issue_id = v.issue_id)
+left join feedback_category as fc on (i.issue_id = fc.issue_id)
+left join customer_name as cn on (i.issue_id = cn.issue_id)
 order by i.issue_id desc
 )
 
-select * from fct_issue_component_version
+select * from fct_issue_component_version 
 
 
