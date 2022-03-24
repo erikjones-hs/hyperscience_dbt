@@ -20,7 +20,7 @@ is_active_acct,
 customer_category,
 revenue_category,
 months_since_start
-from "DEV"."ERIKJONES"."MONTHLY_KPIS_FINANCE_ARR_ACCT"
+from {{ ref('fct_arr_account') }}
 where to_date(date_month) < to_date(date_trunc('month',current_date()))
 order by account_id, date_month asc
 ),
