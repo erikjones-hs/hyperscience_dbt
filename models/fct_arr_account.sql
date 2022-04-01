@@ -23,7 +23,7 @@ is_last_month_acct,
 customer_category,
 revenue_category,
 datediff(month,first_active_month_acct,date_month) as months_since_start
-from "DEV"."ERIKJONES"."MONTHLY_KPIS_FINANCE_ARR"
+from {{ ref('fct_arr_opp') }}
 order by date_month asc
 )
 
