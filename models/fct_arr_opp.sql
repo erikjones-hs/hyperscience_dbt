@@ -6,4 +6,5 @@
 )
 }}
 
-select * from dev.erikjones.monthly_kpis_finance_arr 
+--select * from dev.erikjones.monthly_kpis_finance_arr 
+select * from dev.erikjones.monthly_kpis_finance_arr_trash
