@@ -379,6 +379,38 @@ and opp_arr > 0
 order by account_id, start_dte_raw asc
 ),
 
+raw_data_inc_14 as (
+select distinct 
+account_id,
+account_name,
+opp_id,
+opp_name,
+opp_revenue_type,
+to_date(opp_start_dte) as start_dte_raw,
+to_date(opp_renewal_dte) as end_dte_raw,
+to_date(opp_closed_won_dte) as closed_won_dte,
+opp_arr,
+opp_net_new_arr
+from "DEV"."ERIKJONES"."SALESFORCE_AGG_OPPORTUNITY_v14"
+where (opp_stage_name = 'Closed Won')
+and opp_id not in (select opp_id from raw_data_hist)
+and opp_id not in (select opp_id from raw_data_inc)
+and opp_id not in (select opp_id from raw_data_inc_2) 
+and opp_id not in (select opp_id from raw_data_inc_3)
+and opp_id not in (select opp_id from raw_data_inc_4) 
+and opp_id not in (select opp_id from raw_data_inc_5) 
+and opp_id not in (select opp_id from raw_data_inc_6)
+and opp_id not in (select opp_id from raw_data_inc_7) 
+and opp_id not in (select opp_id from raw_data_inc_8)
+and opp_id not in (select opp_id from raw_data_inc_9)  
+and opp_id not in (select opp_id from raw_data_inc_10)
+and opp_id not in (select opp_id from raw_data_inc_11)  
+and opp_id not in (select opp_id from raw_data_inc_12)
+and opp_id not in (select opp_id from raw_data_inc_13)
+and opp_arr > 0
+order by account_id, start_dte_raw asc
+),
+
 /* Merging historical data set with incrementa closed won opps */
 /* This is now the full closed won opportunity data set that will be transformed */ 
 raw_data as (
@@ -409,6 +441,8 @@ UNION
 select * from raw_data_inc_12
 UNION 
 select * from raw_data_inc_13
+UNION 
+select * from raw_data_inc_14
 order by account_id, start_dte_raw asc
 ),
 
@@ -456,14 +490,15 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      WHEN opp_id = '0061R000010t71kQAA' then to_date('2022-01-15') /* Customer no longer is paying. Close this out in Jan. per FP&A. Sience SAS 41.65k */
      when opp_id = '0061R000014uXZrQAM' then to_date('2023-01-25') /* Updated MPOWER end date because it is incorrect in SFDC */
      when opp_id = '0061R00000yElHXQA0' then to_date('2022-02-15') /* Customer Churned in Feb, per FP&A. Department of Treasury 87.5k */
-     when opp_id = '0061R000010O65hQAC' then to_date('2022-04-15') /* End date adjustment because of open negotiations. First American Financial 1M */
-     when opp_id = '0061R00000tG3b2QAC' then to_date('2022-04-15') /* End date adjustment because of open negotiations. CI Financial 150k */
+     when opp_id = '0061R000010O65hQAC' then to_date('2022-08-15') /* End date adjustment because of open negotiations. First American Financial 1M */
+     when opp_id = '0061R00000tG3b2QAC' then to_date('2022-05-15') /* End date adjustment because of open negotiations. CI Financial 150k */
      when opp_id = '0061R00000zAlU8QAK' then to_date('2022-03-15') /* Opportunity churned in March, per Kristen. AMEX 323k */
      when opp_id = '0061R0000136hnzQAA' then to_date('2022-02-15') /* Customer churned in Feb. per Kristen. AXA Churn. 35k */ 
      when opp_id = '0061R000014vAD7QAM' then to_date('2023-02-15') /* Adjusting end date because it is incorrect in SFDC */
      when opp_id = '0061R00000r7xPhQAI' then to_date('2022-02-15') /* Customer churned. Close this out in Feb. per FP&A. DISA 64.3k */ 
      when opp_Id = '0061R0000137tYlQAI' then to_date('2022-03-15') /* Customer churned. Close this out in Mar. per FP&A. Record Connect 239k */
      when opp_id = '0061R0000137kNxQAI' then to_date('2022-04-15') /* Customer Churned in April per FP&A. State of Texas 402.5k total. 17.5k opp */
+     when opp_id = '0061R00000zD2sxQAC' then to_date('2022-05-15') /* End date adjustment because of open negotiations. Conduent 1.98M */
      ELSE end_dte_raw end as end_dte,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
      WHEN opp_id = '0061R00000uIehuQAC' then to_date('2020-01-01')
