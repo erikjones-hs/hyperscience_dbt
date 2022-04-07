@@ -15,7 +15,7 @@ where to_date(date_ran) = dateadd(day,-1,(to_date(current_date)))
 ),
 
 /* Pulling in transformed SFDC data from arr_opp_history_transform model*/
-aw_data_transformed as (
+raw_data_transformed as (
 select * from {{ref('arr_opp_history_transformed')}}
 ),
 
