@@ -88,8 +88,10 @@ CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
      WHEN opp_id = '0061R0000137hXuQAI' then to_date('2022-02-15')
      WHEN opp_id = '0061R0000136ZbBQAU' then to_date('2022-03-15')
      ELSE start_dte_raw end as start_dte,
+closed_won_dte,
 date_trunc('month',to_date(start_dte)) as start_dte_month,
 date_trunc('month',to_date(end_dte)) as end_dte_month,
+date_trunc('month',to_date(closed_won_dte)) as closed_won_dte_month,
 CASE WHEN opp_id = '0063600000M73LuAAJ' then 200000
      WHEN opp_id = '0063600000dsPyXAAU' then 150000
      WHEN opp_id = '0061R00000kRNPDQA4' then 400000
@@ -102,7 +104,8 @@ CASE WHEN opp_id = '0063600000M73LuAAJ' then 200000
      ELSE opp_arr end as opp_arr,
 CASE WHEN opp_id = '0061R0000135gO1QAI' then 5040 
      WHEN opp_id = '0061R000014xeQwQAI' then 13269
-     ELSE opp_net_new_arr end as opp_net_new_arr
+     ELSE opp_net_new_arr end as opp_net_new_arr,
+opp_is_marketing_influenced_flag
 from raw_data
 where opp_id not in ('00636000003gG2qAAE','0063600000W0NhNAAV','0063600000SKDdAAAX','0061R00000m1g4KQAQ','0063600000X36vUAAR') /*removing these ops per FP&A */
 )
