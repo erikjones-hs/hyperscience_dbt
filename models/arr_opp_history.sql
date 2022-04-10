@@ -418,6 +418,40 @@ and opp_arr > 0
 order by account_id, start_dte_raw asc
 ),
 
+raw_data_inc_15 as (
+select distinct 
+account_id,
+account_name,
+opp_id,
+opp_name,
+opp_revenue_type,
+opp_is_marketing_influenced_flag,
+to_date(opp_start_dte) as start_dte_raw,
+to_date(opp_renewal_dte) as end_dte_raw,
+to_date(opp_closed_won_dte) as closed_won_dte,
+opp_arr,
+opp_net_new_arr
+from "DEV"."ERIKJONES"."SALESFORCE_AGG_OPPORTUNITY_v15"
+where (opp_stage_name = 'Closed Won')
+and opp_id not in (select opp_id from raw_data_hist)
+and opp_id not in (select opp_id from raw_data_inc)
+and opp_id not in (select opp_id from raw_data_inc_2) 
+and opp_id not in (select opp_id from raw_data_inc_3)
+and opp_id not in (select opp_id from raw_data_inc_4) 
+and opp_id not in (select opp_id from raw_data_inc_5) 
+and opp_id not in (select opp_id from raw_data_inc_6)
+and opp_id not in (select opp_id from raw_data_inc_7) 
+and opp_id not in (select opp_id from raw_data_inc_8)
+and opp_id not in (select opp_id from raw_data_inc_9)  
+and opp_id not in (select opp_id from raw_data_inc_10)
+and opp_id not in (select opp_id from raw_data_inc_11)  
+and opp_id not in (select opp_id from raw_data_inc_12)
+and opp_id not in (select opp_id from raw_data_inc_13)
+and opp_id not in (select opp_id from raw_data_inc_14)
+and opp_arr > 0
+order by account_id, start_dte_raw asc
+),
+
 /* Merging historical data set with incrementa closed won opps */
 /* This is now the full closed won opportunity data set that will be transformed */ 
 raw_data as (
@@ -450,6 +484,8 @@ UNION
 select * from raw_data_inc_13
 UNION 
 select * from raw_data_inc_14
+UNION 
+select * from raw_data_inc_15
 order by account_id, start_dte_raw asc
 )
 
