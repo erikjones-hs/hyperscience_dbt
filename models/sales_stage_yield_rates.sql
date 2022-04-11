@@ -41,7 +41,7 @@ from fct_opp_stage_flags
 where lower(opp_name) like '%pilot%'
 ),
 
-fct_stage_yiled_rates as (
+fct_stage_yield_rates as (
 select * from fct_opp_stage_flags
 where opp_id not in (select opp_id from pilots)
 )
