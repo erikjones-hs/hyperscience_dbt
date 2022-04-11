@@ -115,17 +115,19 @@ pipeline_agg_int as (
 select distinct
 dte,
 fy_quarter,
+opp_pipeline_category,
 sum(opp_net_new_arr) as opp_net_new_arr
 from fct_pipeline
-group by dte, fy_quarter
-order by dte asc, fy_quarter
+group by dte, fy_quarter, opp_pipeline_category
+order by dte asc, fy_quarter, opp_pipeline_category
 ),
 
 pipeline_agg as (
 select 
 fy_quarter,
 dte as close_date,
-ZEROIFNULL(sum(opp_net_new_arr) over (partition by fy_quarter order by dte asc rows between unbounded preceding and current row)) as cum_sum_net_new_arr
+opp_pipeline_category,
+ZEROIFNULL(sum(opp_net_new_arr) over (partition by fy_quarter, opp_pipeline_category order by dte asc rows between unbounded preceding and current row)) as cum_sum_net_new_arr
 from pipeline_agg_int
 order by fy_quarter asc, dte asc
 ),
@@ -135,6 +137,7 @@ select distinct
 to_timestamp(cqa.dte) as dte,
 cqa.total_capacity,
 naqa.new_arr_budget,
+pa.opp_pipeline_category,
 pa.cum_sum_net_new_arr
 from capacity_qtr_agg as cqa 
 left join new_arr_qtr_agg as naqa on (cqa.dte = naqa.qtr_end_dte)
