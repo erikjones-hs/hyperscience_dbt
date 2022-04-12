@@ -99,6 +99,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' and to_date(joi.date_month) <= '2019-06-
      WHEN opp_id = '0063600000dsPsjAAE' and to_date(joi.date_month) <= '2019-07-01' then 560000 
      when opp_id = '0061R00000r6r1iQAA' and to_date(joi.date_month) >= '2021-11-01' then 0.00000000001
      when opp_id = '0061R00000uL8ylQAC' and to_date(joi.date_month) >= '2021-11-01' then 0.00000000001
+     when opp_id = '0061R0000137hQzQAI' and to_date(joi.date_month) >= '2022-04-01' then 15000 /* Updated based on agreement to settle per FP&A */
      ELSE joi.mrr end as mrr
 from joined_opportunity_int as joi 
 ),
