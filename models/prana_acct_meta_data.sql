@@ -16,7 +16,8 @@ opp.actual_go_live_date_c as actual_go_live_date
 from "FIVETRAN_DATABASE"."SALESFORCE"."OPPORTUNITY" as opp
 where opp.stage_name = 'Closed Won'
 and opp.is_deleted = 'FALSE'
-order by opp_id),
+order by opp_id
+),
 
 agg_opp_pages as (
 select 
@@ -65,7 +66,7 @@ first_active_month as start_dte,
 last_active_month as end_dte,
 datediff(months,start_dte,to_date(current_date)) as months_since_start,
 datediff(months,to_date(current_date),end_dte) as num_months_to_renewal
-from from {{ ref('fct_arr_account') }} 
+from {{ ref('fct_arr_account') }} 
 where start_dte IS NOT NULL
 order by account_id
 ),
