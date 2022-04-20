@@ -176,4 +176,4 @@ select * from backfill
 order by customer, period_start asc 
 )
 
-select * from fct_saas_usage;
+select * from fct_saas_usage
