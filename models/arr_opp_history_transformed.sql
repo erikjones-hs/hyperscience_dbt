@@ -69,6 +69,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R00000yEQVgQAO' then to_date('2022-06-15') /* End date adjustment because of open negotiations. GDIT VA VICCS 200k */ 
      when opp_id = '0061R00000yFonNQAS' then to_date('2022-06-15') /* End date adjustment because of open negotiations. MetaSource 250k */ 
      ELSE end_dte_raw end as end_dte,
+end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
      WHEN opp_id = '0061R00000uIehuQAC' then to_date('2020-01-01')
      WHEN opp_id = '0061R00000zD2sxQAC' then to_date('2020-12-01')
@@ -95,6 +96,7 @@ CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
 closed_won_dte,
 date_trunc('month',to_date(start_dte)) as start_dte_month,
 date_trunc('month',to_date(end_dte)) as end_dte_month,
+date_trunc('month',to_date(end_dte_raw)) as end_dte_raw_month,
 date_trunc('month',to_date(closed_won_dte)) as closed_won_dte_month,
 CASE WHEN opp_id = '0063600000M73LuAAJ' then 200000
      WHEN opp_id = '0063600000dsPyXAAU' then 150000
