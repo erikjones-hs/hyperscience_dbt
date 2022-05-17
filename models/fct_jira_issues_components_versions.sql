@@ -63,6 +63,20 @@ from "FIVETRAN_DATABASE"."JIRA"."ISSUE_MULTISELECT_HISTORY" as imh
 left join "FIVETRAN_DATABASE"."JIRA"."VERSION" as v on (imh.value = v.id)
 where field_id = 'versions'
 and imh.value IS NOT NULL
+and version_is_active = true 
+order by imh.issue_id
+),
+
+fix_versions as (
+select distinct 
+imh.issue_id,
+v.name as fix_version_name,
+imh.is_active as fix_version_is_active
+from "FIVETRAN_DATABASE"."JIRA"."ISSUE_MULTISELECT_HISTORY" as imh
+left join "FIVETRAN_DATABASE"."JIRA"."VERSION" as v on (to_char(imh.value) = to_char(v.id))
+where field_id in ('fixVersions')
+and imh.value IS NOT NULL
+and fix_version_is_active = true 
 order by imh.issue_id
 ),
 
@@ -110,12 +124,13 @@ i.created_dte,
 c.component_name as component,
 c.component_is_active,
 v.version_name,
-v.version_is_active,
+fv.fix_version_name,
 fc.feedback_category,
 cn.customer_name
 from issues as i
 left join components as c on (i.issue_id = c.issue_id)
 left join versions as v on (i.issue_id = v.issue_id)
+left join fix_versions as fv on (i.issue_id = fv.issue_id)
 left join feedback_category as fc on (i.issue_id = fc.issue_id)
 left join customer_name as cn on (i.issue_id = cn.issue_id)
 order by i.issue_id desc
