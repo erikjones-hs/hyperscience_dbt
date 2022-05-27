@@ -50,6 +50,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      WHEN opp_id = '0061R000010PVABQA4' then to_date('2021-10-15')
      WHEN opp_id = '0061R00000zBqNRQA0' then to_date('2021-11-15')
      WHEN opp_id = '0061R000013fGLrQAM' then to_date('2022-12-18')
+     WHEN opp_id = '0061R00000wJkMuQAK' then to_date('2021-12-15')
      WHEN opp_id = '0061R000013fGTbQAM' then to_date('2022-11-23') /* Updated end date because it is incorect in SFDC. divvyDose 180k */
      WHEN opp_id = '0061R00000zD2sTQAS' then to_date('2021-12-15') /* End date adjusted per Kristen and Finance ARR Google Sheet. Conduent 280k */ 
      WHEN opp_id = '0061R000010t71kQAA' then to_date('2022-01-15') /* Customer no longer is paying. Close this out in Jan. per FP&A. Sience SAS 41.65k */
