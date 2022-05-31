@@ -68,10 +68,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R0000137hQzQAI' then to_date('2022-10-15') /* Adjusting end date by 1 month per FP&A. Allstate 15k */
      when opp_id = '0061R000010O65hQAC' then to_date('2022-08-15') /* End date adjustment because of open negotiations. First American Financial 1M */
      when opp_id = '0061R00000zD2sxQAC' then to_date('2022-06-15') /* End date adjustment because of open negotiations. Conduent 1.98M */
-     when opp_id = '0061R00000zAIBfQAO' then to_date('2022-06-15') /* End date adjustment because of open negotiations. Manulife 375k */
-     when opp_id = '0061R00000zAI8KQAW' then to_date('2022-06-15') /* End date adjustment because of open negotiations. VA DMV 43.2k */ 
-     when opp_id = '0061R00000yEQVgQAO' then to_date('2022-06-15') /* End date adjustment because of open negotiations. GDIT VA VICCS 200k */ 
-     when opp_id = '0061R00000yFonNQAS' then to_date('2022-06-15') /* End date adjustment because of open negotiations. MetaSource 250k */ 
+     when opp_id = '0061R00000zAIBfQAO' then to_date('2022-06-15') /* End date adjustment because of open negotiations. Manulife 375k */ 
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
