@@ -46,7 +46,6 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      WHEN opp_id = '0061R00000tFLB3QAO' then to_date('2021-11-15')
      WHEN opp_id = '0061R0000137jsqQAA' then to_date('2022-08-30')
      WHEN opp_id = '0061R0000137jqkQAA' then to_date('2022-08-19')
-     WHEN opp_id = '0061R0000137ijiQAA' then to_date('2022-06-09')
      WHEN opp_id = '0061R00000uL8ylQAC' then to_date('2023-11-15') /* Adjusting the end date for PMP because they are still a customer, but with a 1 year free contract period */
      WHEN opp_id = '0061R00000zAjoeQAC' then to_date('2021-10-15')
      WHEN opp_id = '0061R0000137hOKQAY' then to_date('2022-08-20')
@@ -96,6 +95,7 @@ CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
      WHEN opp_id = '0061R0000135gO1QAI' then to_date('2021-12-15')
      WHEN opp_id = '0061R0000137hXuQAI' then to_date('2022-02-15')
      WHEN opp_id = '0061R0000136ZbBQAU' then to_date('2022-03-15')
+     when opp_id = '0061R000014wI4qQAE' then to_date('2022-06-01')
      ELSE start_dte_raw end as start_dte,
 closed_won_dte,
 date_trunc('month',to_date(start_dte)) as start_dte_month,
