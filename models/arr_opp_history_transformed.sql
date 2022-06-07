@@ -96,6 +96,8 @@ CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
      WHEN opp_id = '0061R0000137hXuQAI' then to_date('2022-02-15')
      WHEN opp_id = '0061R0000136ZbBQAU' then to_date('2022-03-15')
      when opp_id = '0061R000014wI4qQAE' then to_date('2022-06-01')
+     when opp_id = '0061R000016my8LQAQ' then to_date('2022-06-15')
+     when opp_id = '0061R000016jsHbQAI' then to_date('2022-07-15')
      ELSE start_dte_raw end as start_dte,
 closed_won_dte,
 date_trunc('month',to_date(start_dte)) as start_dte_month,
