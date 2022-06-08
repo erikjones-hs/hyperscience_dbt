@@ -122,4 +122,8 @@ from raw_data
 where opp_id not in ('00636000003gG2qAAE','0063600000W0NhNAAV','0063600000SKDdAAAX','0061R00000m1g4KQAQ','0063600000X36vUAAR') /*removing these ops per FP&A */
 )
 
-select * from raw_data_transformed
+select * from raw_data_transformed where opp_id not in 
+(
+'0061R000016my8LQAQ', /* Tokio Marine Deal 420k. Remove after 6/30/2022 due to out clause */
+'0061R000016jsHbQAI'  /* Utilize Core deal 54k. Remove after 7/15/2022 due to out clause */
+)
