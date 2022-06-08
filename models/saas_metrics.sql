@@ -24,7 +24,7 @@ where to_date(dte) >= '2020-01-01'
 and to_date(dte) <= '2024-02-29'
 ),
 
-saas_metrics_revenue_int as (
+saas_metrics_int as (
 select distinct
 to_timestamp(rd.dte) as dte,
 rd.total_arr,
@@ -69,17 +69,99 @@ rd.cash_conversion_score_75,
 rd.fcf_25,
 rd.fcf_median,
 rd.fcf_75,
-rd.rule_of_40_median
+rd.rule_of_40_median,
+rd.aws_expense,
+sum(rd.aws_expense) over (partition by fd.fy_year order by rd.dte asc rows between unbounded preceding and current row) as aws_expense_fy,
+rd.hosting_engineering_expense,
+sum(rd.hosting_engineering_expense) over (partition by fd.fy_year order by rd.dte asc rows between unbounded preceding and current row) as hosting_engineering_expense_fy,
+rd.hosting_ml_expense,
+sum(rd.hosting_ml_expense) over (partition by fd.fy_year order by rd.dte asc rows between unbounded preceding and current row) as hosting_ml_expense_fy,
+rd.software_engineering_expense,
+sum(rd.software_engineering_expense) over (partition by fd.fy_year order by rd.dte asc rows between unbounded preceding and current row) as software_engineering_expense_fy,
+rd.work_facilities_expense,
+sum(rd.work_facilities_expense) over (partition by fd.fy_year order by rd.dte asc rows between unbounded preceding and current row) as work_facilities_expense_fy,
+rd.all_departments_cor_comp_expense,
+rd.all_departments_expense,
+rd.sales_expense,
+rd.marketing_expense,
+rd.cx_cost_of_rev,
+rd.sales_and_marketing_expense,
+rd.engineering_cost_of_rev,
+rd.product_cost_of_rev,
+rd.r_and_d_expense,
+rd.g_and_a_expense,
+rd.g_and_a_stock_expense,
+rd.all_dept_expense,
+rd.eng_fte,
+rd.sales_fte,
+rd.cx_fte,
+rd.new_eng_fte,
+rd.people_fte,
+rd.product_fte,
+rd.marketing_fte,
+rd.finance_fte,
+rd.corp_dev_fte,
+rd.legal_fte,
+rd.operations_fte,
+rd.all_dept_fte,
+rd.cloud_spend_25,
+rd.cloud_spend_median,
+rd.cloud_spend_75,
+rd.real_estate_spend_25,
+rd.real_estate_spend_median,
+rd.real_estate_spend_75,
+rd.r_d_25,
+rd.r_d_median,
+rd.r_d_75,
+rd.s_m_25,
+rd.s_m_median,
+rd.s_m_75,
+rd.g_a_25,
+rd.g_a_median,
+rd.g_a_75,
+rd.opex_25_sector,
+rd.opex_median_sector,
+rd.opex_75_sector,
+rd.opex_25_rev_range,
+rd.opex_median_rev_range,
+rd.opex_75_rev_range,
+rd.eng_25,
+rd.eng_med,
+rd.eng_75,
+rd.sales_25,
+rd.sales_med,
+rd.sales_75,
+rd.cx_25,
+rd.cx_median,
+rd.cx_75,
+rd.people_25,
+rd.people_median,
+rd.people_75,
+rd.product_25,
+rd.product_median,
+rd.product_75,
+rd.marketing_25,
+rd.marketing_median,
+rd.marketing_75,
+rd.corp_dev_25,
+rd.corp_dev_median,
+rd.corp_dev_75,
+rd.finance_25,
+rd.finance_median,
+rd.finance_75,
+rd.legal_25,
+rd.legal_median,
+rd.legal_75
 from raw_data as rd
 left join fy_dates as fd on (rd.dte = fd.dte)
 order by dte asc
 ),
 
-saas_metrics_revenue as (
+saas_metrics as (
 select *,
 ((revenue_fy - lag(revenue_fy,12,0) over (order by dte asc)) / NULLIFZERO(lag(revenue_fy,12,0) over (order by dte asc))) as revenue_percent_growth
-from saas_metrics_revenue_int
+from saas_metrics_int
 order by dte asc
 )
 
-select * from saas_metrics_revenue
+select * from saas_metrics
