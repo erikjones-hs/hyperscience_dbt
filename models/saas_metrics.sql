@@ -151,7 +151,14 @@ rd.finance_median,
 rd.finance_75,
 rd.legal_25,
 rd.legal_median,
-rd.legal_75
+rd.legal_75,
+rd.magic_number,
+rd.magic_number_median,
+rd.new_arr,
+rd.upsell_arr,
+rd.burn_multiple_25,
+rd.burn_multiple_median,
+rd.burn_multiple_75
 from raw_data as rd
 left join fy_dates as fd on (rd.dte = fd.dte)
 order by dte asc
