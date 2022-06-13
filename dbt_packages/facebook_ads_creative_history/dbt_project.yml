@@ -1,0 +1,18 @@
+name: 'facebook_ads_creative_history'
+version: '0.3.0'
+config-version: 2
+require-dbt-version: [">=0.20.0"]
+models:
+  facebook_ads_creative_history:
+    +schema: facebook_ads_creative_history
+    +materialized: table
+    bigquery:
+      enabled: "{{ target.type == 'bigquery' | as_bool() }}"
+    redshift:
+      enabled: "{{ target.type == 'redshift' | as_bool() }}"
+    snowflake:
+      enabled: "{{ target.type == 'snowflake' | as_bool() }}"
+    spark:
+      enabled: "{{ target.type == 'spark' | as_bool() }}"
+    postgres:
+      enabled: "{{ target.type == 'postgres' | as_bool() }}"

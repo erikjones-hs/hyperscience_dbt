@@ -1,0 +1,15 @@
+name: 'twitter_ads_source'
+version: '0.3.0'
+config-version: 2
+require-dbt-version: [">=0.20.0"]
+models:
+  twitter_ads_source:
+    +schema: stg_twitter_ads
+vars:
+  twitter_ads_source:
+    account_history: "{{ source('twitter_ads','account_history') }}"
+    campaign_history: "{{ source('twitter_ads','campaign_history') }}"
+    line_item_history: "{{ source('twitter_ads','line_item_history') }}"
+    promoted_tweet_history: "{{ source('twitter_ads','promoted_tweet_history') }}"
+    promoted_tweet_report: "{{ source('twitter_ads','promoted_tweet_report') }}"
+    tweet_url: "{{ source('twitter_ads','tweet_url') }}"
