@@ -1,4 +1,4 @@
-[![Apache License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) ![dbt logo and version](https://img.shields.io/static/v1?logo=dbt&label=dbt-version&message=0.20.x&color=orange)
+[![Apache License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 # Google Ads 
 
 This package models Google Ads data from [Fivetran's connector](https://fivetran.com/docs/applications/google-ads).
@@ -13,7 +13,7 @@ This package contains transformation models, designed to work simultaneously wit
 
 | **model**                       | **description** |**compatible API**                                                                                                                   |
 | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |------------------------------- | 
-| [google_ads__url_ad_adapter](models/url/google_ads__url_ad_adapter.sql)      | Each record represents the daily ad performance of each URL in each ad group, including information about the used UTM parameters. | Adwords API and Google Ads API |
+| [google_ads__url_ad_adapter](models/url_google_ads/google_ads__url_ad_adapter.sql)      | Each record represents the daily ad performance of each URL in each ad group, including information about the used UTM parameters. | Adwords API and Google Ads API |
 | [google_ads__criteria_ad_adapter](models/criteria/google_ads__criteria_ad_adapter.sql) | Each record represents the daily ad performance of each criteria in each ad group.                                                 | Adwords API Only|
 | [google_ads__click_performance](models/google_ads__click_performance.sql)   | Each record represents a click, with a corresponding Google click ID (gclid).                                                      | Adwords API Only |
 
@@ -25,7 +25,7 @@ Include in your `packages.yml`
 ```yaml
 packages:
   - package: fivetran/google_ads
-    version: [">=0.4.0", "<0.5.0"]
+    version: [">=0.6.0", "<0.7.0"]
 ```
 
 ## Configuration
@@ -177,7 +177,7 @@ dispatch:
 ## Contributions
 
 Additional contributions to this package are very welcome! Please create issues
-or open PRs against `master`. Check out 
+or open PRs against `main`. Check out 
 [this post](https://discourse.getdbt.com/t/contributing-to-a-dbt-package/657) 
 on the best workflow for contributing to a package.
 

@@ -1,4 +1,4 @@
-[![Apache License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) ![dbt logo and version](https://img.shields.io/static/v1?logo=dbt&label=dbt-version&message=0.20.x&color=orange)
+[![Apache License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) 
 # Microsoft Advertising 
 
 This package models Microsoft Advertising data from [Fivetran's connector](https://fivetran.com/docs/applications/microsoft-advertising). It uses data in the format described by [this ERD](https://fivetran.com/docs/applications/microsoft-advertising#schemainformation).
@@ -24,7 +24,7 @@ Include in your `packages.yml`
 ```yaml
 packages:
   - package: fivetran/microsoft_ads
-    version: [">=0.3.0", "<0.4.0"]
+    version: [">=0.4.0", "<0.5.0"]
 ```
 
 ## Configuration
@@ -42,6 +42,13 @@ vars:
 ```
 
 For additional configurations for the source models, visit the [Microsoft Advertising source package](https://github.com/fivetran/dbt_microsoft_ads_source).
+
+### UTM Auto Tagging Feature
+This package assumes you are manually adding UTM tags to the `final_url` field within the `ad_history` table. If you are leveraging the auto-tag feature within Microsoft Ads then you will want to enable the `microsoft_auto_tagging_enabled` variable to correctly populate the UTM fields within the `int_microsoft_ads__ad_history` model.
+```yml
+vars:
+  microsoft_auto_tagging_enabled: true # False by default
+```
 
 ### Changing the Build Schema
 By default this package will build the Microsoft Ads staging models within a schema titled (<target_schema> + `_stg_microsoft_ads`) and the Microsoft Ads final models with a schema titled (<target_schema> + `_microsoft_ads`) in your target database. If this is not where you would like your modeled Microsoft Ads data to be written to, add the following configuration to your `dbt_project.yml` file:
@@ -72,7 +79,7 @@ dispatch:
 
 ## Contributions
 
-Additional contributions to this package are very welcome! Please create issues or open PRs against `master`. Check out [this post](https://discourse.getdbt.com/t/contributing-to-a-dbt-package/657) on the best workflow for contributing to a package.
+Additional contributions to this package are very welcome! Please create issues or open PRs against `main`. Check out [this post](https://discourse.getdbt.com/t/contributing-to-a-dbt-package/657) on the best workflow for contributing to a package.
 
 ## Resources:
 - Provide [feedback](https://www.surveymonkey.com/r/DQ7K7WW) on our existing dbt packages or what you'd like to see next

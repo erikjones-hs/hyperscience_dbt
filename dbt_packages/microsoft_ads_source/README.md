@@ -1,4 +1,4 @@
-[![Apache License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) ![dbt logo and version](https://img.shields.io/static/v1?logo=dbt&label=dbt-version&message=0.20.x&color=orange)
+[![Apache License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 # Microsoft Advertising (Source)
 
 This package models Microsoft Advertising data from [Fivetran's connector](https://fivetran.com/docs/applications/microsoft-advertising). It uses data in the format described by [this ERD](https://fivetran.com/docs/applications/microsoft-advertising#schemainformation).
@@ -24,7 +24,7 @@ Include in your `packages.yml`
 ```yaml
 packages:
   - package: fivetran/microsoft_ads_source
-    version: [">=0.3.0", "<0.4.0"]
+    version: [">=0.5.0", "<0.6.0"]
 ```
 
 ## Configuration
@@ -39,13 +39,6 @@ config-version: 2
 vars:
     microsoft_ads_schema: your_schema_name
     microsoft_ads_database: your_database_name
-```
-### UTM Auto Tagging Feature
-This package assumes you are manually adding UTM tags to the `final_url` field within the `ad_history` table. If you are leveraging the auto-tag feature within Microsoft Ads then you will want to enable the `microsoft_auto_tagging_enabled` variable to correctly populate the UTM fields within the `stg_microsoft_ads__ad_history` model.
-```yml
-vars:
-    microsoft_ads_source:
-      microsoft_auto_tagging_enabled: true # False by default
 ```
 
 ### Changing the Build Schema
@@ -76,7 +69,7 @@ dispatch:
 ## Contributions
 
 Additional contributions to this package are very welcome! Please create issues
-or open PRs against `master`. Check out 
+or open PRs against `main`. Check out 
 [this post](https://discourse.getdbt.com/t/contributing-to-a-dbt-package/657) 
 on the best workflow for contributing to a package.
 
