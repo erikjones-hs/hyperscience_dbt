@@ -158,7 +158,8 @@ rd.new_arr,
 rd.upsell_arr,
 rd.burn_multiple_25,
 rd.burn_multiple_median,
-rd.burn_multiple_75
+rd.burn_multiple_75,
+rd.churn_arr
 from raw_data as rd
 left join fy_dates as fd on (rd.dte = fd.dte)
 order by dte asc
