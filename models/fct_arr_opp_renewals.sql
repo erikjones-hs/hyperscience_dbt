@@ -11,6 +11,22 @@ with raw_data_transformed as (
 select * from {{ref('arr_opp_history_transformed')}}
 ),
 
+/* Identifying all the opps with transformations to their end dates where we actually care about their raw (non-transfofrmed) contract end dates */
+/* This needs to be updated every month when I update end dates for the next upcoming month */
+transformed_opp_id as (
+select distinct
+opp_id 
+from raw_data_transformed
+where opp_id in (
+'0061R00000zAIBfQAO', /* Manulife- Global Automation/Unqork Transition (Life Insurance Enrollment Forms) */
+'0061R00000zAI8KQAW', /* VA DMV - Title & Registration - 2021. Revenue Churn but kept logo */
+'0061R00000yEQVgQAO', /* GDIT- VA-VICCS-2021. Revenue churn but kept logo */
+'0061R00000yFonNQAS', /* MetaSource- California (Court Systems and State Contracts Paper) -2021. Revenue churn but kept logo */
+'0061R000010PjW2QAK', /* Herault - Terra OccitanIA - test lic. Consiel */
+'0061R00000uKfFzQAK'  /* ONE insurance - Broker - Motor Policy Tariff Switching. weFox */
+)
+),
+
 /* Subscription period intermediate view */
 /* each row is an opportunity with transformed start and end dates */
 /* one last adjustment to end months to account for opportunities that start on the 1st of a month and end on the last day of the month */
@@ -23,10 +39,10 @@ opp_name,
 opp_revenue_type,
 start_dte_month,  
 start_dte,
-CASE WHEN opp_id in ('0061R00000zAIBfQAO','0061R00000zAI8KQAW','0061R00000yEQVgQAO','0061R00000yFonNQAS') then end_dte_raw else end_dte end as end_dte,
-CASE WHEN opp_id in ('0061R00000zAIBfQAO','0061R00000zAI8KQAW','0061R00000yEQVgQAO','0061R00000yFonNQAS') AND (end_dte_raw = last_day(end_dte_raw_month) and start_dte = start_dte_month) then dateadd(month,1,end_dte_raw_month)  
-       WHEN opp_id in ('0061R00000zAIBfQAO','0061R00000zAI8KQAW','0061R00000yEQVgQAO','0061R00000yFonNQAS') then end_dte_raw_month
-     WHEN opp_id not in ('0061R00000zAIBfQAO','0061R00000zAI8KQAW','0061R00000yEQVgQAO','0061R00000yFonNQAS') AND (end_dte = last_day(end_dte_month) and start_dte = start_dte_month) then dateadd(month,1,end_dte_month)  
+CASE WHEN opp_id in (select * from transformed_opp_id) then end_dte_raw else end_dte end as end_dte,
+CASE WHEN opp_id in (select * from transformed_opp_id) AND (end_dte_raw = last_day(end_dte_raw_month) and start_dte = start_dte_month) then dateadd(month,1,end_dte_raw_month)  
+     WHEN opp_id in (select * from transformed_opp_id) then end_dte_raw_month
+     WHEN opp_id not in (select * from transformed_opp_id) AND (end_dte = last_day(end_dte_month) and start_dte = start_dte_month) then dateadd(month,1,end_dte_month)  
      else end_dte_month end as end_dte_month, 
 opp_arr,
 opp_net_new_arr
