@@ -19,6 +19,7 @@ from {{ ref('fct_arr_opp_renewals') }}
 where opp_category = 'churn'
 and to_date(date_month) >= date_trunc('month',to_date(current_date()))
 and to_date(date_month) <= '2023-02-01'
+and opp_id not in ('0061R000010usoKQAQ','0061R000010ujZ5QAI')
 order by date_month asc
 ),
 
