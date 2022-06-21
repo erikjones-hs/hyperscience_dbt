@@ -146,6 +146,7 @@ where to_date(dte) >= '2022-03-01'
 and to_date(dte) <= '2023-02-28'
 ),
 
+/* Aggregating Actuals by Sales Team and Month */
 sales_actuals as (
 select distinct
 date_trunc('month',to_date(close_dte)) as close_month,
@@ -153,80 +154,9 @@ sales_team,
 sum(mrr_change_acct) as new_arr_actuals
 from fct_opp_owner_teams
 where revenue_category in ('new','expansion')
-and close_month <= last_day(date_trunc('month',to_date(current_date())))
+and (close_month <= last_day(date_trunc('month',to_date(current_date()))) or opp_id = '0061R000016jsHbQAI')
 group by close_month, sales_team
 order by close_month asc, sales_team 
-),
-
-actuals_running_total_int1 as (
-select distinct
-date_trunc('month',fd.dte) as dte,
-fd.qtr_end_dte,
-sa.close_month,
-sa.sales_team,
-sa.new_arr_actuals as new_arr_actuals,
-coalesce(sa1.new_arr_actuals,0) as actuals
-from fy_dates as fd
-inner join sales_actuals as sa on (date_trunc('month',fd.dte) >= '2022-03-01' AND date_trunc('month',fd.dte) <= '2023-02-08')
-left join sales_actuals as sa1 on (sa1.close_month = date_trunc('month',fd.dte) AND sa1.sales_team = sa.sales_team)
-order by sales_team, dte asc
-),
-
-actuals_running_total_int2 as (
-select distinct
-dte,
-qtr_end_dte,
-sales_team,
-actuals
-from actuals_running_total_int1
-order by sales_team, dte asc
-),
-
-actuals_running_total_int3 as (
-select distinct
-dte,
-qtr_end_dte,
-sales_team,
-sum(actuals) over (partition by sales_team, qtr_end_dte order by dte asc rows between unbounded preceding and current row) as actuals_running_total_fq
-from actuals_running_total_int2
-where date_trunc('month',dte) <= to_date(date_trunc('month',current_date()))
-order by qtr_end_dte asc, dte asc
-),
-
-actuals_running_total_fq as (
-select distinct
-dte,
-qtr_end_Dte,
-sales_team,
-actuals_running_total_fq,
-lag(actuals_running_total_fq,1,0) over (partition by sales_team order by dte asc) as prev_month_running_total
-from actuals_running_total_int3 
-order by qtr_end_dte asc, dte asc
-),
-
-sales_budget_running_total_int as (
-select distinct
-sb.dte as dte_month,
-sb.sales_team,
-sb.budget,
-fd.fy_year,
-fd.fy_qtr_year,
-fd.qtr_end_dte,
-fd.dte
-from sales_budget as sb 
-right join fy_dates as fd on (sb.dte = fd.dte)
-order by dte asc
-),
-
-sales_budget_running_total_fq as (
-select distinct
-dte_month,
-qtr_end_dte,
-sales_team,
-sum(budget) over (partition by sales_team, qtr_end_dte order by dte_month asc rows between unbounded preceding and current row) as sales_budget_running_total_fq
-from sales_budget_running_total_int
-where dte_month IS NOT NULL
-order by qtr_end_dte asc, dte_month asc
 ),
 
 pipeline as (
@@ -256,7 +186,6 @@ opp_stage_name,
 opp_arr,
 opp_close_dte
 from {{ ref('agg_opportunity_incremental') }}
---from "DEV"."SALES"."SALESFORCE_AGG_OPPORTUNITY"
 where to_date(date_ran) = dateadd(day,-1,(to_date(current_date)))
 and opp_stage_name not in ('Opp DQed','Closed Won')
 and opp_revenue_type not in ('Renewal','License Overage')
@@ -279,31 +208,7 @@ group by close_month, sales_team
 order by close_month, sales_team
 ),
 
-commit_running_total_int as (
-select distinct 
-ca.close_month,
-ca.sales_team,
-ca.arr_committed,
-fd.fy_year,
-fd.fy_qtr_year,
-fd.qtr_end_dte,
-fd.dte
-from commit_agg as ca
-right join fy_dates as fd on (ca.close_month = fd.dte)
-order by dte asc
-),
-
-commit_running_total_fq as (
-select distinct
-close_month,
-qtr_end_dte,
-sales_team,
-sum(arr_committed) over (partition by sales_team, qtr_end_dte order by close_month asc rows between unbounded preceding and current row) as arr_committed_running_total_fq
-from commit_running_total_int
-where close_month IS NOT NULL
-order by qtr_end_dte asc, close_month asc
-),
-
+/* Aggregating Best Case Pipeline Dollars by Sales Team */
 best_case_agg as (
 select distinct 
 last_day(date_trunc('month',opp_close_dte)) as close_month,
@@ -315,46 +220,122 @@ group by close_month, sales_team
 order by close_month, sales_team
 ),
 
-fct_forecast_int as (
+/* Combining Budget and Actuals */
+fct_budget_actuals as (
 select distinct
 sb.dte,
+fd.qtr_end_dte,
 sb.sales_team,
 sb.budget,
-sbrtf.sales_budget_running_total_fq as sales_budget_running_total,
-CASE WHEN sa.new_arr_actuals IS NULL then 0 else sa.new_arr_actuals end as new_arr_actuals,
-CASE WHEN artf.actuals_running_total_fq IS NULL then 0 else artf.actuals_running_total_fq end as actuals_running_total,
-CASE WHEN artf.prev_month_running_total IS NULL then 0 else artf.prev_month_running_total end as prev_month_running_total,
-CASE WHEN ca.arr_committed IS NULL then 0 else ca.arr_committed end as arr_committed,
-CASE WHEN bca.arr_best_case IS NULL then 0 else bca.arr_best_case end as arr_best_case,
-ZEROIFNULL(crtf.arr_committed_running_total_fq) as arr_committed_running_total_fq 
+ZEROIFNULL(sa.new_arr_actuals) as new_arr_actuals,
+ZEROIFNULL(ca.arr_committed) as arr_committed,
+ZEROIFNULL(bca.arr_best_case) as arr_best_case
 from sales_budget as sb
-left join sales_budget_running_total_fq as sbrtf on (sb.dte = sbrtf.dte_month AND sb.sales_team = sbrtf.sales_team)
 left join sales_actuals as sa on (sb.dte = last_day(sa.close_month) AND sb.sales_team = sa.sales_team)
-left join actuals_running_total_fq as artf on (sb.dte = last_day(artf.dte) AND sb.sales_team = artf.sales_team)  
 left join best_case_agg as bca on (sb.dte = bca.close_month AND sb.sales_team = bca.sales_team) 
 left join commit_agg as ca on (sb.dte = ca.close_month AND sb.sales_team = ca.sales_team)
-left join commit_running_total_fq as crtf on (sb.dte = crtf.close_month AND sb.sales_team = crtf.sales_team)
+left join fy_dates as fd on (to_date(sb.dte) = to_date(fd.dte))
 order by sb.dte asc, sb.sales_team
 ),
 
-fct_forecast as (
+/* Calculating Variance from Budget and Actuals */
+fct_budget_variance as (
 select distinct
-to_timestamp(dte) as dte,
+dte,
+qtr_end_dte,
 sales_team,
 budget,
-sales_budget_running_total,
 new_arr_actuals,
-actuals_running_total,
-prev_month_running_total,
+CASE WHEN to_date(dte) >= date_trunc('month',to_date(current_date())) then 0 else (budget - new_arr_actuals) end as budget_variance,
+sum(budget_variance) over (partition by sales_team order by dte asc rows between unbounded preceding and current row) as budget_variance_running_total,
+datediff(month,to_date(dte), qtr_end_dte) + 1 as num_months_to_end_of_qtr,
 arr_committed * .75 as arr_low,
 arr_committed,
 arr_best_case,
-(.4 * arr_best_case) + arr_committed as high_best_case,
-(sales_budget_running_total - prev_month_running_total) as forecast_plan,
-arr_committed_running_total_fq as arr_committed_running_total,
-(.4 * arr_best_case) + arr_committed_running_total_fq as best_case_high_running_total
-from fct_forecast_int 
+(arr_best_case + arr_committed) as arr_high
+from fct_budget_actuals
+order by dte, sales_team
+),
+
+/* Calculating Budget Variance Rollover */
+rollover_int as (
+select distinct
+dte,
+sales_team,
+CASE WHEN to_date(dte) = last_day(date_trunc('month', to_date(current_date()))) then (budget_variance_running_total / num_months_to_end_of_qtr) else NULL end as rollover_monthly_int
+from fct_budget_variance
+order by dte asc                                 
+),
+
+/* Deriving only current month rollover */
+current_rollover as (
+select distinct
+dte,
+sales_team,
+last_value(rollover_monthly_int ignore nulls) over (partition by sales_team order by dte asc) as rollover_current_month
+from rollover_int
 order by dte asc, sales_team
+),
+
+/* Pulling current QTR date */
+current_qtr_int as (
+select distinct
+dte,
+CASE WHEN to_date(dte) = last_day(date_trunc('month',to_date(current_date()))) then qtr_end_dte else NULL end as qtr_end_dte
+from fct_budget_variance
+),
+
+current_qtr as (
+select 
+dte,
+last_value(qtr_end_dte ignore nulls) over (order by dte asc) as current_qtr
+from current_qtr_int
+order by dte asc
+),
+
+/* Combining Budget, Actuals, Variance and Rollover */
+fct_budget_variance_rollover as (
+select distinct
+fbv.dte,
+fbv.qtr_end_dte,
+cq.current_qtr,
+fbv.sales_team,
+fbv.budget,
+fbv.new_arr_actuals,
+fbv.budget_variance,
+fbv.budget_variance_running_total,
+fbv.num_months_to_end_of_qtr,
+cr.rollover_current_month,
+fbv.arr_low,
+fbv.arr_committed,
+fbv.arr_best_case,
+fbv.arr_high
+from fct_budget_variance as fbv
+left join current_rollover as cr on (to_date(fbv.dte) = to_date (cr.dte) AND fbv.sales_team = cr.sales_team)
+left join current_qtr as cq on (to_date(fbv.dte) = to_date(cq.dte))
+order by fbv.dte asc, fbv.sales_team
+),
+
+/* Calculating Forecast Plan from rollover */
+fct_budget_variance_forecast as (
+select distinct 
+dte,
+qtr_end_dte,
+current_qtr,
+sales_team,
+budget,
+new_arr_actuals,
+budget_variance,
+budget_variance_running_total,
+num_months_to_end_of_qtr,
+rollover_current_month,
+CASE WHEN qtr_end_dte = current_qtr then (budget + rollover_current_month) else budget end as forecast_plan,
+arr_low,
+arr_committed,
+arr_best_case,
+arr_high
+from fct_budget_variance_rollover
+order by dte, sales_team
 )
 
-select * from fct_forecast
+select * from fct_budget_variance_forecast
