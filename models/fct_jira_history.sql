@@ -77,7 +77,7 @@ order by issue_id, dte asc
 
 fct_tickets_history as (
 select distinct
-dte,
+to_timestamp(dte) as dte,
 issue_id,
 issue_key,
 parent_id,
