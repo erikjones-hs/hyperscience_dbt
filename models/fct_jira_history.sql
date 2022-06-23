@@ -108,7 +108,13 @@ feedback_category,
 customer_name,
 CASE WHEN to_date(dte) < to_date(resolution_dte_transformed) then 1 else 0 end as open_ticket_fl,
 CASE WHEN to_date(dte) = to_date(resolution_dte_transformed) then 1 else 0 end as closed_ticket_fl,
-CASE WHEN to_date(dte) < to_date(resolution_dte_transformed) then 'open' else 'closed' end as ticket_resolution_category
+CASE WHEN to_date(dte) < to_date(resolution_dte_transformed) then 'open' else 'closed' end as ticket_resolution_category,
+CASE WHEN to_date(dte) = to_date(created_dte) then 1 else 0 end as created_dte_fl,
+CASE WHEN to_date(dte) = to_date(resolution_dte_transformed) then 1 else 0 end as resolved_dte_fl,
+CASE WHEN date_trunc(week,to_date(dte)) = date_trunc(week,to_date(created_dte)) then 1 else 0 end as created_week_fl,
+CASE WHEN date_trunc(week,to_date(dte)) = date_trunc(week,to_date(resolution_dte_transformed)) then 1 else 0 end as resolved_week_fl,
+CASE WHEN date_trunc(month,to_date(dte)) = date_trunc(month,to_date(created_dte)) then 1 else 0 end as created_month_fl,
+CASE WHEN date_trunc(month,to_date(dte)) = date_trunc(month,to_date(resolution_dte_transformed)) then 1 else 0 end as resolved_month_fl
 from ticket_dates 
 order by issue_id, dte asc
 )
