@@ -1,3 +1,12 @@
+{{ config
+(
+    materilized='view'
+    database = 'PROD'
+    schema = 'SALESFORCE'
+)
+}}
+
+
 select 
  
 id as lead_id,

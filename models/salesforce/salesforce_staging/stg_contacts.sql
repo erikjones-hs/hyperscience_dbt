@@ -1,3 +1,11 @@
+{{ config
+(
+    materilized='view'
+    database = 'PROD'
+    schema = 'SALESFORCE'
+)
+}}
+
 select 
  
 id as contact_id,
