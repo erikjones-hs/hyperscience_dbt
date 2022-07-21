@@ -19,11 +19,11 @@ CASE WHEN owner_description in ('EMEA Account Executive','EMEA VP','EMEA Sales O
                                 'EMEA Central Europe - Channel Sales','EMEA Central Europe - Regional Director','EMEA North Europe - Account Executive',
                                 'EMEA North Europe - Channel Sales','EMEA North Europe - Regional Director','EMEA - Sales AVP') then 'EMEA'
      WHEN owner_description in ('Account Manager','US Commercial - Account Executive','US Commercial - Regional Director') then 'Commercial'
-     WHEN owner_description in ('ANZ - Channel Sales','ANZ - Regional Director') then 'APAC'
+     WHEN owner_description in ('ANZ - Channel Sales','ANZ - Regional Director','Global - Channel AVP') then 'APAC'
      WHEN owner_description in ('US Federal','US Federal - Account Executive','US SLED - Regional Director','US SLED - Account Executive','Global Federal - Account Executive',
                                 'Global Public Sector - AVP','Global Federal - Channel Sales') then 'Federal'
      WHEN owner_description in ('US Account Executive - Tri-State','US Director - Tri-State','US AVP - Tri-State','US East - Regional Director','US East - Account Executive') then 'US East'
-     WHEN owner_description in ('US West - Account Executive','US West - Regional Director') then 'US West'
+     WHEN owner_description in ('US West - Account Executive','US West - Regional Director', 'US - Sales VP') then 'US West'
      WHEN owner_description in ('US - Channel Sales','Global GSI - Channel Sales','Global GSP - Channel Sales') then 'Channel'
      ELSE 'Other' end as sales_team,
 CASE WHEN opp_id = '0061R000014vnNlQAI' then 150000
