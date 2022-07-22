@@ -1,10 +1,11 @@
 {{ config
 (
-    materilized='view'
-    database = 'PROD'
+    materialized='view',
+    database = 'PROD',
     schema = 'SALESFORCE'
 )
 }}
+
 
 select 
  
