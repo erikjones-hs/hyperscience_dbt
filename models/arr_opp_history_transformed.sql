@@ -53,6 +53,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      WHEN opp_id = '0061R00000zBqNRQA0' then to_date('2021-11-15')
      WHEN opp_id = '0061R000013fGLrQAM' then to_date('2022-12-18')
      WHEN opp_id = '0061R00000wJkMuQAK' then to_date('2021-12-15')
+     when opp_id = '0061R0000137saUQAQ' then to_date('2022-06-15') 
      WHEN opp_id = '0061R000013fGTbQAM' then to_date('2022-11-23') /* Updated end date because it is incorect in SFDC. divvyDose 180k */
      WHEN opp_id = '0061R00000zD2sTQAS' then to_date('2021-12-15') /* End date adjusted per Kristen and Finance ARR Google Sheet. Conduent 280k */ 
      WHEN opp_id = '0061R000010t71kQAA' then to_date('2022-01-15') /* Customer no longer is paying. Close this out in Jan. per FP&A. Sience SAS 41.65k */
@@ -71,7 +72,6 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R0000137ijiQAA' then to_date('2022-06-29') /* End date adjustment due to negotiated end of contract. Johnson Law Group 25k */
      when opp_id = '0061R000010PjW2QAK' then to_date('2022-08-15') /* End date adjustment because of open negotiations. Conseil 1.5k */ 
      when opp_id = '0061R0000137qhsQAA' then to_date('2022-08-15') /* End date adjustment because of open negotiations. Canada Life 150k */
-     when opp_id = '0061R0000137saUQAQ' then to_date('2022-08-15') /* End date adjustment because of open negotiations. T-Rowe Price 100k */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
