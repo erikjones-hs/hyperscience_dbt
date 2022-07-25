@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: salesforce
+    database: fivetran_database
+    schema: salesforce
+    tables:
+      - name: lead
+      - name: lead_history
+      - name: contact
+      - name: contact_history
+      - name: account
+      - name: user
