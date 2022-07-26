@@ -1,8 +1,8 @@
 {{ config
 (
-    materialized='table',
+    materialized='view',
     database = 'PROD',
-    schema = 'MARKETING'
+    schema = 'SALESFORCE'
 )
 }}
 
