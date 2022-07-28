@@ -126,5 +126,5 @@ where opp_id not in ('00636000003gG2qAAE','0063600000W0NhNAAV','0063600000SKDdAA
 
 select * from raw_data_transformed where opp_id not in 
 (
-'0061R000016my8LQAQ', /* Tokio Marine Deal 420k. Removed due to out clause */
+'0061R000016my8LQAQ' /* Tokio Marine Deal 420k. Removed due to out clause */
 )
