@@ -33,17 +33,19 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 
 models:
-  hyperscience_dbt:
-      
-      salesforce:
-        +database: PROD
-        +schema: SALESFORCE
-      
-        salesforce_marts:
-            +materialized: table
+  # Be sure to namespace your model configs to your project name
+  my_new_project:
 
-        salesforce_staging:
-            +materialized: view
+    # This configures models found in models/events/
+    salesforce:
+      +database: PROD
+      +schema: SALESFORCE
+
+      salesforce_staging:
+        +materialized: view
+      salesforce_marts:
+        +materialized: table
+    
           
 
 
