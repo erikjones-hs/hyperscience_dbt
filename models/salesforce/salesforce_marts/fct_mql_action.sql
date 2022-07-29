@@ -8,4 +8,4 @@ created_date,
 new_value
 
 from {{ ref('stg_lead_history') }}
-where old_value = 'Needs Action' and field = 'Status'
+where old_value = 'Needs Action' and field = 'Status' and is_deleted = false
