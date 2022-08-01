@@ -61,7 +61,7 @@ is_deleted,
  
 -- date fields
     
-date(created_date) as created_date,
+to_timestamp(created_date) as created_date,
 date(date_stage_mal_c) as mal_date,
 date(date_stage_mel_c) as mel_date,
     
