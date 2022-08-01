@@ -11,3 +11,6 @@ sources:
       - name: contact_history
       - name: account
       - name: user
+      - name: user_role
+      - name: group
+      - name: group_member
