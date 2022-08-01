@@ -22,7 +22,13 @@ where opp_id in (
 '0061R00000yEQVgQAO', /* GDIT- VA-VICCS-2021. Revenue churn but kept logo */
 '0061R00000yFonNQAS', /* MetaSource- California (Court Systems and State Contracts Paper) -2021. Revenue churn but kept logo */
 '0061R000010PjW2QAK', /* Herault - Terra OccitanIA - test lic. Consiel */
-'0061R0000137qhsQAA' /* Canada Life */
+'0061R0000137qhsQAA', /* Canada Life */
+'0061R0000137jsqQAA', /* Pac LIfe */
+'0061R000010O65hQAC', /* FATCO */
+'0061R0000137UX5QAM', /* Clean Harbors */
+'0061R0000137jqkQAA', /* QAI */
+'0061R00000zE2RvQAK', /* PeerStreet */
+'0061R0000137hOKQAY' /* SSA DeDupe */
 )
 ),
 
