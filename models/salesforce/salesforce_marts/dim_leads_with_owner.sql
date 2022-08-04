@@ -16,7 +16,7 @@ users as (
     full_name as owner_full_name,
     role_name as owner_role_name
 
-    from {{ ref('stg_users') }}
+    from {{ ref('dim_users_and_queues') }}
 
 )
 
