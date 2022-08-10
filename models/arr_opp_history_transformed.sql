@@ -68,7 +68,6 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R0000137ijiQAA' then to_date('2022-06-29') /* End date adjustment due to negotiated end of contract. Johnson Law Group 25k */
      when opp_id = '0061R00000zDCt9QAG' then to_date('2024-08-24') /* End date adjustment because renewal date was wrong in snapshot */
      when opp_id = '0061R000010PjW2QAK' then to_date('2022-09-15') /* End date adjustment because of open negotiations. Conseil 1.5k */ 
-     when opp_id = '0061R0000137qhsQAA' then to_date('2022-09-15') /* End date adjustment because of open negotiations. Canada Life 150k */
      when opp_id = '0061R0000137jsqQAA' then to_date('2022-09-15') /* End date adjustment because of open negotiations. Pac Life 330k */
      when opp_id = '0061R000010O65hQAC' then to_date('2022-09-15') /* End date adjustment because of open negotiations. First American Financial 1M */
      when opp_id = '0061R0000137UX5QAM' then to_date('2022-09-15') /* End date adjustment because of open negotiations. Clean Harbors 228k */
@@ -128,5 +127,6 @@ where opp_id not in ('00636000003gG2qAAE','0063600000W0NhNAAV','0063600000SKDdAA
 
 select * from raw_data_transformed where opp_id not in 
 (
-'0061R000016my8LQAQ' /* Tokio Marine Deal 420k. Removed due to out clause */
+'0061R000016my8LQAQ', /* Tokio Marine Deal 420k. Removed due to out clause */
+'0061R000016jsHbQAI' /* Utilize Core 54k. Removed due to out clause */
 )
