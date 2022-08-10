@@ -23,12 +23,8 @@ where opp_id in (
 '0061R00000yFonNQAS', /* MetaSource- California (Court Systems and State Contracts Paper) -2021. Revenue churn but kept logo */
 '0061R000010PjW2QAK', /* Herault - Terra OccitanIA - test lic. Consiel */
 '0061R0000137qhsQAA', /* Canada Life */
-'0061R0000137jsqQAA', /* Pac LIfe */
-'0061R000010O65hQAC', /* FATCO */
 '0061R0000137UX5QAM', /* Clean Harbors */
-'0061R0000137jqkQAA', /* QAI */
-'0061R00000zE2RvQAK', /* PeerStreet */
-'0061R0000137hOKQAY' /* SSA DeDupe */
+'0061R00000zE2RvQAK' /* PeerStreet */
 )
 ),
 
@@ -44,7 +40,12 @@ opp_name,
 opp_revenue_type,
 start_dte_month,  
 start_dte,
-CASE WHEN opp_id in (select * from transformed_opp_id) then end_dte_raw else end_dte end as end_dte,
+CASE WHEN opp_id in (select * from transformed_opp_id) then end_dte_raw 
+     WHEN opp_id = '0061R0000137jsqQAA' then to_date('2022-08-30') /* Pacific Life */
+     WHEN opp_id = '0061R000010O65hQAC' then to_date('2022-08-19') /* FATCO */ 
+     WHEN opp_id = '0061R0000137jqkQAA' then to_date('2022-08-19') /* QAI */
+     WHEN opp_id = '0061R0000137hOKQAY' then to_date('2022-08-21') /* SSA DeDupe */
+     else end_dte end as end_dte,
 CASE WHEN opp_id in (select * from transformed_opp_id) AND (end_dte_raw = last_day(end_dte_raw_month) and start_dte = start_dte_month) then dateadd(month,1,end_dte_raw_month)  
      WHEN opp_id in (select * from transformed_opp_id) then end_dte_raw_month
      WHEN opp_id not in (select * from transformed_opp_id) AND (end_dte = last_day(end_dte_month) and start_dte = start_dte_month) then dateadd(month,1,end_dte_month)  
