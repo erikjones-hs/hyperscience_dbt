@@ -17,7 +17,9 @@ select * from {{ref('arr_opp_history')}}
 raw_data_transformed as (
 select 
 CASE WHEN account_id = '0011R000026iP6rQAE' then '0013600001iRke2AAC' else account_id end as account_id,
-CASE WHEN account_name = 'TD Ameritrade' then 'Charles Schwab' else account_name end as account_name,
+CASE WHEN account_name = 'TD Ameritrade' then 'Charles Schwab' 
+     WHEN account_name = '8053580156557' then 'Department of Justice' 
+     else account_name end as account_name,
 opp_id,
 opp_name,
 opp_revenue_type,
