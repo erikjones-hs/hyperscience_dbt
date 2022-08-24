@@ -72,9 +72,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R000010PjW2QAK' then to_date('2022-09-15') /* End date adjustment because of open negotiations. Conseil 1.5k */ 
      when opp_id = '0061R0000137jsqQAA' then to_date('2022-09-15') /* End date adjustment because of open negotiations. Pac Life 330k */
      when opp_id = '0061R000010O65hQAC' then to_date('2022-09-15') /* End date adjustment because of open negotiations. First American Financial 1M */
-     when opp_id = '0061R0000137UX5QAM' then to_date('2022-09-15') /* End date adjustment because of open negotiations. Clean Harbors 228k */
      when opp_id = '0061R0000137jqkQAA' then to_date('2022-09-15') /* End date adjustment because of open negotiations. QAI 35k */
-     when opp_id = '0061R00000zE2RvQAK' then to_date('2022-09-15') /* End date adjustment because of open negotiations. PeerStreet 357k */
      when opp_id = '0061R0000137hOKQAY' then to_date('2022-09-15') /* End date adjustment because of open negotiations. SSA DeDupe 1.9M */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
