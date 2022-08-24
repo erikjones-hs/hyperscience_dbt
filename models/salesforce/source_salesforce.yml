@@ -14,3 +14,6 @@ sources:
       - name: user_role
       - name: group
       - name: group_member
+      - name: opportunity
+      - name: opportunity_field_history
+      - name: bizible_2_bizible_attribution_touchpoint_c
