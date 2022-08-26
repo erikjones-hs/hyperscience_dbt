@@ -68,11 +68,11 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R000010ujZ5QAI' then to_date('2022-06-15') /* Adjusting end date because of new contract with expansion that starts in June */
      when opp_id = '0061R00000zD2sxQAC' then to_date('2024-03-15') /* End date adjustment because renewal date is incorrect in SFDC. Conduent 1.98M */
      when opp_id = '0061R0000137ijiQAA' then to_date('2022-06-29') /* End date adjustment due to negotiated end of contract. Johnson Law Group 25k */
+     when opp_id = '0061R0000137jqkQAA' then to_date('2022-08-19') /* Adjusting end date because wrong in Salesforce. QAI 35k */
      when opp_id = '0061R00000zDCt9QAG' then to_date('2024-08-24') /* End date adjustment because renewal date was wrong in snapshot */
      when opp_id = '0061R000010PjW2QAK' then to_date('2022-09-15') /* End date adjustment because of open negotiations. Conseil 1.5k */ 
      when opp_id = '0061R0000137jsqQAA' then to_date('2022-09-15') /* End date adjustment because of open negotiations. Pac Life 330k */
      when opp_id = '0061R000010O65hQAC' then to_date('2022-09-15') /* End date adjustment because of open negotiations. First American Financial 1M */
-     when opp_id = '0061R0000137jqkQAA' then to_date('2022-09-15') /* End date adjustment because of open negotiations. QAI 35k */
      when opp_id = '0061R0000137hOKQAY' then to_date('2022-09-15') /* End date adjustment because of open negotiations. SSA DeDupe 1.9M */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
