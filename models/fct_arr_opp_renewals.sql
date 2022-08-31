@@ -20,8 +20,7 @@ from raw_data_transformed
 where opp_id in (
 '0061R00000zAI8KQAW', /* VA DMV - Title & Registration - 2021. Revenue Churn but kept logo */
 '0061R00000yEQVgQAO', /* GDIT- VA-VICCS-2021. Revenue churn but kept logo */
-'0061R00000yFonNQAS', /* MetaSource- California (Court Systems and State Contracts Paper) -2021. Revenue churn but kept logo */
-'0061R000010PjW2QAK' /* Herault - Terra OccitanIA - test lic. Consiel */
+'0061R00000yFonNQAS' /* MetaSource- California (Court Systems and State Contracts Paper) -2021. Revenue churn but kept logo */
 )
 ),
 
