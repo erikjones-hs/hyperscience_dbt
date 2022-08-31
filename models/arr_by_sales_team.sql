@@ -24,19 +24,10 @@ from "FIVETRAN_DATABASE"."GOOGLE_SHEETS"."FY_22_FORECAST_FINANCE_INPUTS"
 where to_date(date) = '2022-03-01'
 ),
 
-sales_us_east_goals as (
+sales_us_goals as (
 select distinct
-to_number(sales_us_east_goal) as new_arr,
-'US East' as sales_team,
-'Budget' as category
-from "FIVETRAN_DATABASE"."GOOGLE_SHEETS"."FY_22_FORECAST_FINANCE_INPUTS"
-where to_date(date) = '2022-03-01'
-),
-
-sales_us_west_goals as (
-select distinct 
-to_number(sales_us_west_goal) as new_arr,
-'US West' as sales_team,
+to_number(sales_us_east_goal) + to_number(sales_us_west_goal) as new_arr,
+'US' as sales_team,
 'Budget' as category
 from "FIVETRAN_DATABASE"."GOOGLE_SHEETS"."FY_22_FORECAST_FINANCE_INPUTS"
 where to_date(date) = '2022-03-01'
@@ -56,9 +47,7 @@ select * from sales_federal_goals
 UNION
 select * from sales_channel_goals
 UNION 
-select * from sales_us_east_goals
-UNION 
-select * from sales_us_west_goals
+select * from sales_us_goals
 UNION 
 select * from sales_apac_goals
 order by sales_team
@@ -131,16 +120,11 @@ revenue_category,
 opp_owner_id,
 opportunity_owner,
 owner_description,
-CASE WHEN owner_description in ('EMEA Account Executive','EMEA VP','EMEA Sales Outreach','EMEA Central Europe - Account Executive',
-                                'EMEA Central Europe - Channel Sales','EMEA Central Europe - Regional Director','EMEA North Europe - Account Executive',
-                                'EMEA North Europe - Channel Sales','EMEA North Europe - Regional Director','EMEA - Sales AVP') then 'EMEA'
-     WHEN owner_description in ('Account Manager','US Commercial - Account Executive','US Commercial - Regional Director') then 'Commercial'
+CASE WHEN owner_description in ('EMEA - Sales','EMEA Central Europe - Account Executive','EMEA North Europe - Account Executive') then 'EMEA'
      WHEN owner_description in ('ANZ - Channel Sales','ANZ - Regional Director') then 'APAC'
-     WHEN owner_description in ('US Federal','US Federal - Account Executive','US SLED - Regional Director','US SLED - Account Executive','Global Federal - Account Executive',
-                                'Global Public Sector - AVP','Global Federal - Channel Sales') then 'Federal'
-     WHEN owner_description in ('US Account Executive - Tri-State','US Director - Tri-State','US AVP - Tri-State','US East - Regional Director','US East - Account Executive') then 'US East'
-     WHEN owner_description in ('US West - Account Executive','US West - Regional Director') then 'US West'
-     WHEN owner_description in ('US - Channel Sales','Global GSI - Channel Sales','Global GSP - Channel Sales') then 'Channel'
+     WHEN owner_description in ('Global Federal - Account Executive','US SLED - Account Executive') then 'Federal'
+     WHEN owner_description in ('US - Sales VP','US East - Account Executive','US West - Account Executive','VP Global Sales') OR owner_description IS NULL then 'US'
+     WHEN owner_description in ('Business Development','Corp Dev','Customer Experience','Global GSP - Channel Sales','US - Channel Sales') then 'Channel'
      ELSE 'Other' end as sales_team
 from fct_opp_owner 
 order by opp_id, date_month asc
@@ -182,16 +166,18 @@ sales_team,
 'Actuals' as category
 from fct_fy_teams
 where revenue_category in ('new','expansion')
+and fy_year >= 2022
 order by sales_team, fy_year asc, date_month asc
 ),
 
 fy_agg as (
 select distinct
-new_arr,
+last_value(new_arr) over (partition by sales_team order by dte asc) as new_arr,
 sales_team,
 category
 from fy_agg_int
-where to_date(dte) >= '2022-03-01'
+where sales_team in ('APAC','Channel','EMEA','Federal','US')
+order by sales_team
 ),
 
 fct_sales_teams_goals_actual_fytd as (
