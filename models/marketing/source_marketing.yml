@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: google_analytics_4
+    database: fivetran_database
+    schema: google_analytics_4
+    tables:
+      - name: acquisition_report
+      - name: page_path_report
