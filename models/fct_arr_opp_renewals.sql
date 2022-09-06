@@ -20,7 +20,12 @@ from raw_data_transformed
 where opp_id in (
 '0061R00000zAI8KQAW', /* VA DMV - Title & Registration - 2021. Revenue Churn but kept logo */
 '0061R00000yEQVgQAO', /* GDIT- VA-VICCS-2021. Revenue churn but kept logo */
-'0061R00000yFonNQAS' /* MetaSource- California (Court Systems and State Contracts Paper) -2021. Revenue churn but kept logo */
+'0061R00000yFonNQAS', /* MetaSource- California (Court Systems and State Contracts Paper) -2021. Revenue churn but kept logo */
+'0061R00001A3TIAQA3', /* Vida Capital - IBM 1.6k */
+'0061R000010ONAIQA4', /* Eiffage 50k */
+'0061R000013flkIQAQ', /* VBA IBM 2.3M */
+'0061R0000135g3YQAQ', /* CompIQ 173k */
+'0061R0000135zhLQAQ' /* Morris Law 135k */
 )
 ),
 
