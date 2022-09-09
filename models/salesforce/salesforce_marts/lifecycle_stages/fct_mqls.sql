@@ -8,6 +8,7 @@ select
 
 id,
 lead_id,
+old_value,
 created_date
 
 from {{ ref('stg_lead_history') }}
@@ -34,6 +35,7 @@ select
 
 id,
 lead_id,
+old_value,
 created_date
 
 from mqls
@@ -42,6 +44,7 @@ select
 
 null as id,
 lead_id,
+null as old_value,
 created_date
 
 from leads

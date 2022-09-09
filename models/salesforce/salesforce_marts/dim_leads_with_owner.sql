@@ -24,3 +24,4 @@ select *
 from leads
 left join users 
 using (owner_id)
+where is_deleted = false
