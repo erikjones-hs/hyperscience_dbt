@@ -16,7 +16,7 @@ where to_date(date_ran) = dateadd(day,-1,(to_date(current_date)))
 
 /* Pulling in transformed SFDC data from arr_opp_history_transform model*/
 raw_data_transformed as (
-select * from {{ref('arr_opp_history_transformed')}}
+select * from "PROD"."MONTHLY_KPIS"."ARR_OPP_HISTORY_TRANSFORMED"
 ),
 
 fct_sourced_int as (
@@ -74,34 +74,20 @@ fy.day_of_qtr,
 fy.fy_quarter,
 fy.fy_year
 from fct_sourced_int
-right join fy_dates as fy on (to_date(closed_won_dte) = to_date(fy.dte))
+left join fy_dates as fy on (to_date(closed_won_dte) = to_date(fy.dte))
 order by fy.dte asc
 ),
 
-fy_agg_int as (
+fy_agg as (
 select distinct
 fy_year, 
-dte,
 opp_lead_source,
 sum(opp_net_new_arr) as net_new_arr,
 sum(opp_arr) as total_arr,
 count(distinct opp_id) as num_opps
 from fct_sourced
-group by opp_lead_source, dte, fy_year
-order by dte asc
-),
-
-fy_agg as (
-select 
-fy_year,
-to_timestamp(dte) as dte,
-opp_lead_source,
-ZEROIFNULL(sum(net_new_arr) over (partition by fy_year, opp_lead_source order by dte asc rows between unbounded preceding and current row)) as net_new_arr,
-ZEROIFNULL(sum(total_arr) over (partition by fy_year, opp_lead_source order by dte asc rows between unbounded preceding and current row)) as total_arr,
-ZEROIFNULL(sum(num_opps) over (partition by fy_year, opp_lead_source order by dte asc rows between unbounded preceding and current row)) as num_opps
-from fy_agg_int 
-where to_date(dte) <= to_date(current_date())
-order by fy_year asc, dte asc, opp_lead_source
+group by opp_lead_source, fy_year
+order by fy_year asc
 )
 
 select * from fy_agg
