@@ -1,7 +1,7 @@
 with 
 
 -- all leads with a lifecycle status change to MEL
-mqls as (
+mels as (
 
 select 
 
@@ -23,8 +23,7 @@ lead_id,
 created_date
 
 from {{ ref('dim_leads_with_owner') }}
-where mel_date is not null
-and lead_id not in (select lead_id from mqls)
+where lead_id not in (select lead_id from mels)
 and (mel_date >= '2022-03-24' or lead_source = 'Marketing') --history field tracking activated for lifecycle status on this date
 
 )
@@ -35,7 +34,7 @@ id,
 lead_id,
 created_date
 
-from mqls
+from mels
 union all
 select
 
