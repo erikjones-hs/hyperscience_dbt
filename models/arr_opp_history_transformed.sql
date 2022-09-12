@@ -16,10 +16,12 @@ select * from {{ref('arr_opp_history')}}
 /* adjusting arr to match historical finance data from ARR Google Sheet */
 raw_data_transformed as (
 select 
-CASE WHEN account_id = '0011R000026iP6rQAE' then '0013600001iRke2AAC' else account_id end as account_id,
+CASE WHEN account_id = '0011R000026iP6rQAE' then '0013600001iRke2AAC' 
+     else account_id end as account_id,
 CASE WHEN account_name = 'TD Ameritrade' then 'Charles Schwab' 
      WHEN account_name = '8053580156557' then 'Department of Justice' 
      WHEN account_name = '8780895197581' then 'Mathematica, Inc.'
+     WHEN account_name = 'Tokio Marine HCC' then 'Philadelphia Insurance Companies'
      else account_name end as account_name,
 opp_id,
 opp_name,
@@ -71,6 +73,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R0000137ijiQAA' then to_date('2022-06-29') /* End date adjustment due to negotiated end of contract. Johnson Law Group 25k */
      when opp_id = '0061R0000137jqkQAA' then to_date('2022-08-19') /* Adjusting end date because wrong in Salesforce. QAI 35k */
      when opp_id = '0061R00000zDCt9QAG' then to_date('2024-08-24') /* End date adjustment because renewal date was wrong in snapshot */
+     when opp_id = '0061R000010QadCQAS' then to_date('2022-08-15') /* End date adjustment to account for amended contract */
      when opp_id = '0061R0000137jsqQAA' then to_date('2022-10-15') /* End date adjustment because of open negotiations. Pac Life 330k */
      when opp_id = '0061R000010O65hQAC' then to_date('2022-10-15') /* End date adjustment because of open negotiations. First American Financial 1M */
      when opp_id = '0061R0000137hOKQAY' then to_date('2022-10-15') /* End date adjustment because of open negotiations. SSA DeDupe 1.9M */
@@ -121,9 +124,11 @@ CASE WHEN opp_id = '0063600000M73LuAAJ' then 200000
      WHEN opp_id = '0061R00000uJr07QAC' then 100000
      WHEN opp_id = '0061R0000135gO1QAI' then 89040
      when opp_id = '0061R000014xeQwQAI' then 13269
+     when opp_id = '0061R00001A6F76QAF' then 15000
      ELSE opp_arr end as opp_arr,
 CASE WHEN opp_id = '0061R0000135gO1QAI' then 5040 
      WHEN opp_id = '0061R000014xeQwQAI' then 13269
+     WHEN opp_id = '0061R00001A6F76QAF' then 15000
      ELSE opp_net_new_arr end as opp_net_new_arr,
 opp_is_marketing_influenced_flag
 from raw_data
