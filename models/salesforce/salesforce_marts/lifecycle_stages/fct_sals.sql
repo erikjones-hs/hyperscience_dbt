@@ -26,7 +26,7 @@ created_date
 from {{ ref('dim_leads_with_owner') }}
 where sal_date is not null
 and lead_id not in (select lead_id from sals)
-and sal_date >= '2022-03-24' --history field tracking activated for lifecycle status on this date
+and sal_date is not null
 
 )
 
