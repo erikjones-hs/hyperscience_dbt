@@ -21,7 +21,7 @@ leads as (
 select 
 
 lead_id,
-created_date
+sal_date as created_date
 
 from {{ ref('dim_leads_with_owner') }}
 where sal_date is not null
