@@ -20,11 +20,11 @@ leads as (
 select 
 
 lead_id,
-created_date
+iff(mel_date is null, created_date, mel_date) as created_date
 
 from {{ ref('dim_leads_with_owner') }}
 where lead_id not in (select lead_id from mels)
-and (mel_date >= '2022-03-24' or lead_source = 'Marketing') --history field tracking activated for lifecycle status on this date
+and (mel_date is not null or lead_source = 'Marketing') 
 
 )
 
