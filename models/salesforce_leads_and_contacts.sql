@@ -10,13 +10,16 @@ WITH source AS (
 
 SELECT
 
-    --IDS
+    --GENERAL
     
     IFNULL(CONTACTS.ID, LEADS.ID) as PERSON_ID,
     LEADS.ID as LEAD_ID,
     CONTACTS.ID as CONTACT_ID,
+    ifnull(contacts.account_id, leads.account_name_c) as person_account_id,
     IFF(LEADS.ID IS NULL, 'Contact', 'Lead') as ORIGINAL_PERSON_TYPE,
     IFF(CONTACTS.ID IS NOT NULL, 'Contact', 'Lead') as CURRENT_PERSON_TYPE,
+    IFNULL(CONTACTS.CONTACT_TYPE_C, LEADS.LEAD_TYPE_C) as LEAD_TYPE,
+    leads.lifecycle_status_c as lifecycle_status,
     
     --LIFECYCLE STAGES
     
@@ -45,13 +48,31 @@ SELECT
     
     --DEMOGRAPHICS
     
+    IFNULL(CONTACTS.FIRST_NAME, LEADS.FIRST_NAME) as FIRST_NAME,
+    IFNULL(CONTACTS.LAST_NAME, LEADS.LAST_NAME) as LAST_NAME,
     IFNULL(CONTACTS.GLOBAL_REGION_C, IFNULL(LEADS.GLOBAL_REGION_C, IFF(IFNULL(CONTACTS.SALES_REGION_C, LEADS.SALES_REGION_C) = 'North America', 'NAM', IFNULL(CONTACTS.SALES_REGION_C, LEADS.SALES_REGION_C)))) as GLOBAL_REGION,
     IFF(IFNULL(CONTACTS.SALES_REGION_C, LEADS.SALES_REGION_C) = 'North America', 'NAM', IFNULL(CONTACTS.SALES_REGION_C, LEADS.SALES_REGION_C))  as SALES_REGION,
-    IFNULL(CONTACTS.INFERRED_COUNTRY_C, IFNULL(LEADS.COUNTRY, IFNULL(LEADS.INFERRED_COUNTRY_C, LEADS.ZOOM_INFO_COUNTRY_C))) as COUNTRY,
+    
+    IFNULL(
+        CONTACTS.INFERRED_COUNTRY_C, 
+        IFNULL(
+            LEADS.COUNTRY, 
+            IFNULL(
+                LEADS.INFERRED_COUNTRY_C, 
+                LEADS.ZOOM_INFO_COUNTRY_C)
+        )
+    ) as CLEANED_COUNTRY,
+    
+    IFNULL(CONTACTS.INFERRED_STATE_REGION_C, LEADS.INFERRED_STATE_REGION_C) as STATE,
     IFNULL(JOB_FUNCTION_CLEANED_C, LEADS.ZOOM_INFO_JOB_FUNCTION_C) as JOB_FUNCTION,
     IFNULL(JOB_LEVEL_CLEANED_C, LEADS.ZOOM_INFO_MANAGEMENT_LEVEL_C) as JOB_LEVEL,
     IFNULL(IFNULL(CONTACTS.TITLE, CONTACTS.ZOOM_INFO_JOB_TITLE_C), IFNULL(LEADS.TITLE, LEADS.ZOOM_INFO_JOB_TITLE_C)) as JOB_TITLE,
     IFNULL(CONTACTS.PERSONA_C, LEADS.PERSONA_C) as PERSONA,
+    IFNULL(LEADS.INDUSTRY_CLEANED_C, zisf_zoom_info_industry_c) as LEAD_INDUSTRY,
+    LEADS.COMPANY as LEAD_COMPANY,
+    LEADS.annual_revenue as lead_annual_revenue,
+    LEADS.number_of_employees as lead_number_of_employees,
+    LEADS.converted_opportunity_id as converted_opportunity_id,
     
     
     --SOURCE INFORMATION
@@ -62,6 +83,7 @@ SELECT
     IFNULL(CONTACTS.SOURCE_LAST_PERSON_SOURCE_C, LEADS.SOURCE_LAST_PERSON_SOURCE_C) as LAST_LEAD_SOURCE,
     IFNULL(CONTACTS.SOURCE_LAST_SECONDARY_LEAD_SOURCE_C, LEADS.SOURCE_LAST_SECONDARY_LEAD_SOURCE_C) as LAST_SECONDARY_LEAD_SOURCE,
     IFNULL(CONTACTS.SOURCE_LAST_LEAD_SOURCE_DETAIL_C, LEADS.SOURCE_LAST_LEAD_SOURCE_DETAIL_C) as SOURCE_LAST_LEAD_SOURCE_DETAIL,
+    IFNULL(CONTACTS.ACQUISITION_PROGRAM_C, LEADS.ACQUISITION_PROGRAM_C) as ACQUISITION_PROGRAM,
     
     --STATUS
     
@@ -72,7 +94,20 @@ SELECT
     IFNULL(CONTACTS.LEAD_SCORE_C, LEADS.LEAD_SCORE_C) as LEAD_SCORE,
     IFNULL(CONTACTS.SCORE_AT_MQL_C, LEADS.SCORE_AT_MQL_C) as LEAD_SCORE_AT_MQL,
     IFNULL(CONTACTS.PROFILE_SCORE_C, LEADS.PROFILE_SCORE_C) as PROFILE_SCORE,
-    IFNULL(CONTACTS.ENGAGEMENT_SCORE_C, LEADS.ENGAGEMENT_SCORE_C) as ENGAGEMENT_SCORE
+    IFNULL(CONTACTS.ENGAGEMENT_SCORE_C, LEADS.ENGAGEMENT_SCORE_C) as ENGAGEMENT_SCORE,
+
+    --OWNER
+    
+    IFNULL(CONTACTS.OWNER_ID, LEADS.OWNER_ID) as OWNER_ID,
+    IFNULL(CONTACTS.SDR_C, LEADS.OWNER_ID) as SDR,
+    
+    --CONTACT INFORMATION
+    IFNULL(CONTACTS.PHONE, LEADS.PHONE) as PHONE,
+    IFNULL(CONTACTS.EMAIL, LEADS.EMAIL) as EMAIL,
+    
+    --LEAD QUALIFICATION
+    
+    IFNULL(CONTACTS.QUALIFICATION_NOTES_C, LEADS.QUALIFICATION_NOTES_C) as QUALIFICATION_NOTES
     
 FROM FIVETRAN_DATABASE.SALESFORCE.LEAD LEADS
 FULL JOIN FIVETRAN_DATABASE.SALESFORCE.CONTACT CONTACTS
@@ -100,11 +135,68 @@ merged_contacts AS (
 
 ),
 
+sdrs AS (
+
+SELECT
+    
+    ID as SDR_ID,
+    NAME as SDR_NAME,
+    TITLE as TITLE
+    
+FROM FIVETRAN_DATABASE.SALESFORCE.USER
+
+),
+
+owners as (
+
+SELECT
+    
+    ID as CONTACT_OWNER_ID,
+    NAME as CONTACT_OWNER_NAME,
+    TITLE as CONTACT_OWNER_TITLE
+    
+FROM FIVETRAN_DATABASE.SALESFORCE.USER
+
+),
+
+accounts as (
+    
+    select
+    
+    id as account_id,
+    name as account_name, 
+    billing_country as account_country,
+    number_of_employees as account_number_of_employees,
+    annual_revenue as account_annual_revenue,
+    industry_cleaned_c as account_industry,
+    sales_region_c as account_sales_region,
+    zoominfo_subindustry_c as account_sub_industry,
+    tier_c as account_tier
+    
+    from fivetran_database.salesforce.account
+    where is_deleted = false
+),
+
+opportunity as (
+
+    select 
+    
+    opp_id,
+    opp_stage_name_ordered,
+    opp_arr,
+    opp_closed_won_dte,
+    opp_dq_dte
+    
+    from dev.sales.salesforce_agg_opportunity
+
+),
+
 data AS (
 
 SELECT
 
     *,
+    IFNULL(ACCOUNT_NAME, LEAD_COMPANY) as ACCOUNT_OR_COMPANY_NAME,
     IFF(
     LEAD_SOURCE = 'Marketing' AND MQL_DATE IS NULL,
     SAL_DATE,
@@ -113,8 +205,15 @@ SELECT
     IFF(PERSON_ID IN (SELECT * FROM merged_leads) OR PERSON_ID IN (SELECT * FROM merged_contacts), 'MERGED', NULL) as IS_MERGED
 
 FROM source
-
+LEFT JOIN sdrs 
+    ON SDR = SDR_ID
+left join owners
+    on owner_id = contact_owner_id
+left join accounts
+    on source.person_account_id = accounts.account_id
+left join opportunity
+    on source.converted_opportunity_id = opportunity.opp_id
+    
 )
 
-SELECT *
-FROM data
+SELECT * FROM data
