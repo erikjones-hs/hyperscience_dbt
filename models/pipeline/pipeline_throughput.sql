@@ -19,7 +19,7 @@ opp_net_new_arr,
 opp_created_dte,
 opp_closed_won_dte
 from {{ ref('agg_opportunity_incremental') }}
-where opp_stage_name not in ('Closed Won','Opp DQed') 
+where opp_stage_name not in ('Closed Won','Opp DQed','Closed Lost') 
 and opp_pipeline_category not in ('other')
 and date_ran = last_day(to_date(date_ran))
 order by date_ran asc
@@ -38,7 +38,7 @@ opp_net_new_arr,
 opp_created_dte,
 opp_closed_won_dte
 from {{ ref('agg_opportunity_incremental') }}
-where opp_stage_name in ('Closed Won','Opp DQed')
+where opp_stage_name in ('Closed Won','Opp DQed','Closed Lost')
 and opp_pipeline_category not in ('other')
 and date_ran = last_day(to_date(date_ran))
 order by date_ran asc

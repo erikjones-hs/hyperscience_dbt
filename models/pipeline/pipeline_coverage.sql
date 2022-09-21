@@ -103,7 +103,7 @@ fy.fy_year
 from {{ ref('agg_opportunity_incremental') }}
 right join fy_dates as fy on (to_date(opp_close_dte) = to_date(fy.dte))
 where fy.dte >= '2022-03-01'
-and opp_stage_name not in ('Closed Won','Opp DQed') 
+and opp_stage_name not in ('Closed Won','Opp DQed','Closed Lost') 
 and date_ran = dateadd(day,-1,(to_date(current_date)))
 and to_date(opp_close_dte) >= to_date(current_date())
 and to_date(opp_close_dte) <= '2023-02-28'

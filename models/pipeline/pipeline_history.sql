@@ -29,7 +29,7 @@ opportunity_owner,
 owner_description,
 opp_pipeline_category
 from {{ ref('agg_opportunity_incremental') }}
-where opp_stage_name not in ('Closed Won','Opp DQed')  
+where opp_stage_name not in ('Closed Won','Opp DQed','Closed Lost')  
 and date_ran = last_day(to_date(date_ran))
 order by date_ran asc
 ),
