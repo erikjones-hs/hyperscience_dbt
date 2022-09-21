@@ -43,7 +43,7 @@ CASE WHEN opp_poc_dte IS NOT NULL then datediff(day,to_date(opp_poc_dte),to_date
 CASE WHEN opp_eb_review_dte IS NOT NULL then datediff(day,to_date(opp_eb_review_dte),to_date(current_date())) else NULL end as time_in_eb_review,
 CASE WHEN opp_neg_and_close_dte IS NOT NULL then datediff(day,to_date(opp_neg_and_close_dte),to_date(current_date())) else NULL end as time_in_neg_and_close
 from {{ ref('agg_opportunity_incremental') }}
-where opp_stage_name not in ('Closed Won','Opp DQed')  
+where opp_stage_name not in ('Closed Won','Opp DQed','Closed Lost')  
 and date_ran = dateadd(day,-1,(to_date(current_date)))
 order by date_ran asc, opp_stage_name
 )
