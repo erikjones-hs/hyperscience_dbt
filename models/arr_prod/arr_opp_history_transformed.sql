@@ -74,11 +74,10 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R0000137jqkQAA' then to_date('2022-08-19') /* Adjusting end date because wrong in Salesforce. QAI 35k */
      when opp_id = '0061R00000zDCt9QAG' then to_date('2024-08-24') /* End date adjustment because renewal date was wrong in snapshot */
      when opp_id = '0061R000010QadCQAS' then to_date('2027-03-15') /* End date adjustment to account for amended contract. Philadelphia Insureance Company 300k */
-     when opp_id = '0061R0000137jsqQAA' then to_date('2022-10-15') /* End date adjustment because of open negotiations. Pac Life 330k */
-     when opp_id = '0061R000010O65hQAC' then to_date('2022-10-15') /* End date adjustment because of open negotiations. First American Financial 1M */
+     when opp_id = '0061R0000137jsqQAA' then to_date('2022-08-15') /* Adjusting End Date for historical accuracy. Pac Life 330k */
+     when opp_id = '0061R000010O65hQAC' then to_date('2022-08-15') /* Adjusting End Date for historical accuracy. First American Financial 1M */
      when opp_id = '0061R0000137hOKQAY' then to_date('2022-10-15') /* End date adjustment because of open negotiations. SSA DeDupe 1.9M */
      when opp_id = '0061R00001A3TIAQA3' then to_date('2022-10-15') /* End date adjustment because of open negotiations. Vida Capital - IBM 1.6k */
-   --  when opp_id = '0061R000010ONAIQA4' then to_date('2022-10-15') /* End date adjustment because of open negotiations. Eiffage 50k */
      when opp_id = '0061R000013flkIQAQ' then to_date('2022-10-15') /* End date adjustment because of open negotiations. VBA IBM 2.3M */
      when opp_id = '0061R0000135g3YQAQ' then to_date('2022-10-15') /* End date adjustment because of open negotiations. CompIQ 173k */
      when opp_id = '0061R0000135zhLQAQ' then to_date('2022-10-15') /* End date adjustment because of open negotiations. Morris Law 135k */
@@ -109,6 +108,7 @@ CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
      when opp_id = '0061R000014wI4qQAE' then to_date('2022-06-01')
      when opp_id = '0061R000016my8LQAQ' then to_date('2022-06-15')
      when opp_id = '0061R000016jsHbQAI' then to_date('2022-07-15')
+     when opp_id = '0061R00001A3ujGQAR' then to_date('2022-03-15')
      ELSE start_dte_raw end as start_dte,
 closed_won_dte,
 date_trunc('month',to_date(start_dte)) as start_dte_month,
@@ -125,12 +125,10 @@ CASE WHEN opp_id = '0063600000M73LuAAJ' then 200000
      WHEN opp_id = '0061R0000135gO1QAI' then 89040
      when opp_id = '0061R000014xeQwQAI' then 13269
      when opp_id = '0061R00001A6F76QAF' then 15000
-     when opp_id = '0061R00001A3ujGQAR' then 60000
      ELSE opp_arr end as opp_arr,
 CASE WHEN opp_id = '0061R0000135gO1QAI' then 5040 
      WHEN opp_id = '0061R000014xeQwQAI' then 13269
      WHEN opp_id = '0061R00001A6F76QAF' then 15000
-     when opp_id = '0061R00001A3ujGQAR' then 60000
      ELSE opp_net_new_arr end as opp_net_new_arr,
 opp_is_marketing_influenced_flag
 from raw_data
@@ -140,5 +138,6 @@ where opp_id not in ('00636000003gG2qAAE','0063600000W0NhNAAV','0063600000SKDdAA
 select * from raw_data_transformed where opp_id not in 
 (
 '0061R000016my8LQAQ', /* Tokio Marine Deal 420k. Removed due to out clause */
-'0061R000016jsHbQAI' /* Utilize Core 54k. Removed due to out clause */
+'0061R000016jsHbQAI', /* Utilize Core 54k. Removed due to out clause */
+'0061R000010QadCQAS' /* Original Tokio Marine Deal with Philly Insuarnce (replaced by amended opp for Philly Insurance) */
 )
