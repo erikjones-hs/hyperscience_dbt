@@ -7,15 +7,13 @@ select
 	partner_account_c as opp_partner_account,
 	stage_name as opp_stage_name,
 	case
-		when stage_name = 'AE Discovery' then '1. AE Discovery'
-		when stage_name = 'Value/Fit' then '2. Value/Fit'
-		when stage_name = 'TDD' then '3. TDD'
-		when stage_name = 'EB Go/No-Go' then '4. EB Go/No-Go'
-		when stage_name = 'TVE' then '5. TVE'
-		when stage_name = 'EB Revisit' then '6. EB Revisit'
-		when stage_name = 'Negotiate and Close' then '7. Negotiate and Close'
-		when stage_name = 'Closed Won' then '8. Closed Won'
-		when stage_name = 'Opp DQed' then '9. Opp DQed'
+		when stage_name = 'Diccovery & Qualification' then '1. Discovery & Qualification'
+		when stage_name = 'Alignment' then '2. Alignment'
+		when stage_name = 'EB Sponsorship' then '3. EB Sponsorship'
+		when stage_name = 'Value & Validation' then '4. Value & Validation'
+		when stage_name = 'EB Singoff & Contracts' then '5. EB Signoff & Contracts'
+		when stage_name = 'Closed Won' then '6. Closed Won'
+		when stage_name = 'Closed Lost' then '7. Closed Lost'
 		else 'Other'
 	end as opp_stage_name_ordered,
 	active_opportunity_c as opp_is_active,
