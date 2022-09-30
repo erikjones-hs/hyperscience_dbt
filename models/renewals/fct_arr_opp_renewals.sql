@@ -21,11 +21,20 @@ where opp_id in (
 '0061R00000zAI8KQAW', /* VA DMV - Title & Registration - 2021. Revenue Churn but kept logo */
 '0061R00000yEQVgQAO', /* GDIT- VA-VICCS-2021. Revenue churn but kept logo */
 '0061R00000yFonNQAS', /* MetaSource- California (Court Systems and State Contracts Paper) -2021. Revenue churn but kept logo */
+'0061R0000137hOKQAY', /* SSA DeDupe 1.9M */
 '0061R00001A3TIAQA3', /* Vida Capital - IBM 1.6k */
-'0061R000010ONAIQA4', /* Eiffage 50k */
 '0061R000013flkIQAQ', /* VBA IBM 2.3M */
 '0061R0000135g3YQAQ', /* CompIQ 173k */
-'0061R0000135zhLQAQ' /* Morris Law 135k */
+'0061R0000135zhLQAQ', /* Morris Law 135k */
+'0061R0000137by9QAA', /* AIG 555k */
+'0061R0000137hQzQAI', /* Allstate 15k */
+'0061R0000135gSiQAI', /* Ascensus 216k */
+'0061R000010OgSrQAK', /* GAIG 180k */
+'0061R000010tH9RQAU', /* VA VICCS 1.2M */
+'0061R0000137kdCQAQ', /* Unum 625k */
+'0061R000013eo6oQAA', /* Mutual of Omaha 306k */
+'0061R000014ulZtQAI', /* Promomash 50k */
+'0061R000010t5ARQAY' /* Mars 95k */
 )
 ),
 
