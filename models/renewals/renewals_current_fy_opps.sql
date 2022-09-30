@@ -19,7 +19,7 @@ from {{ ref('fct_arr_opp_renewals') }}
 where opp_category = 'churn'
 and to_date(date_month) >= date_trunc('month',to_date(current_date()))
 and to_date(date_month) <= '2024-02-01'
-and opp_id not in ('0061R000010usoKQAQ','0061R000010ujZ5QAI','0061R0000137jqkQAA','0061R0000137UX5QAM','0061R00000zE2RvQAK')
+and opp_id not in ('0061R000010usoKQAQ','0061R000010ujZ5QAI','0061R0000137jqkQAA','0061R0000137UX5QAM','0061R00000zE2RvQAK','0061R00000oERITQA4','0061R000010ONAIQA4')
 order by date_month asc
 ),
 
@@ -36,7 +36,7 @@ opp_commit_status,
 CASE WHEN opp_id = '0061R00000yGqH3QAK' then '0061R000014wIeUQAU' else prior_opp_id end as prior_opp_id,
 opp_close_dte
 from "DEV"."SALES"."SALESFORCE_AGG_OPPORTUNITY"
-where opp_stage_name not in ('Closed Won','Opp DQed')
+where opp_stage_name not in ('Closed Won','Opp DQed','Closed Lost')
 and is_deleted = false
 ),
 
