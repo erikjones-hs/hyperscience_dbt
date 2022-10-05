@@ -88,7 +88,6 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R0000137kdCQAQ' then to_date('2022-11-15') /* End date adjustment because of open negotiations. Unum 625k */
      when opp_id = '0061R000013eo6oQAA' then to_date('2022-11-15') /* End date adjustment because of open negotiations. Mutual of Omaha 306k */
      when opp_id = '0061R000014ulZtQAI' then to_date('2022-11-15') /* End date adjustment because of open negotiations. Promomash 50k */
-     when opp_id = '0061R000010t5ARQAY' then to_date('2022-11-15') /* End date adjustment because of open negotiations. Mars 95k */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')

@@ -33,7 +33,7 @@ opp_stage_name,
 opp_arr,
 opp_close_dte
 from "DEV"."SALES"."SALESFORCE_AGG_OPPORTUNITY"
-where opp_stage_name not in ('Opp DQed', 'Closed Won')
+where opp_stage_name not in ('Opp DQed', 'Closed Won','Closed Lost')
 and opp_revenue_type not in ('Renewal','License Overage')
 and opportunity_owner not in ('Eli Berman')
 and opp_commit_status in ('Committed','Best Case','Visible Opportunity','Pipeline')
