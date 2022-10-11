@@ -6,7 +6,16 @@
 )
 }}
 
-with renewal_opps as (
+with renewals as (
+select *,
+CASE WHEN opp_category = 'churn' and customer_category = 'active' then 1 else 0 end as renewal_month,
+max(renewal_month) over (partition by account_id) as has_renewed,
+sum(renewal_month) over (partition by account_id) as num_renewals
+from {{ ref('fct_arr_opp') }} 
+order by account_id, date_month asc
+), 
+
+renewal_opps as (
 select distinct
 date_month,
 account_id,
@@ -19,7 +28,7 @@ from {{ ref('fct_arr_opp_renewals') }}
 where opp_category = 'churn'
 and to_date(date_month) >= date_trunc('month',to_date(current_date()))
 and to_date(date_month) <= '2024-02-01'
-and opp_id not in ('0061R000010usoKQAQ','0061R000010ujZ5QAI','0061R0000137jqkQAA','0061R0000137UX5QAM','0061R00000zE2RvQAK','0061R00000oERITQA4','0061R000010ONAIQA4')
+and opp_id not in (select opp_id from renewals where renewal_month = 1 )
 order by date_month asc
 ),
 
