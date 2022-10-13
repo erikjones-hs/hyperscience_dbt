@@ -35,7 +35,12 @@ account_id,
 account_name,
 opp_id,
 opp_name,
-mrr_change,
+CASE WHEN opp_id = '0061R000016kGCyQAM' then -90000
+     WHEN opp_id = '0061R000014xeQwQAI' then -183115.38
+     WHEN opp_id = '0061R00000r6r1iQAA' then -375000
+     WHEN opp_id = '0061R00000zAI8KQAW' then -43225
+     WHEN opp_id = '0061R000014wNrpQAE' then -35000.001
+     else mrr_change end as mrr_change,
 CASE WHEN opp_id = '0061R0000137hOKQAY' then to_date('2022-09-30') /* Adjusting end date because it is wrong in SFDC. SSA DEDupe 19.M */
      WHEN opp_id = '0061R000013fGTbQAM' then to_date('2022-11-23') /* Adjusting end date because it is wrong in SFDC. DivvyDose 180k */ 
      WHEN opp_id = '0061R00000r6r1iQAA' then to_date('2023-11-15') /* Adjusting the end date for CRL because they are still a customer, but with no committed revenue */
@@ -54,6 +59,7 @@ and to_date(date_month) >= date_trunc('month',to_date(current_date()))
 and to_date(date_month) <= '2024-02-01'
 and opp_id not in (select opp_id from renewals where renewal_month = 1 and to_date(date_month) <= date_trunc(month,to_date(current_date())))
 and opp_id not in (select opp_id from churn)
+and opp_id not in ('0061R00000zAuShQAK')
 order by end_dte asc
 ),
 
@@ -63,11 +69,22 @@ opp_id,
 opp_name,
 account_id,
 account_name,
-opp_arr,
-opp_net_new_arr,
+CASE WHEN opp_id = '0061R00001BAugdQAD' then 0.00000000001
+     WHEN opp_id = '0061R000014wNrVQAU' then 250000
+     WHEN opp_id = '0061R000014wNrmQAE' then 0.00000000001
+     WHEN opp_id = '0061R00001A644eQAB' then 375000.003
+     WHEN opp_id = '0061R00001BAPkAQAX' then 330000
+     else opp_arr end as opp_arr,
+CASE WHEN opp_id = '0061R00001A6iWpQAJ' then 0 
+     WHEN opp_id = '0061R000014wI4cQAE' then 0
+     else opp_net_new_arr end as opp_net_new_arr,
 opp_stage_name,
 opp_commit_status,
-CASE WHEN opp_id = '0061R00000yGqH3QAK' then '0061R000014wIeUQAU' else prior_opp_id end as prior_opp_id,
+CASE WHEN opp_id = '0061R00000yGqH3QAK' then '0061R000014wIeUQAU' 
+     WHEN opp_id = '0061R00001A6iWpQAJ' then '0061R000016kGCyQAM'
+     when opp_id = '0061R000014wNrVQAU' then '0061R00000yFci4QAC'
+     when opp_id = '0061R00001BAugdQAD' then '0061R00000yFonNQAS'
+     else prior_opp_id end as prior_opp_id,
 opp_close_dte
 from "DEV"."SALES"."SALESFORCE_AGG_OPPORTUNITY"
 where opp_stage_name not in ('Closed Won','Opp DQed','Closed Lost')
@@ -77,7 +94,8 @@ and is_deleted = false
 open_opps as (
 select * 
 from open_opps_int
-where prior_opp_id in (select distinct opp_id from renewal_opps)  
+where prior_opp_id in (select distinct opp_id from renewal_opps) 
+OR prior_opp_id = '0061R000013eo6oQAA' 
 and opp_id not in ('0061R000014wNrwQAE')
 ),
 
@@ -99,7 +117,8 @@ oo.opp_stage_name,
 oo.opp_commit_status as open_opp_commit_status,
 CASE WHEN open_opp_id IS NULL then potential_churn_amount else (potential_churn_amount + open_opp_arr) end as net_new_arr,
 CASE WHEN net_new_arr > 0 then 'expansion'
-     WHEN net_new_arr < 0 then 'churn'
+     WHEN net_new_arr < 0 and open_opp_id IS NULL then 'no open opp'
+     WHEN net_new_arr < 0 and open_opp_id IS NOT NULL then 'churn'
      WHEN net_new_arr = 0 then 'flat'
      ELSE 'other' end as renewal_type
 from renewal_opps as ro
