@@ -15,6 +15,19 @@ from {{ ref('fct_arr_opp') }}
 order by account_id, date_month asc
 ), 
 
+churn as (
+select distinct
+date_month,
+account_id,
+account_name,
+opp_id,
+opp_name
+from {{ ref('fct_arr_opp') }} 
+where customer_category = 'churn'
+and to_date(date_month) <= date_trunc(month,to_date(current_date()))
+order by date_month asc
+),
+
 renewal_opps as (
 select distinct
 date_month,
@@ -23,13 +36,25 @@ account_name,
 opp_id,
 opp_name,
 mrr_change,
-end_dte
+CASE WHEN opp_id = '0061R0000137hOKQAY' then to_date('2022-09-30') /* Adjusting end date because it is wrong in SFDC. SSA DEDupe 19.M */
+     WHEN opp_id = '0061R000013fGTbQAM' then to_date('2022-11-23') /* Adjusting end date because it is wrong in SFDC. DivvyDose 180k */ 
+     WHEN opp_id = '0061R00000r6r1iQAA' then to_date('2023-11-15') /* Adjusting the end date for CRL because they are still a customer, but with no committed revenue */
+     WHEN opp_id = '0061R00000yFonNQAS' then to_date('2023-11-15') /* Adjusting the end date for MetaSource because they are still a customer, but with no committed revenue */
+     WHEN opp_id = '0061R00000zAI8KQAW' then to_date('2023-11-15') /* Adjusting the end date for Virginia DMV because they are still a customer, but with no committed revenue */
+     WHEN opp_id = '0061R00000yEQVgQAO' then to_date('2023-11-15') /* Adjusting the end date for GDIT-VA because they are still a customer, but with no committed revenue */
+     WHEN opp_id = '0061R00000uL8ylQAC' then to_date('2023-11-15') /* Adjusting the end date for PMP because they are still a customer, but with a 1 year free contract period */
+     When opp_id = '0061R000014uXZrQAM' then to_date('2023-01-25') /* Updated MPOWER end date because it is incorrect in SFDC */
+     when opp_id = '0061R00000zD2sxQAC' then to_date('2024-03-15') /* End date adjustment because renewal date is incorrect in SFDC. Conduent 1.98M */
+     when opp_id = '0061R00000zDCt9QAG' then to_date('2024-08-24') /* End date adjustment because renewal date was wrong in snapshot */
+     when opp_id = '0061R000010QadCQAS' then to_date('2027-03-15') /* End date adjustment to account for amended contract. Philadelphia Insureance Company 300k */
+     ELSE end_dte_raw end as end_dte
 from {{ ref('fct_arr_opp_renewals') }}
 where opp_category = 'churn'
 and to_date(date_month) >= date_trunc('month',to_date(current_date()))
 and to_date(date_month) <= '2024-02-01'
-and opp_id not in (select opp_id from renewals where renewal_month = 1 )
-order by date_month asc
+and opp_id not in (select opp_id from renewals where renewal_month = 1 and to_date(date_month) <= date_trunc(month,to_date(current_date())))
+and opp_id not in (select opp_id from churn)
+order by end_dte asc
 ),
 
 open_opps_int as (
