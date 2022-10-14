@@ -16,6 +16,7 @@ sources:
       - name: group_member
       - name: opportunity
       - name: opportunity_field_history
+      - name: opportunity_contact_role
       - name: campaign
       - name: campaign_member
       - name: bizible_2_bizible_attribution_touchpoint_c
