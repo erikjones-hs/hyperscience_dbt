@@ -52,12 +52,13 @@ CASE WHEN opp_id = '0061R0000137hOKQAY' then to_date('2022-09-30') /* Adjusting 
      when opp_id = '0061R00000zD2sxQAC' then to_date('2024-03-15') /* End date adjustment because renewal date is incorrect in SFDC. Conduent 1.98M */
      when opp_id = '0061R00000zDCt9QAG' then to_date('2024-08-24') /* End date adjustment because renewal date was wrong in snapshot */
      when opp_id = '0061R000010QadCQAS' then to_date('2027-03-15') /* End date adjustment to account for amended contract. Philadelphia Insureance Company 300k */
+     when opp_id = '0061R00001A4pwsQAB' then to_date('2023-10-29') /* End date adjustment because it is wrong in SFDC. Ascensus 216k */
      ELSE end_dte_raw end as end_dte
 from {{ ref('fct_arr_opp_renewals') }}
 where opp_category = 'churn'
 and to_date(date_month) >= date_trunc('month',to_date(current_date()))
 and to_date(date_month) <= '2024-02-01'
-and opp_id not in (select opp_id from renewals where renewal_month = 1 and to_date(date_month) <= date_trunc(month,to_date(current_date())))
+and opp_id not in (select opp_id from renewals where renewal_month = 1 and to_date(date_month) <= dateadd(month,1,date_trunc(month,to_date(current_date()))))
 and opp_id not in (select opp_id from churn)
 and opp_id not in ('0061R00000zAuShQAK')
 order by end_dte asc

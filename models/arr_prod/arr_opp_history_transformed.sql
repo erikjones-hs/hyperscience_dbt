@@ -22,6 +22,7 @@ CASE WHEN account_name = 'TD Ameritrade' then 'Charles Schwab'
      WHEN account_name = '8053580156557' then 'Department of Justice' 
      WHEN account_name = '8780895197581' then 'Mathematica, Inc.'
      WHEN account_name = 'Tokio Marine HCC' then 'Philadelphia Insurance Companies'
+     WHEN account_name = 'Great American Insurance Group' then 'Great American Insurance Company'
      else account_name end as account_name,
 opp_id,
 opp_name,
@@ -76,17 +77,16 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R0000137jsqQAA' then to_date('2022-08-15') /* Adjusting End Date for historical accuracy. Pac Life 330k */
      when opp_id = '0061R000010O65hQAC' then to_date('2022-08-15') /* Adjusting End Date for historical accuracy. First American Financial 1M */
      when opp_id = '0061R0000137hQzQAI' then to_date('2022-10-15') /* End date adjustment for historical accuracy. Allstate 15k */
+     when opp_id = '0061R00001A4pwsQAB' then to_date('2023-10-29') /* End date adjustment because it is wrong in SFDC. Ascensus 216k */
+     when opp_id = '0061R000010OgSrQAK' then to_date('2022-11-15') /* End date adjustment for historical accuracy. GAIG 180k */
      when opp_id = '0061R0000137hOKQAY' then to_date('2022-11-15') /* End date adjustment because of open negotiations. SSA DeDupe 1.9M */
      when opp_id = '0061R00001A3TIAQA3' then to_date('2022-11-15') /* End date adjustment because of open negotiations. Vida Capital - IBM 1.6k */
      when opp_id = '0061R000013flkIQAQ' then to_date('2022-11-15') /* End date adjustment because of open negotiations. VBA IBM 2.3M */
      when opp_id = '0061R0000135g3YQAQ' then to_date('2022-11-15') /* End date adjustment because of open negotiations. CompIQ 173k */
      when opp_id = '0061R0000137by9QAA' then to_date('2022-11-15') /* End date adjustment because of open negotiations. AIG 555k */
-     when opp_id = '0061R0000135gSiQAI' then to_date('2022-11-15') /* End date adjustment because of open negotiations. Ascensus 216k */
-     when opp_id = '0061R000010OgSrQAK' then to_date('2022-11-15') /* End date adjustment because of open negotiations. GAIG 180k */
      when opp_id = '0061R000010tH9RQAU' then to_date('2022-11-15') /* End date adjustment because of open negotiations. VA VICCS 1.2M */
      when opp_id = '0061R0000137kdCQAQ' then to_date('2022-11-15') /* End date adjustment because of open negotiations. Unum 625k */
      when opp_id = '0061R000013eo6oQAA' then to_date('2022-11-15') /* End date adjustment because of open negotiations. Mutual of Omaha 306k */
-     when opp_id = '0061R000014ulZtQAI' then to_date('2022-11-15') /* End date adjustment because of open negotiations. Promomash 50k */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
