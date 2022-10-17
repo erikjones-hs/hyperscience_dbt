@@ -74,6 +74,7 @@ select
     left join {{ ref('dim_users_and_queues') }} sdr  on (opp.opp_sdr_id = sdr.id)
     left join {{ ref('stg_marketing_influenced_opps') }} marketing_influenced on (opp.opp_id = marketing_influenced.marketing_influenced_opportunity_id)
     left join {{ ref('stg_opp_stage_history') }} on (opp.opp_id = opportunity_id)
+    where opp.is_deleted = false
 
 
 
