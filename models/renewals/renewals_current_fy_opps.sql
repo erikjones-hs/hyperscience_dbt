@@ -58,9 +58,13 @@ from {{ ref('fct_arr_opp_renewals') }}
 where opp_category = 'churn'
 and to_date(date_month) >= date_trunc('month',to_date(current_date()))
 and to_date(date_month) <= '2024-02-01'
-and opp_id not in (select opp_id from renewals where renewal_month = 1 and to_date(date_month) <= dateadd(month,1,date_trunc(month,to_date(current_date()))))
+and opp_id not in (select opp_id from renewals where renewal_month = 1 and to_date(date_month) <= date_trunc(month,to_date(current_date())))
 and opp_id not in (select opp_id from churn)
-and opp_id not in ('0061R00000zAuShQAK')
+and opp_id not in (
+'0061R00000zAuShQAK', /* Removing extra BenefitMall opp. Relying instead on Upsell opp */ 
+'0061R000013fFwbQAE', /* Early Renewal. Federated Mutual Insurance */
+'0061R000010OgSrQAK' /* Early Renewal Great American Insurance */
+)
 order by end_dte asc
 ),
 
