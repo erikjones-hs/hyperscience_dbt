@@ -79,6 +79,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R0000137hQzQAI' then to_date('2022-10-15') /* End date adjustment for historical accuracy. Allstate 15k */
      when opp_id = '0061R00001A4pwsQAB' then to_date('2023-10-29') /* End date adjustment because it is wrong in SFDC. Ascensus 216k */
      when opp_id = '0061R000010OgSrQAK' then to_date('2022-11-15') /* End date adjustment for historical accuracy. GAIG 180k */
+     when opp_id = '0061R000013fHgQQAU' then to_date('2022-10-15') /* End date adjustment for historical accuracy. IRS phase 2 */
      when opp_id = '0061R0000137hOKQAY' then to_date('2022-11-15') /* End date adjustment because of open negotiations. SSA DeDupe 1.9M */
      when opp_id = '0061R00001A3TIAQA3' then to_date('2022-11-15') /* End date adjustment because of open negotiations. Vida Capital - IBM 1.6k */
      when opp_id = '0061R000013flkIQAQ' then to_date('2022-11-15') /* End date adjustment because of open negotiations. VBA IBM 2.3M */
@@ -86,7 +87,6 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R0000137by9QAA' then to_date('2022-11-15') /* End date adjustment because of open negotiations. AIG 555k */
      when opp_id = '0061R000010tH9RQAU' then to_date('2022-11-15') /* End date adjustment because of open negotiations. VA VICCS 1.2M */
      when opp_id = '0061R0000137kdCQAQ' then to_date('2022-11-15') /* End date adjustment because of open negotiations. Unum 625k */
-     when opp_id = '0061R000013eo6oQAA' then to_date('2022-11-15') /* End date adjustment because of open negotiations. Mutual of Omaha 306k */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
@@ -131,10 +131,12 @@ CASE WHEN opp_id = '0063600000M73LuAAJ' then 200000
      WHEN opp_id = '0061R0000135gO1QAI' then 89040
      when opp_id = '0061R000014xeQwQAI' then 13269
      when opp_id = '0061R00001A6F76QAF' then 15000
+     when opp_id = '0061R00001BAPkAQAX' then 330000
      ELSE opp_arr end as opp_arr,
 CASE WHEN opp_id = '0061R0000135gO1QAI' then 5040 
      WHEN opp_id = '0061R000014xeQwQAI' then 13269
      WHEN opp_id = '0061R00001A6F76QAF' then 15000
+     when opp_id = '0061R00001BAPkAQAX' then 150000
      ELSE opp_net_new_arr end as opp_net_new_arr,
 opp_is_marketing_influenced_flag
 from raw_data
