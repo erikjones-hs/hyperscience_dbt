@@ -81,7 +81,6 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R000010OgSrQAK' then to_date('2022-11-15') /* End date adjustment for historical accuracy. GAIG 180k */
      when opp_id = '0061R000013fHgQQAU' then to_date('2022-10-15') /* End date adjustment for historical accuracy. IRS phase 2 */
      when opp_id = '0061R0000137hOKQAY' then to_date('2022-11-15') /* End date adjustment because of open negotiations. SSA DeDupe 1.9M */
-     when opp_id = '0061R00001A3TIAQA3' then to_date('2022-11-15') /* End date adjustment because of open negotiations. Vida Capital - IBM 1.6k */
      when opp_id = '0061R000013flkIQAQ' then to_date('2022-11-15') /* End date adjustment because of open negotiations. VBA IBM 2.3M */
      when opp_id = '0061R0000135g3YQAQ' then to_date('2022-11-15') /* End date adjustment because of open negotiations. CompIQ 173k */
      when opp_id = '0061R0000137by9QAA' then to_date('2022-11-15') /* End date adjustment because of open negotiations. AIG 555k */
@@ -147,5 +146,7 @@ select * from raw_data_transformed where opp_id not in
 (
 '0061R000016my8LQAQ', /* Tokio Marine Deal 420k. Removed due to out clause */
 '0061R000016jsHbQAI', /* Utilize Core 54k. Removed due to out clause */
-'0061R000010QadCQAS' /* Original Tokio Marine Deal with Philly Insuarnce (replaced by amended opp for Philly Insurance) */
+'0061R000010QadCQAS', /* Original Tokio Marine Deal with Philly Insuarnce (replaced by amended opp for Philly Insurance) */
+'0061R000014wNsNQAU', /* Data Dimensions 640k. Removing because they opted out of their auto-renewal */
+'0061R00001A3TIAQA3' /* Vida Capital 1.6k. Was an NRR Deal. Should have not been in here as ARR */
 )
