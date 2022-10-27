@@ -63,7 +63,9 @@ and opp_id not in (select opp_id from churn)
 and opp_id not in (
 '0061R00000zAuShQAK', /* Removing extra BenefitMall opp. Relying instead on Upsell opp */ 
 '0061R000013fFwbQAE', /* Early Renewal. Federated Mutual Insurance */
-'0061R000010OgSrQAK' /* Early Renewal Great American Insurance */
+'0061R000010OgSrQAK', /* Early Renewal Great American Insurance */
+'0061R000014v6D3QAI', /* Early Renewal for Aviso Wealth */
+'0061R000013fGTbQAM'  /* Early Renewal for divvyDOSE */
 )
 order by end_dte asc
 ),
