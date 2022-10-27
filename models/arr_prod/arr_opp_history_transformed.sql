@@ -82,7 +82,6 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R000013fHgQQAU' then to_date('2022-10-15') /* End date adjustment for historical accuracy. IRS phase 2 */
      when opp_id = '0061R0000137hOKQAY' then to_date('2022-11-15') /* End date adjustment because of open negotiations. SSA DeDupe 1.9M */
      when opp_id = '0061R000013flkIQAQ' then to_date('2022-11-15') /* End date adjustment because of open negotiations. VBA IBM 2.3M */
-     when opp_id = '0061R0000135g3YQAQ' then to_date('2022-11-15') /* End date adjustment because of open negotiations. CompIQ 173k */
      when opp_id = '0061R0000137by9QAA' then to_date('2022-11-15') /* End date adjustment because of open negotiations. AIG 555k */
      when opp_id = '0061R000010tH9RQAU' then to_date('2022-11-15') /* End date adjustment because of open negotiations. VA VICCS 1.2M */
      when opp_id = '0061R0000137kdCQAQ' then to_date('2022-11-15') /* End date adjustment because of open negotiations. Unum 625k */
