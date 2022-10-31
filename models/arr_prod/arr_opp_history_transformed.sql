@@ -80,11 +80,13 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R00001A4pwsQAB' then to_date('2023-10-29') /* End date adjustment because it is wrong in SFDC. Ascensus 216k */
      when opp_id = '0061R000010OgSrQAK' then to_date('2022-11-15') /* End date adjustment for historical accuracy. GAIG 180k */
      when opp_id = '0061R000013fHgQQAU' then to_date('2022-10-15') /* End date adjustment for historical accuracy. IRS phase 2 */
-     when opp_id = '0061R0000137hOKQAY' then to_date('2022-11-15') /* End date adjustment because of open negotiations. SSA DeDupe 1.9M */
-     when opp_id = '0061R000013flkIQAQ' then to_date('2022-11-15') /* End date adjustment because of open negotiations. VBA IBM 2.3M */
-     when opp_id = '0061R0000137by9QAA' then to_date('2022-11-15') /* End date adjustment because of open negotiations. AIG 555k */
-     when opp_id = '0061R000010tH9RQAU' then to_date('2022-11-15') /* End date adjustment because of open negotiations. VA VICCS 1.2M */
-     when opp_id = '0061R0000137kdCQAQ' then to_date('2022-11-15') /* End date adjustment because of open negotiations. Unum 625k */
+     when opp_id = '0061R0000137hOKQAY' then to_date('2022-12-15') /* End date adjustment because of open negotiations. SSA DeDupe 1.9M */
+     when opp_id = '0061R000013flkIQAQ' then to_date('2022-12-15') /* End date adjustment because of open negotiations. VBA IBM 2.3M */
+     when opp_id = '0061R0000137by9QAA' then to_date('2022-12-15') /* End date adjustment because of open negotiations. AIG 555k */
+     when opp_id = '0061R000010tH9RQAU' then to_date('2022-12-15') /* End date adjustment because of open negotiations. VA VICCS 1.2M */
+     when opp_id = '0061R0000137kdCQAQ' then to_date('2022-12-15') /* End date adjustment because of open negotiations. Unum 625k */
+     when opp_id = '0061R0000135gO1QAI' then to_date('2022-12-15') /* End date adjustment because of open negotiations. Accerta 89.4k */
+     when opp_id = '0061R000014wIeUQAU' then to_date('2022-12-15') /* End date adjustment because of open negotiations. SSA W2 950k */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
