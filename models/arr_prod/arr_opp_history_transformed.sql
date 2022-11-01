@@ -17,12 +17,14 @@ select * from {{ref('arr_opp_history')}}
 raw_data_transformed as (
 select 
 CASE WHEN account_id = '0011R000026iP6rQAE' then '0013600001iRke2AAC' 
+     WHEN account_id = '0013600001hWo0yAAC' then '0011R00002HKzaCQAT'
      else account_id end as account_id,
 CASE WHEN account_name = 'TD Ameritrade' then 'Charles Schwab' 
      WHEN account_name = '8053580156557' then 'Department of Justice' 
      WHEN account_name = '8780895197581' then 'Mathematica, Inc.'
      WHEN account_name = 'Tokio Marine HCC' then 'Philadelphia Insurance Companies'
      WHEN account_name = 'Great American Insurance Group' then 'Great American Insurance Company'
+     WHEN account_name = 'IBM' then 'Department of Veterans Affairs'
      else account_name end as account_name,
 opp_id,
 opp_name,
@@ -80,10 +82,10 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R00001A4pwsQAB' then to_date('2023-10-29') /* End date adjustment because it is wrong in SFDC. Ascensus 216k */
      when opp_id = '0061R000010OgSrQAK' then to_date('2022-11-15') /* End date adjustment for historical accuracy. GAIG 180k */
      when opp_id = '0061R000013fHgQQAU' then to_date('2022-10-15') /* End date adjustment for historical accuracy. IRS phase 2 */
-     when opp_id = '0061R0000137hOKQAY' then to_date('2022-12-15') /* End date adjustment because of open negotiations. SSA DeDupe 1.9M */
-     when opp_id = '0061R000013flkIQAQ' then to_date('2022-12-15') /* End date adjustment because of open negotiations. VBA IBM 2.3M */
+     when opp_id = '0061R0000137hOKQAY' then to_date('2022-09-15') /* End date adjustment for historical accuracy. SSA DeDupe 1.9M */
+     when opp_id = '0061R000013flkIQAQ' then to_date('2022-10-15') /* End date adjustment for historical accuracy. VBA IBM 2.3M */
+     when opp_id = '0061R000010tH9RQAU' then to_date('2022-10-15') /* End date adjustment for historical accuracy. VA VICCS 1.2M */
      when opp_id = '0061R0000137by9QAA' then to_date('2022-12-15') /* End date adjustment because of open negotiations. AIG 555k */
-     when opp_id = '0061R000010tH9RQAU' then to_date('2022-12-15') /* End date adjustment because of open negotiations. VA VICCS 1.2M */
      when opp_id = '0061R0000137kdCQAQ' then to_date('2022-12-15') /* End date adjustment because of open negotiations. Unum 625k */
      when opp_id = '0061R0000135gO1QAI' then to_date('2022-12-15') /* End date adjustment because of open negotiations. Accerta 89.4k */
      when opp_id = '0061R000014wIeUQAU' then to_date('2022-12-15') /* End date adjustment because of open negotiations. SSA W2 950k */
