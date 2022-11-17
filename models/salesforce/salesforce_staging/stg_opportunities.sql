@@ -12,7 +12,7 @@ select
 		when stage_name = 'Alignment' then '2. Alignment'
 		when stage_name = 'EB Sponsorship' then '3. EB Sponsorship'
 		when stage_name = 'Value & Validation' then '4. Value & Validation'
-		when stage_name = 'EB Singoff & Contracts' then '5. EB Signoff & Contracts'
+		when stage_name = 'EB Signoff & Contracts' then '5. EB Signoff & Contracts'
 		when stage_name = 'Closed Won' then '6. Closed Won'
 		when stage_name = 'Closed Lost' then '7. Closed Lost'
 		else 'Other'
