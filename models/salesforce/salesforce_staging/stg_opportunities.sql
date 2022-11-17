@@ -7,7 +7,8 @@ select
 	partner_account_c as opp_partner_account,
 	stage_name as opp_stage_name,
 	case
-		when stage_name = 'Diccovery & Qualification' then '1. Discovery & Qualification'
+		when stage_name = 'Pipeline Generation' then '0. Pipeline Generation'
+		when stage_name = 'Discovery & Qualification' then '1. Discovery & Qualification'
 		when stage_name = 'Alignment' then '2. Alignment'
 		when stage_name = 'EB Sponsorship' then '3. EB Sponsorship'
 		when stage_name = 'Value & Validation' then '4. Value & Validation'
