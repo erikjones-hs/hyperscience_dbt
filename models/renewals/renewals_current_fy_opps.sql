@@ -77,7 +77,7 @@ and opp_id not in (
 '0061R000010OgSrQAK', /* Early Renewal Great American Insurance */
 '0061R000014v6D3QAI', /* Early Renewal for Aviso Wealth */
 '0061R000013fGTbQAM', /* Early Renewal for divvyDOSE */
-'0061R000014uygDQAQ'. /* Early Renewal for Kovack */
+'0061R000014uygDQAQ'  /* Early Renewal for Kovack */
 )
 order by end_dte asc
 ),
