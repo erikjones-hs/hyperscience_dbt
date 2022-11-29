@@ -91,7 +91,11 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R0000137scfQAA' then to_date('2022-11-15') /* End Date Adjustment per FP&A. Not Paying. Cogent 95k */ 
      when opp_id = '0061R000014wIeUQAU' then to_date('2022-10-15') /* End date adjustment for historical accuracy. SSA W2 950k */
      when opp_id = '0061R00001A4rKQQAZ' then to_date('2023-11-30') /* End date adjustment because it is wrong in SFDC. Kovack 35k */
-     when opp_id = '0061R0000135gO1QAI' then to_date('2022-12-15') /* End date adjustment because of open negotiations. Accerta 89.4k */
+     when opp_id = '0061R0000135gO1QAI' then to_date('2023-01-15') /* End date adjustment because of open negotiations. Accerta 89.4k */
+     when opp_id = '0061R000013fGLrQAM' then to_date('2023-01-15') /* End date adjustment because of open negotiations. Legal and General 315k */
+     when opp_id = '0061R000013gx5GQAQ' then to_date('2023-01-15') /* End date adjustment because of open negotiations. Chanel 5k */
+     when opp_id = '0061R00000uIehuQAC' then to_date('2023-01-15') /* End date adjustment because of open negotiations. FM Global 125k */ 
+     when opp_id = '0061R00000uLcG2QAK' then to_date('2023-01-15') /* End date adjustment because of open negotiations. Morgan Stanley 148.5k */ 
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
