@@ -57,7 +57,6 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      WHEN opp_id = '0061R00000zAjoeQAC' then to_date('2021-10-15')
      WHEN opp_id = '0061R000010PVABQA4' then to_date('2021-10-15')
      WHEN opp_id = '0061R00000zBqNRQA0' then to_date('2021-11-15')
-     WHEN opp_id = '0061R000013fGLrQAM' then to_date('2022-12-18')
      WHEN opp_id = '0061R00000wJkMuQAK' then to_date('2021-12-15')
      when opp_id = '0061R0000137saUQAQ' then to_date('2022-06-15') 
      WHEN opp_id = '0061R000013fGTbQAM' then to_date('2022-11-23') /* Updated end date because it is incorect in SFDC. divvyDose 180k */
