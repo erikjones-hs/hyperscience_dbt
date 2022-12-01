@@ -25,6 +25,7 @@ CASE WHEN account_name = 'TD Ameritrade' then 'Charles Schwab'
      WHEN account_name = 'Tokio Marine HCC' then 'Philadelphia Insurance Companies'
      WHEN account_name = 'Great American Insurance Group' then 'Great American Insurance Company'
      WHEN account_name = 'IBM' then 'Department of Veterans Affairs'
+     when account_name = 'Momentum Metropolitan Holdings Limited' then 'Momentum'
      else account_name end as account_name,
 opp_id,
 opp_name,
@@ -91,6 +92,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R0000137scfQAA' then to_date('2022-11-15') /* End Date Adjustment per FP&A. Not Paying. Cogent 95k */ 
      when opp_id = '0061R000014wIeUQAU' then to_date('2022-10-15') /* End date adjustment for historical accuracy. SSA W2 950k */
      when opp_id = '0061R00001A4rKQQAZ' then to_date('2023-11-30') /* End date adjustment because it is wrong in SFDC. Kovack 35k */
+     when opp_id = '0061R00000zBWKMQA4' then to_date('2022-11-15') /* End date adjustment due to upsell. Momentum 330.67k */
      when opp_id = '0061R0000135gO1QAI' then to_date('2023-01-15') /* End date adjustment because of open negotiations. Accerta 89.4k */
      when opp_id = '0061R000013fGLrQAM' then to_date('2023-01-15') /* End date adjustment because of open negotiations. Legal and General 315k */
      when opp_id = '0061R000013gx5GQAQ' then to_date('2023-01-15') /* End date adjustment because of open negotiations. Chanel 5k */
