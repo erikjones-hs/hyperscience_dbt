@@ -13,6 +13,33 @@ customer,
 dte_month,
 total_pages_created
 from "DEV"."CX"."CUSTOMER_DATA_FCT_MONTHLY_PAGES"
+where customer not in ('AIG','AIG - Internal Audit','Guardian','Voya')
+order by customer, dte_month asc
+),
+
+/* Need to correct for Blended Pages COntracts */
+blended_raw_data as (
+select distinct
+customer,
+to_date(date) as dte_month,
+NUMBER_OF_PAGES_WITH_FIELDS_ON_THEM_COMPLETED as num_pages_with_fields_completed,
+ZEROIFNULL(NUMBER_OF_PAGES_MATCHED_TO_FLEX_LAYOUTS_CREATED) as num_matched_semi_structured_pages,
+ZEROIFNULL(NUMBER_OF_PAGES_MATCHED_TO_FORM_LAYOUTS_CREATED) as num_matched_structured_pages,
+NUMBER_OF_PAGES_CREATED as num_pages_created
+from "FIVETRAN_DATABASE"."GOOGLE_SHEETS"."CUSTOMER_DATA"
+where customer in ('AIG','AIG - Internal Audit','Guardian','Voya')
+order by customer, dte_month asc
+),
+
+blended_pages as (
+select distinct
+customer,
+to_timestamp(dte_month) as dte_month,
+CASE WHEN customer in ('AIG','AIG - Internal Audit') then ((num_pages_with_fields_completed) + (num_matched_semi_structured_pages/3) + ((num_pages_created - num_pages_with_fields_completed)/4)) 
+     WHEN customer = 'Guardian' then ((num_pages_with_fields_completed) + ((num_pages_created - num_pages_with_fields_completed)/16))
+     WHEN customer = 'Voya' then (num_matched_structured_pages + num_matched_semi_structured_pages)
+     ELSE NULL end as total_pages_created
+from blended_raw_data
 order by customer, dte_month asc
 ),
 
@@ -41,6 +68,8 @@ order by customer, total_pages_created
 usage_combined as (
 select * from raw_data_on_prem
 UNION
+select * from blended_pages
+UNION 
 select * from saas_usage_monthly
 order by customer, dte_month asc
 ),
