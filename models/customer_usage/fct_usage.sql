@@ -21,7 +21,7 @@ order by customer, dte_month asc
 blended_raw_data as (
 select distinct
 customer,
-to_date(date) as dte_month,
+date_trunc(month,to_date(date)) as dte_month,
 NUMBER_OF_PAGES_WITH_FIELDS_ON_THEM_COMPLETED as num_pages_with_fields_completed,
 ZEROIFNULL(NUMBER_OF_PAGES_MATCHED_TO_FLEX_LAYOUTS_CREATED) as num_matched_semi_structured_pages,
 ZEROIFNULL(NUMBER_OF_PAGES_MATCHED_TO_FORM_LAYOUTS_CREATED) as num_matched_structured_pages,
