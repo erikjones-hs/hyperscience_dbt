@@ -26,6 +26,7 @@ CASE WHEN account_name = 'TD Ameritrade' then 'Charles Schwab'
      WHEN account_name = 'Great American Insurance Group' then 'Great American Insurance Company'
      WHEN account_name = 'IBM' then 'Department of Veterans Affairs'
      when account_name = 'Momentum Metropolitan Holdings Limited' then 'Momentum'
+     when account_name = 'ALMAC.' then 'ALMAC'
      else account_name end as account_name,
 opp_id,
 opp_name,
@@ -95,6 +96,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R00001A4rFVQAZ' then to_date('2023-12-18') /* End date adjustment because it is wrong in SFDC. Legal and General 315k */
      when opp_id = '0061R000013fGLrQAM' then to_date('2022-12-15') /* End date adjustment for historical accuracy. Legal and General 315k */
      when opp_id = '0061R0000135VUDQA2' then to_date('2023-05-02') /* End date adjustment because it was wrong in SFDC when the snapshot was taken. QBE Renewal 30k */
+     when opp_id = '0061R00001382KHQAY' then to_date('2022-12-01') /* End date adjustment because new opp for lower ARR due to exchange rates. Almac. 168k */
      when opp_id = '0061R0000135gO1QAI' then to_date('2023-01-15') /* End date adjustment because of open negotiations. Accerta 89.4k */
      when opp_id = '0061R000013gx5GQAQ' then to_date('2023-01-15') /* End date adjustment because of open negotiations. Chanel 5k */
      when opp_id = '0061R00000uLcG2QAK' then to_date('2023-01-15') /* End date adjustment because of open negotiations. Morgan Stanley 148.5k */ 
@@ -126,6 +128,7 @@ CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
      when opp_id = '0061R000016my8LQAQ' then to_date('2022-06-15')
      when opp_id = '0061R000016jsHbQAI' then to_date('2022-07-15')
      when opp_id = '0061R00001A3ujGQAR' then to_date('2022-03-15')
+     when opp_id = '006Dm000002eKjzIAE' then to_date('2022-12-15')
      ELSE start_dte_raw end as start_dte,
 closed_won_dte,
 date_trunc('month',to_date(start_dte)) as start_dte_month,
