@@ -1,0 +1,1 @@
+SELECT ACCOUNT_NAME, DTE_MONTH, predict from PREDICT({{ref('create_churn_model')}}, DEV.DRIFTO.INFERENCE)
