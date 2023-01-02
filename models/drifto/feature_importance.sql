@@ -1,0 +1,1 @@
+SELECT * FROM IMPORTANCE({{ref('create_churn_model')}})
