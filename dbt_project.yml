@@ -56,6 +56,14 @@ models:
       marketing_marts:
         +materialized: table
 
+    example:
+        +materialized: table
+
+quoting:
+  database: false
+  schema: false
+  identifier: false
+
 
           
   
