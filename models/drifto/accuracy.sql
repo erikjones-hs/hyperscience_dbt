@@ -1,1 +1,0 @@
-SELECT * FROM METRICS({{ref('create_churn_model')}})
