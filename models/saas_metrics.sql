@@ -21,7 +21,7 @@ fy_qtr_year,
 qtr_end_dte
 from "DEV"."MARTS"."FY_CALENDAR"
 where to_date(dte) >= '2020-01-01'
-and to_date(dte) <= '2024-02-29'
+and to_date(dte) < '2025-03-01'
 ),
 
 saas_metrics_int as (
