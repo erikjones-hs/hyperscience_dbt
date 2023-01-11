@@ -96,13 +96,12 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R000013fGLrQAM' then to_date('2022-12-15') /* End date adjustment for historical accuracy. Legal and General 315k */
      when opp_id = '0061R0000135VUDQA2' then to_date('2023-05-02') /* End date adjustment because it was wrong in SFDC when the snapshot was taken. QBE Renewal 30k */
      when opp_id = '0061R00001382KHQAY' then to_date('2022-12-01') /* End date adjustment because new opp for lower ARR due to exchange rates. Almac. 168k */
+     when opp_id = '0061R00001A4rIoQAJ' then to_date('2024-01-30') /* End date adjustment because it was wrong in SFDC when the snapshot was taken. Protective Life 120k */
+     when opp_id = '0061R000014vnNlQAI' then to_date('2023-01-15') /* End Date adjustment because they are not paying. I3systems 120k */
      when opp_id = '0061R0000135gO1QAI' then to_date('2023-02-15') /* End date adjustment because of open negotiations. Accerta 89.4k */
-     when opp_id = '0061R000013gx5GQAQ' then to_date('2023-02-15') /* End date adjustment because of open negotiations. Chanel 5k */
      when opp_id = '0061R00000uLcG2QAK' then to_date('2023-02-15') /* End date adjustment because of open negotiations. Morgan Stanley 148.5k */ 
      when opp_id = '0061R0000137hXuQAI' then to_date('2023-02-15') /* End date adjustment because of open negotiations. FIS Global 130k */ 
      when opp_id = '0061R000013f0rkQAA' then to_date('2023-02-15') /* End date adjustment because of open negotiations. State of CO 214k */
-     when opp_id = '0061R000013gVOqQAM' then to_date('2023-02-15') /* End date adjustment because of open negotiations. Cap One 75k */
-     when opp_id = '0061R000010Ok06QAC' then to_date('2023-02-15') /* End date adjustment because of open negotiations. Protective Life 120k */
      when opp_id = '0061R000014uXZrQAM' then to_date('2023-02-15') /* End date adjustment because of open negotiations. MPower 99k */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
@@ -167,5 +166,6 @@ select * from raw_data_transformed where opp_id not in
 '0061R000016jsHbQAI', /* Utilize Core 54k. Removed due to out clause */
 '0061R000010QadCQAS', /* Original Tokio Marine Deal with Philly Insuarnce (replaced by amended opp for Philly Insurance) */
 '0061R000014wNsNQAU', /* Data Dimensions 640k. Removing because they opted out of their auto-renewal */
-'0061R00001A3TIAQA3' /* Vida Capital 1.6k. Was an NRR Deal. Should have not been in here as ARR */
+'0061R00001A3TIAQA3', /* Vida Capital 1.6k. Was an NRR Deal. Should have not been in here as ARR */
+'0061R000013gx5GQAQ' /* Chanel F&B 5k. Was an NRR Deal. Should have not been in here as ARR */
 )
