@@ -1,0 +1,123 @@
+version: 2
+
+models:
+ - name: fct_arr_account
+
+metrics:
+  - name: arr
+    label: ARR
+    model: ref('fct_arr_account')
+    description: "Total ARR"
+    calculation_method: sum
+    expression: mrr_acct
+    timestamp: date_month
+    time_grains: [month, quarter, year]
+    dimensions:
+      - customer_category
+      - revenue_category
+      - account_name
+      - is_active_account
+
+  - name: expansion_arr
+    label: Expansion ARR
+    model: ref('fct_arr_account')
+    description: "Total Expansion ARR"
+    calculation_method: sum
+    expression: mrr_change_acct
+    timestamp: date_month
+    time_grains: [month, quarter, year]
+    filters:
+      - field: revenue_category
+        operator: '='
+        value: "'expansion'"
+
+  - name: new_arr
+    label: New ARR
+    model: ref('fct_arr_account')
+    description: "Total New ARR"
+    calculation_method: sum
+    expression: mrr_acct
+    timestamp: date_month
+    time_grains: [month, quarter, year]
+    filters:
+      - field: revenue_category
+        operator: '='
+        value: "'new'"
+
+  - name: churn_arr
+    label: Churn ARR
+    model: ref('fct_arr_account')
+    description: "Total Churn ARR"
+    calculation_method: sum
+    expression: mrr_change_acct
+    timestamp: date_month
+    time_grains: [month, quarter, year]
+    filters:
+      - field: revenue_category
+        operator: '='
+        value: "'churn'"
+
+  - name: net_new_arr
+    label: Net New ARR
+    description: "Net New ARR"
+    calculation_method: expression
+    expression: "{{metric('new_arr')}} + {{metric('expansion_arr')}} + {{metric('churn_arr')}}"
+    timestamp: date_month
+    time_grains: [month, quarter, year]
+
+  - name: new_bookings
+    label: New Bookings
+    description: "New Bookings"
+    calculation_method: expression
+    expression: "{{metric('new_arr')}} + {{metric('expansion_arr')}}"
+    timestamp: date_month
+    time_grains: [month, quarter, year]
+
+  - name: new_customers
+    label: New Customers
+    model: ref('fct_arr_account')
+    description: "New Customers"
+    calculation_method: count_distinct
+    expression: account_id
+    timestamp: date_month
+    time_grains: [month, quarter, year]
+    filters:
+      - field: customer_category
+        operator: '='
+        value: "'new'"
+
+  - name: active_customers
+    label: Active Customers
+    model: ref('fct_arr_account')
+    description: "Active Customers"
+    calculation_method: count_distinct
+    expression: account_id
+    timestamp: date_month
+    time_grains: [month, quarter, year]
+    filters:
+      - field: customer_category
+        operator: '='
+        value: "'active'"
+
+  - name: churn_customers
+    label: Churned Customers
+    model: ref('fct_arr_account')
+    description: "Churned Customers"
+    calculation_method: count_distinct
+    expression: account_id
+    timestamp: date_month
+    time_grains: [month, quarter, year]
+    filters:
+      - field: customer_category
+        operator: '='
+        value: "'churn'"
+
+  - name: arr_customers
+    label: Active ARR Customers
+    description: "New Customers + Active Customers"
+    calculation_method: expression
+    expression: "{{metric('new_customers')}} + {{metric('active_customers')}}"
+    timestamp: date_month
+    time_grains: [month, quarter, year]
+
+

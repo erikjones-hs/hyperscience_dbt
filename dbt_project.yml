@@ -59,6 +59,10 @@ models:
     example:
         +materialized: table
 
+    arr_prod:
+      +metrics:
+        - arr.yml
+
 quoting:
   database: false
   schema: false
