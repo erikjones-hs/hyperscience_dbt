@@ -4,19 +4,49 @@ models:
  - name: fct_arr_account
 
 metrics:
-  - name: arr
-    label: ARR
+  - name: arr_month
+    label: Monthly ARR
     model: ref('fct_arr_account')
-    description: "Total ARR"
+    description: "Total Monthly ARR"
     calculation_method: sum
     expression: mrr_acct
     timestamp: date_month
-    time_grains: [month, quarter, year]
     dimensions:
       - customer_category
       - revenue_category
       - account_name
-      - is_active_account
+
+  - name: arr_qtr
+    label: Fiscal Quarter ARR 
+    model: ref('fct_arr_account')
+    description: "Total ARR by Fiscal Quarter"
+    calculation_method: sum
+    expression: mrr_acct
+    timestamp: date_month
+    filters:
+     - field: fq_row_num
+      operator: '='
+      value: '1'
+    dimensions:
+     - customer_category
+     - revenue_category
+     - account_name
+
+  - name: arr_yr
+    label: Fiscal Year ARR 
+    model: ref('fct_arr_account')
+    description: "Total ARR by Fiscal Year"
+    calculation_method: sum
+    expression: mrr_acct
+    timestamp: date_month
+    filters:
+     - field: fy_row_num
+      operator: '='
+      value: '1'
+    dimensions:
+     - customer_category
+     - revenue_category
+     - account_name
 
   - name: expansion_arr
     label: Expansion ARR
