@@ -109,4 +109,4 @@ from unioned_emp as ue
 order by employee_id, date_month asc
 )
 
-select * from fct_emp;
+select * from fct_emp
