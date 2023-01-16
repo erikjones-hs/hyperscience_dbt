@@ -21,7 +21,18 @@ source_last_lead_source_detail_c as last_lead_source_detail,
 lead_score_c as lead_score,
 profile_score_c as profile_score,
 engagement_score_c as engagement_score,
+lifecycle_status_c as lifecycle_status,
+
 qualification_notes_c as qualification_notes,
+
+-- combining company name fields based on priority
+a.name as company_name,
+    
+-- combining annual revenue fields based on priority
+a.annual_revenue as annual_revenue,
+    
+-- combining number of employees fields based on priority
+a.number_of_employees as number_of_employees,
     
 -- combining two country fields based on priority
 ifnull(inferred_country_c, zoom_info_country_c) as country,
@@ -52,7 +63,13 @@ date(date_stage_sql_c) as sql_date,
     
 date(date_stage_mrl_c) as mrl_date,
 date(date_stage_srl_c) as srl_date,
+
+-- combining historical dq date with the current dq date fields
+date(date_stage_disqualifed_c)  as dq_date,
+
 date(date_stage_customer_c) as customer_date,
 date(date_stage_former_customer_c) as former_customer_date
  
 from {{ source('salesforce', 'contact')}}
+left join {{ ref('stg_accounts') }} a
+on account_id = a.account_id
