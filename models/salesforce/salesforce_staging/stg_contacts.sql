@@ -2,16 +2,16 @@
 select 
  
 id as contact_id,
-account_id,
-owner_id, 
-created_by_id, 
+c.account_id,
+c.owner_id, 
+c.created_by_id, 
 first_name,
 last_name,
 email,
 phone,
-global_region_c as global_region,
-sales_region_c as sales_region,
-persona_c as persona,
+c.global_region_c as global_region,
+c.sales_region_c as sales_region,
+c.persona_c as persona,
 lead_source,
 secondary_lead_source_c as secondary_lead_source,
 source_first_lead_source_detail_c as first_lead_source_detail,
@@ -26,13 +26,13 @@ lifecycle_status_c as lifecycle_status,
 qualification_notes_c as qualification_notes,
 
 -- combining company name fields based on priority
-a.name as company_name,
+a.account_name as company_name,
     
 -- combining annual revenue fields based on priority
-a.annual_revenue as annual_revenue,
+a.account_annual_revenue as annual_revenue,
     
 -- combining number of employees fields based on priority
-a.number_of_employees as number_of_employees,
+a.account_number_of_employees as number_of_employees,
     
 -- combining two country fields based on priority
 ifnull(inferred_country_c, zoom_info_country_c) as country,
@@ -70,6 +70,6 @@ date(date_stage_disqualifed_c)  as dq_date,
 date(date_stage_customer_c) as customer_date,
 date(date_stage_former_customer_c) as former_customer_date
  
-from {{ source('salesforce', 'contact')}}
+from {{ source('salesforce', 'contact')}} c
 left join {{ ref('stg_accounts') }} a
-on account_id = a.account_id
+on c.account_id = a.account_id
