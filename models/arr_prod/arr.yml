@@ -2,6 +2,7 @@ version: 2
 
 models:
  - name: fct_arr_account
+ - name: fct_arr_account_qtr_year
 
 metrics:
   - name: arr_month
@@ -18,7 +19,7 @@ metrics:
 
   - name: arr_qtr
     label: Fiscal Quarter ARR 
-    model: ref('fct_arr_account')
+    model: ref('fct_arr_account_qtr_year')
     description: "Total ARR by Fiscal Quarter"
     calculation_method: sum
     expression: mrr_acct
@@ -34,7 +35,7 @@ metrics:
 
   - name: arr_yr
     label: Fiscal Year ARR 
-    model: ref('fct_arr_account')
+    model: ref('fct_arr_account_qtr_year')
     description: "Total ARR by Fiscal Year"
     calculation_method: sum
     expression: mrr_acct
