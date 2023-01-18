@@ -35,22 +35,6 @@ metrics:
      - revenue_category
      - account_name
 
-  - name: arr_yr
-    label: Fiscal Year ARR 
-    model: ref('fct_arr_account_qtr_year')
-    description: "Total ARR by Fiscal Year"
-    calculation_method: sum
-    expression: mrr_acct
-    timestamp: date_month
-    filters:
-     - field: fy_row_num
-       operator: '='
-       value: '1'
-    dimensions:
-     - customer_category
-     - revenue_category
-     - account_name
-
   - name: expansion_arr
     label: Expansion ARR
     model: ref('fct_arr_account')
