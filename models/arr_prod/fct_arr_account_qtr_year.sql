@@ -13,6 +13,16 @@ where to_date(date_month) <= date_trunc(month,to_date(current_date()))
 order by date_month asc
 ),
 
+acct_meta_data as (
+select * 
+from {{ ref('sfdc_acct_meta_data') }}
+),
+
+deal_type as (
+select * 
+from {{ ref('dim_deal_type') }} 
+),
+
 fy_dates as (
 select distinct 
 dte,
@@ -48,26 +58,34 @@ order by aaa.account_id, aaa.date_month asc
 
 agg_account_arr_qtr_year as (
 select distinct
-date_month,
-account_id,
-account_name,
-mrr_acct,
-mrr_change_acct,
-mrr_reporting_acct,
-is_active_acct,
-first_active_month,
-last_active_month,
-is_first_month_acct,
-is_last_month_acct,
-customer_category,
-revenue_category,
-months_since_start,
-fy_year,
-fy_qtr_year,
-qtr_end_dte,
-row_number() over (partition by account_id, fy_year order by date_month desc) as fy_row_num,
-row_number() over (partition by account_id, fy_qtr_year order by date_month desc) as fq_row_num  
-from agg_account_arr_int2
+aaa.date_month,
+aaa.account_id,
+aaa.account_name,
+aaa.mrr_acct,
+aaa.mrr_change_acct,
+aaa.mrr_reporting_acct,
+aaa.is_active_acct,
+aaa.first_active_month,
+aaa.last_active_month,
+aaa.is_first_month_acct,
+aaa.is_last_month_acct,
+aaa.customer_category,
+aaa.revenue_category,
+aaa.months_since_start,
+aaa.fy_year,
+aaa.fy_qtr_year,
+aaa.qtr_end_dte,
+amd.industry,
+amd.billing_country_adjusted as billing_country,
+amd.region,
+amd.annual_revenue,
+amd.revenue_range,
+dt.deal_type,
+row_number() over (partition by aaa.account_id, aaa.fy_year order by aaa.date_month desc) as fy_row_num,
+row_number() over (partition by aaa.account_id, aaa.fy_qtr_year order by aaa.date_month desc) as fq_row_num  
+from agg_account_dates as aaa
+left join acct_meta_data as amd on (aaa.account_id = amd.account_id)
+left join deal_type as dt on (aaa.account_id = dt.account_id)
 order by account_id, date_month asc
 )
 
