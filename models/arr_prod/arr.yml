@@ -12,6 +12,7 @@ metrics:
     calculation_method: sum
     expression: mrr_acct
     timestamp: date_month
+    time_grains: [month]
     dimensions:
       - customer_category
       - revenue_category
@@ -24,6 +25,7 @@ metrics:
     calculation_method: sum
     expression: mrr_acct
     timestamp: date_month
+    time_grains: [month]
     filters:
      - field: fq_row_num
        operator: '='
