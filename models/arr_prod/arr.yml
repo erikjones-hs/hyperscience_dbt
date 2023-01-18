@@ -42,7 +42,7 @@ metrics:
     calculation_method: sum
     expression: mrr_change_acct
     timestamp: date_month
-    time_grains: [month, quarter, year]
+    time_grains: [month]
     filters:
       - field: revenue_category
         operator: '='
@@ -55,7 +55,7 @@ metrics:
     calculation_method: sum
     expression: mrr_acct
     timestamp: date_month
-    time_grains: [month, quarter, year]
+    time_grains: [month]
     filters:
       - field: revenue_category
         operator: '='
@@ -68,7 +68,7 @@ metrics:
     calculation_method: sum
     expression: mrr_change_acct
     timestamp: date_month
-    time_grains: [month, quarter, year]
+    time_grains: [month]
     filters:
       - field: revenue_category
         operator: '='
@@ -80,7 +80,7 @@ metrics:
     calculation_method: expression
     expression: "{{metric('new_arr')}} + {{metric('expansion_arr')}} + {{metric('churn_arr')}}"
     timestamp: date_month
-    time_grains: [month, quarter, year]
+    time_grains: [month]
 
   - name: new_bookings
     label: New Bookings
@@ -88,7 +88,7 @@ metrics:
     calculation_method: expression
     expression: "{{metric('new_arr')}} + {{metric('expansion_arr')}}"
     timestamp: date_month
-    time_grains: [month, quarter, year]
+    time_grains: [month]
 
   - name: new_customers
     label: New Customers
@@ -97,7 +97,7 @@ metrics:
     calculation_method: count_distinct
     expression: account_id
     timestamp: date_month
-    time_grains: [month, quarter, year]
+    time_grains: [month]
     filters:
       - field: customer_category
         operator: '='
@@ -110,7 +110,7 @@ metrics:
     calculation_method: count_distinct
     expression: account_id
     timestamp: date_month
-    time_grains: [month, quarter, year]
+    time_grains: [month]
     filters:
       - field: customer_category
         operator: '='
@@ -123,7 +123,7 @@ metrics:
     calculation_method: count_distinct
     expression: account_id
     timestamp: date_month
-    time_grains: [month, quarter, year]
+    time_grains: [month]
     filters:
       - field: customer_category
         operator: '='
@@ -135,6 +135,6 @@ metrics:
     calculation_method: expression
     expression: "{{metric('new_customers')}} + {{metric('active_customers')}}"
     timestamp: date_month
-    time_grains: [month, quarter, year]
+    time_grains: [month]
 
 
