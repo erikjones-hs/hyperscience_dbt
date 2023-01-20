@@ -177,7 +177,19 @@ rd.bonus,
 rd.severance,
 rd.relocation,
 rd.temp_labor,
-rd.software_subscriptions
+rd.software_subscriptions,
+rd.fcf_percent_25,
+rd.fcf_percent_median,
+rd.fcf_percent_75,
+rd.rev_per_fte_25,
+rd.rev_per_fte_med,
+rd.rev_per_fte_75,
+comp_benefit_25,
+comp_benefit_med,
+comp_benefit_75,
+software_fte_25,
+software_fte_med,
+software_fte_75
 from raw_data as rd
 left join fy_dates as fd on (rd.dte = fd.dte)
 order by dte asc
