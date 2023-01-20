@@ -160,7 +160,24 @@ rd.burn_multiple_25,
 rd.burn_multiple_median,
 rd.burn_multiple_75,
 rd.churn_arr,
-rd.cost_of_revenue
+rd.cost_of_revenue,
+rd.financing_cash_flow,
+rd.operating_cash_flow,
+rd.salaries_and_wages_allocation,
+rd.payroll_taxes_allocation,
+rd.benefits_allocation,
+rd.employer_match_401_k_allocation,
+rd.salaries_and_wages,
+rd.payroll_taxes,
+rd.payroll_benefits,
+rd.health_club,
+rd.employer_match_401_k,
+rd.dependent_care,
+rd.bonus,
+rd.severance,
+rd.relocation,
+rd.temp_labor,
+rd.software_subscriptions
 from raw_data as rd
 left join fy_dates as fd on (rd.dte = fd.dte)
 order by dte asc
@@ -168,7 +185,9 @@ order by dte asc
 
 saas_metrics as (
 select *,
-((revenue_fy - lag(revenue_fy,12,0) over (order by dte asc)) / NULLIFZERO(lag(revenue_fy,12,0) over (order by dte asc))) as revenue_percent_growth
+((revenue_fy - lag(revenue_fy,12,0) over (order by dte asc)) / NULLIFZERO(lag(revenue_fy,12,0) over (order by dte asc))) as revenue_percent_growth,
+(salaries_and_wages_allocation + benefits_allocation + employer_match_401_k_allocation + salaries_and_wages + payroll_taxes + payroll_benefits+ 
+ health_club + employer_match_401_k + dependent_care + bonus + severance + relocation + temp_labor) as comp_benefits_spend
 from saas_metrics_int
 order by dte asc
 )
