@@ -198,7 +198,7 @@ order by dte asc
 saas_metrics as (
 select *,
 ((revenue_fy - lag(revenue_fy,12,0) over (order by dte asc)) / NULLIFZERO(lag(revenue_fy,12,0) over (order by dte asc))) as revenue_percent_growth,
-(salaries_and_wages_allocation + benefits_allocation + employer_match_401_k_allocation + salaries_and_wages + payroll_taxes + payroll_benefits+ 
+(salaries_and_wages_allocation + payroll_taxes_allocation + benefits_allocation + employer_match_401_k_allocation + salaries_and_wages + payroll_taxes + payroll_benefits + 
  health_club + employer_match_401_k + dependent_care + bonus + severance + relocation + temp_labor) as comp_benefits_spend
 from saas_metrics_int
 order by dte asc
