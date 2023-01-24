@@ -84,9 +84,14 @@ CASE WHEN customer_int = 'irc-prod' then 'IRC'
      WHEN customer_int = 'kovack-prod' then 'Kovack'
      WHEN customer_int = 'missionunderwriters-prod' then 'Mission Underwriters'
      WHEN customer_int = 'cifinancial-prod' then 'CI Financial'
+     when customer_int = 'lossexpress-prod' then 'Loss Express'
+     when customer_int = 'vault-prod' then 'Valut'
+     when customer_int = 'resound-prod' then 'ReSound'
+     when customer_int = 'navix-prod' then 'Navix'
      ELSE 'non-prod' end as customer 
 from "RAW"."USAGE_REPORTING"."SAAS_PROD"
-where customer_int in ('irc-prod','promomash-prod','transflo-prod','benefitmall-prod','kovack-prod','missionunderwriters-prod','cifinancial-prod')
+where customer_int in ('irc-prod','promomash-prod','transflo-prod','benefitmall-prod','kovack-prod','missionunderwriters-prod','cifinancial-prod',
+                       'lossexpress-prod','vault-prod','resound-prod','navix-prod')
 order by customer, period_start asc
 ),
 
