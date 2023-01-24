@@ -16,7 +16,7 @@ date_trunc('month',to_date(hire_dte)) as hire_dte_month,
 date_trunc('month',to_date(end_dte)) as end_dte_month
 from "FIVETRAN_DATABASE"."BAMBOOHR_FIVETRAN"."EMPLOYEE"
 where to_date(hire_dte) <= to_date(current_date()) 
-and employment_status = 'Full-Time'
+and employment_status in ('Full-Time', 'Terminated')
 ),
 
 months as (
