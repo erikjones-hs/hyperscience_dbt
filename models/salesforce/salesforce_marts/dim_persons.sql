@@ -3,8 +3,9 @@ with leads as (
     select 
 
     'lead' as type,
-    first_name,
+    lead_type as person_type,
     lead_id as person_id,
+    first_name,
     last_name,
     email,
     phone,
@@ -24,7 +25,6 @@ with leads as (
     engagement_score,
     lifecycle_status,
     status,
-    lead_type,
     type_of_mql,
     dq_reason,
     dq_reason_description,
@@ -62,6 +62,7 @@ contacts as (
     select
 
     'contact' as type,
+    contact_type as person_type,
     contact_id as person_id,
     c.first_name,
     c.last_name,
@@ -69,7 +70,9 @@ contacts as (
     c.phone,
     c.global_region,
     c.sales_region,
+
     l.state as state,
+
     c.persona,
     c.lead_source,
     c.secondary_lead_source,
@@ -78,23 +81,28 @@ contacts as (
     c.last_secondary_lead_source,
     c.last_lead_source_detail,
     c.lead_score,
+
     l.lead_score_at_mql as lead_score_at_mql,
+
     c.profile_score,
     c.engagement_score,
     c.lifecycle_status as lifecycle_status,
-    l.status as status,
-    l.lead_type as lead_type,
+
+    c.contact_status as status,
     l.type_of_mql as type_of_mql,
     l.dq_reason as dq_reason,
     l.dq_reason_description as dq_reason_description,
-    l.company_name as company_name,
-    l.annual_revenue as annual_revenue,
-    l.number_of_employees as number_of_employees,
+    c.company_name as company_name,
+    c.annual_revenue as annual_revenue,
+    c.number_of_employees as number_of_employees,
+
     c.country,
     c.job_function,
     c.job_level,
     c.job_title,
-    l.industry as industry,
+
+    c.industry as industry,
+
     c.created_date,
     c.mal_date,
     c.mel_date,
@@ -104,10 +112,14 @@ contacts as (
     c.sql_date,
     c.mrl_date,
     c.srl_date,
-    l.dq_date as dq_date,
+
+    c.dq_date as dq_date,
+
     c.customer_date,
     c.former_customer_date,
+
     l.converted_date as converted_date,
+
     c.owner_full_name, 
     c.owner_role_name
 

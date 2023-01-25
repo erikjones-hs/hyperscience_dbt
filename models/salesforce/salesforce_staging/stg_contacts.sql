@@ -22,17 +22,16 @@ lead_score_c as lead_score,
 profile_score_c as profile_score,
 engagement_score_c as engagement_score,
 lifecycle_status_c as lifecycle_status,
-
+contact_status_c as contact_status,
+contact_type_c as contact_type,
+--type_of_mql_c,
 qualification_notes_c as qualification_notes,
 
--- combining company name fields based on priority
+-- account data
 a.account_name as company_name,
-    
--- combining annual revenue fields based on priority
 a.account_annual_revenue as annual_revenue,
-    
--- combining number of employees fields based on priority
 a.account_number_of_employees as number_of_employees,
+a.account_industry as industry,
     
 -- combining two country fields based on priority
 ifnull(inferred_country_c, zoom_info_country_c) as country,
