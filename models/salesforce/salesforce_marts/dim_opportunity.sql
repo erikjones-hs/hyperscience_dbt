@@ -21,7 +21,6 @@ select
     opp.opp_pipeline_category,
     opp.opp_is_qualified_pipeline,
     opp.opp_is_pipeline,
-    opp.opp_fiscal,
     opp.opp_loss_reason,
     opp.opp_closed_won_dte,
     opp.opp_created_dte,
