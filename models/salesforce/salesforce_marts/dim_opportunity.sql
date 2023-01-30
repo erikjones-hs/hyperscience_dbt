@@ -44,6 +44,7 @@ select
     opportunity_owner.role_name as opp_owner_role,
     opp.opp_created_by_id,
     created_by.full_name as opp_created_by_name,
+    created_by.role_name as opp_created_by_role,
     account_owner.full_name as account_owner_name,
     account_owner.role_name as account_owner_role,
     sdr.full_name as sdr_name,
