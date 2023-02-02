@@ -66,7 +66,6 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R00000yElHXQA0' then to_date('2022-02-15') /* Customer Churned in Feb, per FP&A. Department of Treasury 87.5k */
      when opp_id = '0061R00000zAlU8QAK' then to_date('2022-03-15') /* Opportunity churned in March, per Kristen. AMEX 323k */
      when opp_id = '0061R0000136hnzQAA' then to_date('2022-02-15') /* Customer churned in Feb. per Kristen. AXA Churn. 35k */ 
-     when opp_id = '0061R000014vAD7QAM' then to_date('2023-02-15') /* Adjusting end date because it is incorrect in SFDC. Mercury Insurance 225k */
      when opp_id = '0061R00000r7xPhQAI' then to_date('2022-02-15') /* Customer churned. Close this out in Feb. per FP&A. DISA 64.3k */ 
      when opp_Id = '0061R0000137tYlQAI' then to_date('2022-03-15') /* Customer churned. Close this out in Mar. per FP&A. Record Connect 239k */
      when opp_id = '0061R0000137kNxQAI' then to_date('2022-04-15') /* Customer Churned in April per FP&A. State of Texas 402.5k total. 17.5k opp */
@@ -99,10 +98,14 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R00001A4rIoQAJ' then to_date('2024-01-30') /* End date adjustment because it was wrong in SFDC when the snapshot was taken. Protective Life 120k */
      when opp_id = '0061R00001A4pwxQAB' then to_date('2023-11-30') /* End date adjustment because it is wrong in SFDC when snapshot was taken. Accerta 81.9k */
      when opp_id = '0061R000014vnNlQAI' then to_date('2023-01-15') /* End Date adjustment because they are not paying. I3systems 120k */
-     when opp_id = '0061R00000uLcG2QAK' then to_date('2023-02-15') /* End date adjustment because of open negotiations. Morgan Stanley 148.5k */ 
-     when opp_id = '0061R0000137hXuQAI' then to_date('2023-02-15') /* End date adjustment because of open negotiations. FIS Global 130k */ 
-     when opp_id = '0061R000013f0rkQAA' then to_date('2023-02-15') /* End date adjustment because of open negotiations. State of CO 214k */
-     when opp_id = '0061R000014uXZrQAM' then to_date('2023-02-15') /* End date adjustment because of open negotiations. MPower 99k */
+     when opp_id = '0061R00000uLcG2QAK' then to_date('2023-03-15') /* End date adjustment because of open negotiations. Morgan Stanley 148.5k */ 
+     when opp_id = '0061R0000137hXuQAI' then to_date('2023-03-15') /* End date adjustment because of open negotiations. FIS Global 130k */ 
+     when opp_id = '0061R000013f0rkQAA' then to_date('2023-03-15') /* End date adjustment because of open negotiations. State of CO 214k */
+     when opp_id = '0061R000014uXZrQAM' then to_date('2023-03-15') /* End date adjustment because of open negotiations. MPower 99k */
+     when opp_id = '0061R000014vAD7QAM' then to_date('2023-03-15') /* End date adjustment because of open negotiatios. Mercury Insurance 225k */
+     when opp_id = '0061R0000136ZbBQAU' then to_date('2023-03-15') /* End date adjustment because of open negotiatios. Reveal 8.8k */
+     when opp_id = '0061R000014wHDFQA2' then to_date('2023-03-15') /* End date adjustment because of open negotiatios. Mckinsey 150k */
+
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
