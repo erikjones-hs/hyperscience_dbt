@@ -184,12 +184,22 @@ rd.fcf_percent_75,
 rd.rev_per_fte_25,
 rd.rev_per_fte_med,
 rd.rev_per_fte_75,
-comp_benefit_25,
-comp_benefit_med,
-comp_benefit_75,
-software_fte_25,
-software_fte_med,
-software_fte_75
+rd.comp_benefit_25,
+rd.comp_benefit_med,
+rd.comp_benefit_75,
+rd.software_fte_25,
+rd.software_fte_med,
+rd.software_fte_75,
+rd.rule_40_25,
+rd.rule_40_med,
+rd.rule_40_75,
+rd.magic_number_25,
+rd.magic_number_med,
+rd.magic_number_75,
+rd.healthcare_benefits,
+rd.referral_bonus,	
+rd.commissions,
+rd.guarantees
 from raw_data as rd
 left join fy_dates as fd on (rd.dte = fd.dte)
 order by dte asc
@@ -199,7 +209,7 @@ saas_metrics as (
 select *,
 ((revenue_fy - lag(revenue_fy,12,0) over (order by dte asc)) / NULLIFZERO(lag(revenue_fy,12,0) over (order by dte asc))) as revenue_percent_growth,
 (salaries_and_wages_allocation + payroll_taxes_allocation + benefits_allocation + employer_match_401_k_allocation + salaries_and_wages + payroll_taxes + payroll_benefits + 
- health_club + employer_match_401_k + dependent_care + bonus + severance + relocation + temp_labor) as comp_benefits_spend
+ health_club + employer_match_401_k + dependent_care + bonus + severance + relocation + temp_labor + healthcare_benefits + referral_bonus + commissions + guarantees) as comp_benefits_spend
 from saas_metrics_int
 order by dte asc
 )
