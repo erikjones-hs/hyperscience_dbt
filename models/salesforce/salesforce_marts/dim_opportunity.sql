@@ -42,6 +42,7 @@ select
     opp.opp_owner_id,
     opportunity_owner.full_name as opp_owner_name,
     opportunity_owner.role_name as opp_owner_role,
+    opportunity_owner.department as opp_owner_team,
     opp.opp_created_by_id,
     created_by.full_name as opp_created_by_name,
     created_by.role_name as opp_created_by_role,
