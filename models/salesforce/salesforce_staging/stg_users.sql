@@ -12,7 +12,8 @@ users as (
     name as full_name,
     email,
     user_role_id,
-    is_active
+    is_active,
+    department
 
     from {{ source('salesforce', 'user')}}
 
@@ -39,7 +40,8 @@ select
  full_name,
  email,
  role_name,
- is_active
+ is_active,
+ department
 
  from users 
  left join user_roles 

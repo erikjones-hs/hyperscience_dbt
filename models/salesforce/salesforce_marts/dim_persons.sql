@@ -50,7 +50,9 @@ with leads as (
     former_customer_date,
     converted_date,
     owner_full_name, 
-    owner_role_name
+    owner_role_name,
+    created_by_full_name,
+    created_by_role_name
 
     from {{ ref('dim_leads_with_owner') }}
     where is_deleted = false and is_converted = false
@@ -121,7 +123,9 @@ contacts as (
     l.converted_date as converted_date,
 
     c.owner_full_name, 
-    c.owner_role_name
+    c.owner_role_name,
+    c.created_by_full_name,
+    c.created_by_role_name
 
     from {{ ref('dim_contacts_with_owner') }} c
     left join {{ ref('dim_leads_with_owner') }} l
