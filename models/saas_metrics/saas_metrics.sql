@@ -199,7 +199,8 @@ rd.magic_number_75,
 rd.healthcare_benefits,
 rd.referral_bonus,	
 rd.commissions,
-rd.guarantees
+rd.guarantees,
+rd.cash_balance
 from raw_data as rd
 left join fy_dates as fd on (rd.dte = fd.dte)
 order by dte asc
