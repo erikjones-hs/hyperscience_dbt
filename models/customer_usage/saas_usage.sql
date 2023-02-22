@@ -2,7 +2,7 @@
 (
     materialized='table',
     database = 'PROD',
-    schema = 'PRODUCT_ANALYTICS'
+    schema = 'CUSTOMER_USAGE'
 )
 }} 
 
@@ -79,7 +79,7 @@ CUSTOM_SUPERVISION_TRANSCRIBED_FIELDS_COUNT as number_of_fields_extracted_in_cus
 split_part(report_id,'_',0) as customer_int,
 CASE WHEN customer_int = 'irc-prod' then 'IRC'
      WHEN customer_int = 'promomash-prod' then 'Promomash'
-     WHEN customer_int in ('transflo-prod','rstransflo-prod') then 'Transflo'
+     WHEN customer_int in ('transflo-prod','rtstransflo-prod') then 'Transflo'
      WHEN customer_int = 'benefitmall-prod' then 'Benefit Mall'
      WHEN customer_int = 'kovack-prod' then 'Kovack'
      WHEN customer_int = 'missionunderwriters-prod' then 'Mission Underwriters'
@@ -91,7 +91,7 @@ CASE WHEN customer_int = 'irc-prod' then 'IRC'
      ELSE 'non-prod' end as customer 
 from "RAW"."USAGE_REPORTING"."SAAS_PROD"
 where customer_int in ('irc-prod','promomash-prod','transflo-prod','benefitmall-prod','kovack-prod','missionunderwriters-prod','cifinancial-prod',
-                       'lossexpress-prod','vault-prod','resound-prod','navix-prod','rstransflo-prod')
+                       'lossexpress-prod','vault-prod','resound-prod','navix-prod','rtstransflo-prod')
 order by customer, period_start asc
 ),
 
