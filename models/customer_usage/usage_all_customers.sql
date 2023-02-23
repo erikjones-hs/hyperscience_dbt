@@ -10,8 +10,7 @@
 with usage_combined as (
 select distinct
 dte_month,
-opp_id as customer,
-opp_name,
+account_id as customer,
 sfdc_account_name,
 total_pages as total_pages_created,
 is_opp_active_fl
@@ -24,7 +23,6 @@ order by customer, dte_month asc
 usage_spc_int as (
 select distinct 
 customer,
-opp_name,
 dte_month,
 total_pages_created,
 sfdc_account_name,
@@ -41,7 +39,6 @@ order by customer, dte_month asc
 usage_spc as (
 select distinct
 customer, 
-opp_name,
 dte_month,
 total_pages_created,
 sfdc_account_name,
@@ -83,7 +80,6 @@ order by customer, dte_month asc
 fct_spc_int as (
 select distinct 
 customer, 
-opp_name,
 dte_month,
 total_pages_created,
 sfdc_account_name,
@@ -120,7 +116,6 @@ fct_spc as (
 select distinct
 customer, 
 dte_month,
-opp_name,
 total_pages_created,
 sfdc_account_name,
 prev_pages_created,
