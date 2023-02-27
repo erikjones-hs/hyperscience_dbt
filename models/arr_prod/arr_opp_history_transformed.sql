@@ -98,14 +98,16 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R00001A4rIoQAJ' then to_date('2024-01-30') /* End date adjustment because it was wrong in SFDC when the snapshot was taken. Protective Life 120k */
      when opp_id = '0061R00001A4pwxQAB' then to_date('2023-11-30') /* End date adjustment because it is wrong in SFDC when snapshot was taken. Accerta 81.9k */
      when opp_id = '0061R000014vnNlQAI' then to_date('2023-01-15') /* End Date adjustment because they are not paying. I3systems 120k */
-     when opp_id = '0061R00000uLcG2QAK' then to_date('2023-03-15') /* End date adjustment because of open negotiations. Morgan Stanley 148.5k */ 
-     when opp_id = '0061R0000137hXuQAI' then to_date('2023-03-15') /* End date adjustment because of open negotiations. FIS Global 130k */ 
-     when opp_id = '0061R000013f0rkQAA' then to_date('2023-03-15') /* End date adjustment because of open negotiations. State of CO 214k */
-     when opp_id = '0061R000014uXZrQAM' then to_date('2023-03-15') /* End date adjustment because of open negotiations. MPower 99k */
-     when opp_id = '0061R000014vAD7QAM' then to_date('2023-03-15') /* End date adjustment because of open negotiatios. Mercury Insurance 225k */
-     when opp_id = '0061R0000136ZbBQAU' then to_date('2023-03-15') /* End date adjustment because of open negotiatios. Reveal 8.8k */
-     when opp_id = '0061R000014wHDFQA2' then to_date('2023-03-15') /* End date adjustment because of open negotiatios. Mckinsey 150k */
-
+     when opp_id = '0061R000013f0rkQAA' then to_date('2023-02-15') /* End date adjustment because it is wrong in SFDC. State of CO 214k */
+     when opp_id = '0061R00000uLcG2QAK' then to_date('2023-04-15') /* End date adjustment because of open negotiations. Morgan Stanley 148.5k */ 
+     when opp_id = '0061R0000137hXuQAI' then to_date('2023-04-15') /* End date adjustment because of open negotiations. FIS Global 130k */ 
+     when opp_id = '0061R000014uXZrQAM' then to_date('2023-04-15') /* End date adjustment because of open negotiations. MPower 99k */
+     when opp_id = '0061R000014vAD7QAM' then to_date('2023-04-15') /* End date adjustment because of open negotiatios. Mercury Insurance 225k */
+     when opp_id = '0061R0000136ZbBQAU' then to_date('2023-04-15') /* End date adjustment because of open negotiatios. Reveal 8.8k */
+     when opp_id = '0061R000014wHDFQA2' then to_date('2023-04-15') /* End date adjustment because of open negotiatios. Mckinsey 150k */
+     when opp_id = '0061R000013edS8QAI' then to_date('2023-04-15') /* End date adjustment because of open negotiatios. Amex 275k */
+     when opp_id = '0061R000010QozNQAS' then to_date('2023-04-15') /* End date adjustment because of open negotiations. Spark Theraputics 8k */
+     when opp_id = '0061R000016kGCyQAM' then to_date('2023-04-15') /* End date adjustment because of open negotiations. WRK 75k */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
