@@ -128,7 +128,7 @@ contacts as (
     c.owner_role_name,
     c.created_by_full_name,
     c.created_by_role_name,
-    disposition
+    c.disposition
 
     from {{ ref('dim_contacts_with_owner') }} c
     left join {{ ref('dim_leads_with_owner') }} l
