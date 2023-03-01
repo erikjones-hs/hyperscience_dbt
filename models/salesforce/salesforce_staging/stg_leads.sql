@@ -87,6 +87,7 @@ date(ifnull(date_stage_disqualifed_c, dq_date_c)) as dq_date,
     
 date(date_stage_customer_c) as customer_date,
 date(date_stage_former_customer_c) as former_customer_date,
-date(converted_date) as converted_date
+date(converted_date) as converted_date,
+disposition_c as disposition
  
 from {{ source('salesforce', 'lead')}}
