@@ -67,7 +67,8 @@ date(date_stage_srl_c) as srl_date,
 date(date_stage_disqualifed_c)  as dq_date,
 
 date(date_stage_customer_c) as customer_date,
-date(date_stage_former_customer_c) as former_customer_date
+date(date_stage_former_customer_c) as former_customer_date,
+disposition_c as disposition
  
 from {{ source('salesforce', 'contact')}} c
 left join {{ ref('stg_accounts') }} a
