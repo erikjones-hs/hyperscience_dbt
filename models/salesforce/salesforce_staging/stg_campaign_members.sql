@@ -11,6 +11,11 @@ select
     created_date,
     created_by_id,
     first_responded_date,
-    type
+    type,
+    utm_source_c,
+    utm_medium_c,
+    utm_campaign_c,
+    utm_term_c,
+    utm_content_c
 
 from {{ source('salesforce', 'campaign_member') }}
