@@ -27,6 +27,11 @@ select
     campaign_member.created_date as member_created_date,
     campaign_member.created_by_id as member_created_by_id,
     campaign_member.first_responded_date,
+    campaign_member.utm_source_c,
+    campaign_member.utm_medium_c,
+    campaign_member.utm_campaign_c,
+    campaign_member.utm_term_c,
+    campaign_member.utm_content_c,
 
     campaign.campaign_name,
     campaign.parent_id as parent_campaign_id,

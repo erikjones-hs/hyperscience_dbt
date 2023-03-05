@@ -53,7 +53,8 @@ with leads as (
     owner_full_name, 
     owner_role_name,
     created_by_full_name,
-    created_by_role_name
+    created_by_role_name,
+    disposition
 
     from {{ ref('dim_leads_with_owner') }}
     where is_deleted = false and is_converted = false
@@ -126,7 +127,8 @@ contacts as (
     c.owner_full_name, 
     c.owner_role_name,
     c.created_by_full_name,
-    c.created_by_role_name
+    c.created_by_role_name,
+    c.disposition
 
     from {{ ref('dim_contacts_with_owner') }} c
     left join {{ ref('dim_leads_with_owner') }} l
