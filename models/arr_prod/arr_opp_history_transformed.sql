@@ -105,10 +105,11 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R000014uXZrQAM' then to_date('2023-01-15') /* End date adjustment because it is wrong in SFDC. MPower 99k */
      when opp_id = '0061R00001A4rGJQAZ' then to_date('2024-02-14') /* End date adjustment because it is wrong in SFDC. McKinsey 30k */
      when opp_id = '0061R000014wHDFQA2' then to_date('2023-03-15') /* End date adjustment because it is wrong in SFDC. Mckinsey 150k */
-     when opp_id = '0061R0000136ZbBQAU' then to_date('2023-04-15') /* End date adjustment because of open negotiatios. Reveal 8.8k */
-     when opp_id = '0061R000013edS8QAI' then to_date('2023-04-15') /* End date adjustment because of open negotiatios. Amex 275k */
-     when opp_id = '0061R000010QozNQAS' then to_date('2023-04-15') /* End date adjustment because of open negotiations. Spark Theraputics 8k */
-     when opp_id = '0061R000016kGCyQAM' then to_date('2023-04-15') /* End date adjustment because of open negotiations. WRK 75k */
+     when opp_id = '0061R000013edS8QAI' then to_date('2023-04-15') /* End date adjustment because it is wrong in SFDC. Amex 275k */
+     when opp_id = '0061R0000136ZbBQAU' then to_date('2023-05-15') /* End date adjustment because of open negotiatios. Reveal 8.8k */
+     when opp_id = '0061R000010QozNQAS' then to_date('2023-05-15') /* End date adjustment because of open negotiations. Spark Theraputics 8k */
+     when opp_id = '0061R000016kGCyQAM' then to_date('2023-05-15') /* End date adjustment because of open negotiations. WRK 75k */
+     when opp_id = '0061R000014wNrhQAE' then to_date('2023-05-15') /* End date adjustment because of open negotiations. Voya 200k */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
@@ -173,5 +174,6 @@ select * from raw_data_transformed where opp_id not in
 '0061R000010QadCQAS', /* Original Tokio Marine Deal with Philly Insuarnce (replaced by amended opp for Philly Insurance) */
 '0061R000014wNsNQAU', /* Data Dimensions 640k. Removing because they opted out of their auto-renewal */
 '0061R00001A3TIAQA3', /* Vida Capital 1.6k. Was an NRR Deal. Should have not been in here as ARR */
-'0061R000013gx5GQAQ' /* Chanel F&B 5k. Was an NRR Deal. Should have not been in here as ARR */
+'0061R000013gx5GQAQ', /* Chanel F&B 5k. Was an NRR Deal. Should have not been in here as ARR */
+'0061R00000zCCLQQA4' /* Air Force opp that was mistakenly moved to closed win in SFDC */
 )
