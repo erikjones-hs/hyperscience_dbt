@@ -109,7 +109,6 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R0000136ZbBQAU' then to_date('2023-05-15') /* End date adjustment because of open negotiatios. Reveal 8.8k */
      when opp_id = '0061R000010QozNQAS' then to_date('2023-05-15') /* End date adjustment because of open negotiations. Spark Theraputics 8k */
      when opp_id = '0061R000016kGCyQAM' then to_date('2023-05-15') /* End date adjustment because of open negotiations. WRK 75k */
-     when opp_id = '0061R000014wNrhQAE' then to_date('2023-05-15') /* End date adjustment because of open negotiations. Voya 200k */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
