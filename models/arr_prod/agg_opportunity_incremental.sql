@@ -104,6 +104,7 @@ net_new_arr_forecast_c as opp_net_new_arr,
 is_deleted
 from "FIVETRAN_DATABASE"."SALESFORCE"."OPPORTUNITY"
 where is_deleted = 'FALSE'
+and _fivetran_active = 'TRUE'
 order by id asc
 ),
 
