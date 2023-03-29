@@ -6,19 +6,25 @@
 )
 }}
 
+/* Defining the currently active opp at the ACCOUNT level */
+/* Currently Active Opp = Currently Active Opp with HIGHEST ARR */
+/* Currently Actve Opp used to define contract length */
+/* Taking ACCOUNT ARR as current month ARR */
 with raw_data_int as (
-select distinct
+select distinct 
 fao.account_id,
 fao.account_name,
 fao.opp_id,
 fao.opp_name,
-CASE WHEN fao.opp_id = '0061R00000zD2sxQAC' then to_date('2022-03-15') else fao.start_dte end as start_dte,
+fao.start_dte,
 fao.end_dte,
-CASE WHEN fao.end_dte_month >= date_trunc(month,to_date(current_date())) then 1 else 0 end as is_opp_active_fl, 
-faa.mrr_acct as arr
+CASE WHEN fao.end_dte >= to_date(current_date()) then 1 else 0 end as is_opp_active_fl,
+faa.mrr_acct as arr,
+row_number() over (partition by fao.account_id order by fao.start_dte desc, fao.mrr_acct desc) as row_num
 from {{ref('fct_arr_opp')}} as fao
 left join {{ref('fct_arr_account')}} as faa on (fao.account_id = faa.account_id AND date_trunc(month,current_date()) = to_date(faa.date_month))
-order by fao.opp_id, start_dte asc
+where to_date(fao.date_month) <= date_trunc(month,to_date(current_date()))
+qualify row_num = 1
 ),
 
 raw_data as (
@@ -37,15 +43,23 @@ from raw_data_int
 order by opp_id, start_dte asc
 ),
 
+/* Defining contracted pages as the pages contracted on the current active opp with MAX pages */
+/* THIS ONLY MATTERS BECAUSE ALL OF THIS IS AT THE ACCOUNT LEVEL */
+/* NEED SEPARATE PROCESS FOR ANYTHING AT THE OPP LEVEL */
 contracted_pages as (
 select distinct
 opp_id,
 opp_name,
-sfdc_account_id,
-sfdc_account_name,
-contract_pages_annual
-from "FIVETRAN_DATABASE"."GOOGLE_SHEETS"."SFDC_CONTRACTED_PAGES_LOOKUP"
-order by sfdc_account_id
+account_id,
+account_name,
+start_dte,
+end_dte,
+contracted_pages as contract_pages_annual,
+is_active,
+row_number() over (partition by account_id order by start_dte desc, contracted_pages desc) as row_num
+from {{ref('opp_contracted_pages_history')}}
+qualify row_num = 1
+order by account_id 
 ),
 
 fct_account_meta_data as (
@@ -61,7 +75,7 @@ CASE WHEN rd.contract_length_months in (11,12,13) then 12
      ELSE rd.contract_length_months end as contract_length_months,
 rd.arr,
 rd.is_opp_active_fl,
-cp.contract_pages_annual
+CASE WHEN rd.account_id = '0013600000QfzD9AAJ' then 999999999999 else cp.contract_pages_annual end as contract_pages_annual
 from raw_data as rd
 left join contracted_pages as cp on (rd.opp_id = cp.opp_id)
 order by rd.opp_name

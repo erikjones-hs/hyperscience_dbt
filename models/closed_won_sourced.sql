@@ -74,7 +74,7 @@ fy.day_of_qtr,
 fy.fy_quarter,
 fy.fy_year
 from fct_sourced_int
-left join fy_dates as fy on (to_date(closed_won_dte) = to_date(fy.dte))
+left join fy_dates as fy on (to_date(start_dte) = to_date(fy.dte))
 order by fy.dte asc
 ),
 

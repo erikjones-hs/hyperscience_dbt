@@ -18,10 +18,24 @@ users as (
 
     from {{ ref('dim_users_and_queues') }}
 
+),
+
+users_1 as (
+
+    select 
+
+    id as created_by_id,
+    full_name as created_by_full_name,
+    role_name as created_by_role_name
+
+    from {{ ref('dim_users_and_queues') }}
+
 )
 
 select *
 from leads
 left join users 
 using (owner_id)
+left join users_1
+using (created_by_id)
 where is_deleted = false

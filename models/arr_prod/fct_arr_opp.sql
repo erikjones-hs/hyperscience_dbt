@@ -104,6 +104,9 @@ CASE WHEN opp_id = '0063600000X36zWAAR' and to_date(joi.date_month) <= '2019-06-
      when opp_id = '0061R00000yEQVgQAO' and to_date(joi.date_month) >= '2022-05-01' then 0.00000000001
      when opp_id = '0061R0000137hQzQAI' and to_date(joi.date_month) >= '2022-04-01' then 15000 /* Updated based on agreement to settle per FP&A */ 
      when opp_id = '0061R00001A3ujGQAR' and to_date(joi.date_month) <= '2022-07-01' then 300000
+     when opp_id = '0061R000014wNrUQAU' and to_date(joi.date_month) >= '2022-12-01' then 145000
+     when opp_id = '0061R00001A4rFVQAZ' and to_date(joi.date_month) >= '2022-12-01' then 253000
+     when opp_id = '0061R000014wI4hQAE' and to_date(joi.date_month) >= '2022-12-01' then 20000
      ELSE joi.mrr end as mrr
 from joined_opportunity_int as joi 
 ),
@@ -405,9 +408,24 @@ first_active_month_acct,
 last_active_month_acct,
 is_first_month_acct,
 is_last_month_acct,
-opp_category,
-customer_category,
-revenue_category
+CASE WHEN opp_id = '0061R000010t71kQAA' and to_date(date_month) = '2022-01-01' then 'de-book' /* Sience SAS */
+     when opp_id = '0061R000014vnNlQAI' and to_date(date_month) = '2023-01-01' then 'de-book' /* i3 Systems */
+     when opp_id = '0061R000013gijQQAQ' and to_date(date_month) = '2022-11-01' then 'de-book' /* MindMap */
+     when opp_id = '0061R000016mzrWQAQ' and to_date(date_month) = '2022-11-01' then 'de-book' /* FeatSystems */
+     when opp_id = '0061R0000137scfQAA' and to_date(date_month) = '2022-11-01' then 'de-book' /* Cogent */
+     else opp_category end as opp_category,
+CASE WHEN opp_id = '0061R000010t71kQAA' and to_date(date_month) = '2022-01-01' then 'de-book' /* Sience SAS */
+     when opp_id = '0061R000014vnNlQAI' and to_date(date_month) = '2023-01-01' then 'de-book' /* i3 Systems */
+     when opp_id = '0061R000013gijQQAQ' and to_date(date_month) = '2022-11-01' then 'de-book' /* MindMap */
+     when opp_id = '0061R000016mzrWQAQ' and to_date(date_month) = '2022-11-01' then 'de-book' /* FeatSystems */
+     when opp_id = '0061R0000137scfQAA' and to_date(date_month) = '2022-11-01' then 'de-book' /* Cogent */
+     else customer_category end as customer_category,
+CASE WHEN opp_id = '0061R000010t71kQAA' and to_date(date_month) = '2022-01-01' then 'de-book' /* Sience SAS */
+     when opp_id = '0061R000014vnNlQAI' and to_date(date_month) = '2023-01-01' then 'de-book' /* i3 Systems */
+     when opp_id = '0061R000013gijQQAQ' and to_date(date_month) = '2022-11-01' then 'de-book' /* MindMap */
+     when opp_id = '0061R000016mzrWQAQ' and to_date(date_month) = '2022-11-01' then 'de-book' /* FeatSystems */
+     when opp_id = '0061R0000137scfQAA' and to_date(date_month) = '2022-11-01' then 'de-book' /* Cogent */
+     else revenue_category end as revenue_category
 from change_table
 order by account_id, start_dte_month asc, date_month asc
 )

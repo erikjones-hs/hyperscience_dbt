@@ -7,53 +7,48 @@
 }}
 
 /* Pulling in opportunity data from fct_opps to id upcoming renewals */
+/* joining with arr opp history tabe to get untransformed end dates (end date raw) */
 with fct_opps as (
 select distinct
-to_timestamp(date_month) as date_month,
-account_id,
-account_name,
-opp_id,
-opp_name,
-to_timestamp(start_dte_month) as start_dte_month,
-to_timestamp(start_dte) as start_dte,
-to_timestamp(end_dte_month) as end_dte_month,
-to_timestamp(end_dte) as end_dte,
-mrr,
-mrr_change,
-CASE WHEN mrr = 0 then mrr_change else mrr end as mrr_reporting,
-is_active,
-first_active_month,
-last_active_month,
-is_first_month,
-is_last_month,
-mrr_acct as mrr_acct,
-mrr_change_acct,
-CASE WHEN mrr_acct = 0 then mrr_change_acct else mrr_acct end as mrr_reporting_acct,
-is_active_acct,
-first_active_month_acct,
-last_active_month_acct,
-is_first_month_acct,
-is_last_month_acct,
-opp_category,
-customer_category,
-revenue_category
-from {{ref('fct_arr_opp')}}
+to_timestamp(fao.date_month) as date_month,
+fao.account_id,
+fao.account_name,
+fao.opp_id,
+fao.opp_name,
+to_timestamp(fao.start_dte_month) as start_dte_month,
+to_timestamp(fao.start_dte) as start_dte,
+to_timestamp(fao.end_dte_month) as end_dte_month,
+to_timestamp(date_trunc('month',aoh.end_dte_raw)) as end_dte_raw_month,
+to_timestamp(fao.end_dte) as end_dte,
+to_timestamp(aoh.end_dte_raw) as end_dte_raw,
+fao.mrr,
+fao.mrr_change,
+CASE WHEN fao.mrr = 0 then fao.mrr_change else fao.mrr end as mrr_reporting,
+fao.is_active,
+fao.first_active_month,
+fao.last_active_month,
+fao.is_first_month,
+fao.is_last_month,
+fao.mrr_acct as mrr_acct,
+fao.mrr_change_acct,
+CASE WHEN fao.mrr_acct = 0 then fao.mrr_change_acct else fao.mrr_acct end as mrr_reporting_acct,
+fao.is_active_acct,
+fao.first_active_month_acct,
+fao.last_active_month_acct,
+fao.is_first_month_acct,
+fao.is_last_month_acct,
+fao.opp_category,
+fao.customer_category,
+fao.revenue_category
+from {{ref('fct_arr_opp')}} as fao
+left join {{ref('arr_opp_history')}} as aoh on (fao.opp_id = aoh.opp_id)
 order by account_id, start_dte_month asc, date_month asc
 ),
 
-/* Pulling in transformed SFDC data from arr_opp_history_transform model*/
-/* This is because we need both transformed and non-transformed end dates */
-/* non-transformed end dates for current month and previous month actual end dates */
-raw_data_transformed as (
-select * from {{ref('arr_opp_history_transformed')}}
-),
-
-/* Identifying all the opps with transformations to their end dates where we actually care about their raw (non-transfofrmed) contract end dates */
+/* Pulling in transformed SFDC renewal dates*/
+/* This model needs to be updated with each month's transformed end dates for upcoming renewals */
 transformed_opp_id as (
-select distinct
-opp_id 
-from raw_data_transformed
-where end_dte_raw != end_dte
+select * from {{ref('transformed_opps_for_open_negotiations')}}
 ),
 
 /* Subscription period intermediate view */
@@ -68,7 +63,7 @@ CASE WHEN opp_id in (select * from transformed_opp_id) AND (end_dte_raw = last_d
      WHEN opp_id in (select * from transformed_opp_id) then end_dte_raw_month
      WHEN opp_id not in (select * from transformed_opp_id) AND (end_dte = last_day(end_dte_month) and start_dte = start_dte_month) then dateadd(month,1,end_dte_month)  
      else end_dte_month end as end_dte_month_raw
-from raw_data_transformed
+from fct_opps
 ),
 
 /* Merging adjusted end dates with unadjusted end dates to get true end dates for renwals */
@@ -110,4 +105,3 @@ order by account_id, start_dte_month asc, date_month
 )
 
 select * from fct_renewals
-

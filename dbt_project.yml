@@ -56,6 +56,18 @@ models:
       marketing_marts:
         +materialized: table
 
+    example:
+        +materialized: table
+
+    arr_prod:
+      +metrics:
+        - arr.yml
+
+quoting:
+  database: false
+  schema: false
+  identifier: false
+
 
           
   

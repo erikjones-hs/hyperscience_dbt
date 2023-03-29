@@ -2,16 +2,16 @@
 select 
  
 id as contact_id,
-account_id,
-owner_id, 
-created_by_id, 
+c.account_id,
+c.owner_id, 
+c.created_by_id, 
 first_name,
 last_name,
 email,
 phone,
-global_region_c as global_region,
-sales_region_c as sales_region,
-persona_c as persona,
+c.global_region_c as global_region,
+c.sales_region_c as sales_region,
+c.persona_c as persona,
 lead_source,
 secondary_lead_source_c as secondary_lead_source,
 source_first_lead_source_detail_c as first_lead_source_detail,
@@ -21,7 +21,17 @@ source_last_lead_source_detail_c as last_lead_source_detail,
 lead_score_c as lead_score,
 profile_score_c as profile_score,
 engagement_score_c as engagement_score,
+lifecycle_status_c as lifecycle_status,
+contact_status_c as contact_status,
+contact_type_c as contact_type,
+--type_of_mql_c,
 qualification_notes_c as qualification_notes,
+
+-- account data
+a.account_name as company_name,
+a.account_annual_revenue as annual_revenue,
+a.account_number_of_employees as number_of_employees,
+a.account_industry as industry,
     
 -- combining two country fields based on priority
 ifnull(inferred_country_c, zoom_info_country_c) as country,
@@ -52,7 +62,14 @@ date(date_stage_sql_c) as sql_date,
     
 date(date_stage_mrl_c) as mrl_date,
 date(date_stage_srl_c) as srl_date,
+
+-- combining historical dq date with the current dq date fields
+date(date_stage_disqualifed_c)  as dq_date,
+
 date(date_stage_customer_c) as customer_date,
-date(date_stage_former_customer_c) as former_customer_date
+date(date_stage_former_customer_c) as former_customer_date,
+disposition_c as disposition
  
-from {{ source('salesforce', 'contact')}}
+from {{ source('salesforce', 'contact')}} c
+left join {{ ref('stg_accounts') }} a
+on c.account_id = a.account_id
