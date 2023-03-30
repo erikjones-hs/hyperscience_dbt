@@ -2,7 +2,7 @@
 (
     materialized='table',
     database = 'PROD',
-    schema = 'CUSTOMER_USAGE'
+    schema = 'DATA_QC'
 )
 }} 
 
