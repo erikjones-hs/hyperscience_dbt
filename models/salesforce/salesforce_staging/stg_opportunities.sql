@@ -77,5 +77,6 @@ select
 
 from {{ source('salesforce', 'opportunity') }}
 where is_deleted = false
+and _fivetran_active = 'TRUE'
 order by id asc
 
