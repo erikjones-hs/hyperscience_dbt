@@ -62,6 +62,22 @@ qualify row_num = 1
 order by account_id 
 ),
 
+usage_meta_data as (
+select distinct
+account_id,
+activated_customer_fl,
+live_customer_fl
+from "PROD"."CUSTOMER_USAGE"."USAGE_META_DATA"
+where to_date(dte_month) = date_trunc(month,to_date(current_date()))
+),
+
+deployment_type as (
+select distinct
+id,
+saa_s_or_on_prem_c as deployment
+from "FIVETRAN_DATABASE"."SALESFORCE"."ACCOUNT"
+),
+
 fct_account_meta_data as (
 select distinct
 rd.account_id,
@@ -75,9 +91,14 @@ CASE WHEN rd.contract_length_months in (11,12,13) then 12
      ELSE rd.contract_length_months end as contract_length_months,
 rd.arr,
 rd.is_opp_active_fl,
-CASE WHEN rd.account_id = '0013600000QfzD9AAJ' then 999999999999 else cp.contract_pages_annual end as contract_pages_annual
+CASE WHEN rd.account_id = '0013600000QfzD9AAJ' then 999999999999 else cp.contract_pages_annual end as contract_pages_annual,
+CASE WHEN umd.live_customer_fl IS NULL then 0 else umd.live_customer_fl end as live_customer_fl,
+CASE WHEN umd.activated_customer_fl IS NULL then 0 else umd.activated_customer_fl end as activated_customer_fl ,
+CASE WHEN dt.deployment IS NULL then 'On-Prem' else dt.deployment end as deployment
 from raw_data as rd
 left join contracted_pages as cp on (rd.opp_id = cp.opp_id)
+left join usage_meta_data as umd on (rd.account_id = umd.account_id)
+left join deployment_type as dt on (dt.id = rd.account_id)
 order by rd.opp_name
 )
 
