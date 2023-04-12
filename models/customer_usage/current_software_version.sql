@@ -36,7 +36,7 @@ rd.software_version,
 left(rd.software_version,4) as version,
 rd.account_id,
 rd.account_name,
-CASE WHEN rd.account_name in ('Conduent','AIG (American International Group, Inc)','Department of Veterans Affairs','Social Security Administration','Pacific Life') then rd.customer 
+CASE WHEN rd.account_name in ('Conduent','AIG (American International Group, Inc)','Department of Veterans Affairs','Pacific Life') then rd.customer 
      ELSE rd.account_name end as customer_name,
 row_number() over (partition by customer_name order by rd.dte desc) as row_num,
 md.is_active_acct
