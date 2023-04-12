@@ -111,22 +111,32 @@ inner join dates on (dates.dte >= to_date(fgl.go_live_date) AND dates.dte <= to_
 order by account_id, dte asc
 ),
 
+meta_data as (
+select distinct
+account_id,
+deployment
+from {{ref('acct_meta_data')}}
+),
+
+
 fct_go_live_history as (
 select distinct
-to_timestamp(dte) as dte,
-account_id,
-account_name,
-opp_id,
-opp_name,
-go_live_date,
-start_date,
-churn_month,
-CASE WHEN to_date(dte) < to_date(churn_month) and to_date(dte) >= go_live_date then 1 else 0 end as live_customer_fl,
-CASE WHEN to_date(dte) = to_date(go_live_date) then 1 else 0 end as go_live_date_fl,
-CASE WHEN datediff(day, to_date(start_date), to_date(go_live_date)) < 1 then 1 else datediff(day, to_date(start_date), to_date(go_live_date)) end as ttv_days,
-(ttv_days / 31) as ttv_months
-from history_dates 
-order by account_id, dte asc
+to_timestamp(hd.dte) as dte,
+hd.account_id,
+hd.account_name,
+hd.opp_id,
+hd.opp_name,
+hd.go_live_date,
+hd.start_date,
+hd.churn_month,
+CASE WHEN to_date(hd.dte) < to_date(churn_month) and to_date(hd.dte) >= go_live_date then 1 else 0 end as live_customer_fl,
+CASE WHEN to_date(hd.dte) = to_date(hd.go_live_date) then 1 else 0 end as go_live_date_fl,
+CASE WHEN datediff(day, to_date(hd.start_date), to_date(hd.go_live_date)) < 1 then 1 else datediff(day, to_date(hd.start_date), to_date(hd.go_live_date)) end as ttv_days,
+(ttv_days / 31) as ttv_months,
+md.deployment
+from history_dates as hd 
+left join meta_data as md on (md.account_id = hd.account_id)
+order by hd.account_id, dte asc
 )
 
 select * from fct_go_live_history
