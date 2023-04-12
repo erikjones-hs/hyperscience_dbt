@@ -174,5 +174,6 @@ select * from raw_data_transformed where opp_id not in
 '0061R000014wNsNQAU', /* Data Dimensions 640k. Removing because they opted out of their auto-renewal */
 '0061R00001A3TIAQA3', /* Vida Capital 1.6k. Was an NRR Deal. Should have not been in here as ARR */
 '0061R000013gx5GQAQ', /* Chanel F&B 5k. Was an NRR Deal. Should have not been in here as ARR */
-'0061R00000zCCLQQA4' /* Air Force opp that was mistakenly moved to closed win in SFDC */
+'0061R00000zCCLQQA4', /* Air Force opp that was mistakenly moved to closed win in SFDC */
+'006Dm000003M0dVIAS' /* Paid Pilot that in not recurring. Australian Department of Defense */
 )
