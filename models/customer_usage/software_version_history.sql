@@ -47,7 +47,7 @@ order by customer, dte desc
 
 fct_software_version as (
 select distinct
-dte,
+to_timestamp(dte) as dte,
 customer,
 software_version,
 version,
