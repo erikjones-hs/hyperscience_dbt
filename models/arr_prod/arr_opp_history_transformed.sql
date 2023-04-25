@@ -104,10 +104,11 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R00001A4rItQAJ' then to_date('2024-01-24') /* End date adjustment because it is wrong in SFDC. MPower 99k */ 
      when opp_id = '0061R000014uXZrQAM' then to_date('2023-01-15') /* End date adjustment because it is wrong in SFDC. MPower 99k */
      when opp_id = '0061R00001A4rGJQAZ' then to_date('2024-02-14') /* End date adjustment because it is wrong in SFDC. McKinsey 30k */
-     when opp_id = '0061R000014wHDFQA2' then to_date('2023-03-15') /* End date adjustment because it is wrong in SFDC. Mckinsey 150k */
+     when opp_id = '0061R000014wHDFQA2' then to_date('2023-02-15') /* End date adjustment because it is wrong in SFDC. Mckinsey 150k */
      when opp_id = '0061R000013edS8QAI' then to_date('2023-04-15') /* End date adjustment because it is wrong in SFDC. Amex 275k */
+     when opp_id = '0061R000014wI4bQAE' then to_date('2023-04-15') /* End date adjustment to reflect known churn. Manulife 375k */
      when opp_id = '0061R0000136ZbBQAU' then to_date('2023-05-15') /* End date adjustment because of open negotiatios. Reveal 8.8k */
-     when opp_id = '0061R000010QozNQAS' then to_date('2023-05-15') /* End date adjustment because of open negotiations. Spark Theraputics 8k */
+ --    when opp_id = '0061R000010QozNQAS' then to_date('2023-05-15') /* End date adjustment because of open negotiations. Spark Theraputics 8k */
      when opp_id = '0061R000016kGCyQAM' then to_date('2023-05-15') /* End date adjustment because of open negotiations. WRK 75k */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
@@ -138,6 +139,7 @@ CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
      when opp_id = '0061R000016jsHbQAI' then to_date('2022-07-15')
      when opp_id = '0061R00001A3ujGQAR' then to_date('2022-03-15')
      when opp_id = '006Dm000002eKjzIAE' then to_date('2022-12-15')
+     when opp_id = '0061R00001A4rGJQAZ' then to_date('2023-02-15')
      ELSE start_dte_raw end as start_dte,
 closed_won_dte,
 date_trunc('month',to_date(start_dte)) as start_dte_month,
