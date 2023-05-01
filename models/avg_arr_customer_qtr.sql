@@ -20,7 +20,7 @@ select distinct
 to_timestamp(date) as qtr_end_dte,
 avg_arr_customer as avg_arr
 from "FIVETRAN_DATABASE"."GOOGLE_SHEETS"."FY_22_FORECAST_FINANCE_INPUTS"
-where to_date(date) > add_months(date_trunc('month',to_date(current_date())),2)
+where to_date(date) > add_months(date_trunc('month',to_date(current_date())),1)
 and monthname(date) in ('Feb','May','Aug','Nov')
 order by qtr_end_dte asc
 ),
