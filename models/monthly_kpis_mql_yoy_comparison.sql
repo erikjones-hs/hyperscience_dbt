@@ -10,7 +10,7 @@ with mqls as (
 select distinct 
 mql_dte,
 person_id
-from "DEV"."ERIKJONES"."MONTHLY_KPIS_MARKETING_MQLS"
+from {{ref('marketing_mqls')}}
 order by mql_dte asc
 ),
 

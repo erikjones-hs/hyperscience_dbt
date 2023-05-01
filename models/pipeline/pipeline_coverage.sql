@@ -80,34 +80,29 @@ order by qtr_end_dte asc
 
 fct_pipeline as (
 select distinct
-to_timestamp(date_ran) as date_ran,
-opp_id,
-opp_name,
-account_name,
-account_industry,
-account_sales_region,
-partner_account_name,
-opp_stage_name,
-opp_lead_source,
-opp_is_marketing_influenced_flag,
-opp_close_dte,
-opp_arr,
-opp_net_new_arr, 
-opportunity_owner,
-owner_description,
-opp_pipeline_category,
-opp_revenue_type,
+to_timestamp(opp.date_ran) as date_ran,
+opp.opp_id,
+opp.opp_name,
+opp.account_name,
+opp.account_industry,
+opp.account_sales_region,
+opp.partner_account_name,
+opp.opp_stage_name,
+opp.opp_lead_source,
+opp.opp_is_marketing_influenced_flag,
+opp.opp_close_dte,
+opp.opp_arr,
+opp.opp_net_new_arr, 
+opp.opportunity_owner,
+opp.owner_description,
+opp.opp_pipeline_category,
+opp.opp_revenue_type,
 fy.dte,
 fy.fy_quarter,
 fy.fy_year
-from {{ ref('agg_opportunity_incremental') }}
+from {{ ref('new_business_pipeline_current') }} as opp
 right join fy_dates as fy on (to_date(opp_close_dte) = to_date(fy.dte))
 where fy.dte >= '2022-03-01'
-and opp_stage_name not in ('Closed Won','Opp DQed','Closed Lost') 
-and date_ran = dateadd(day,-1,(to_date(current_date)))
-and to_date(opp_close_dte) >= to_date(current_date())
-and to_date(opp_close_dte) <= '2023-02-28'
-and opp_revenue_type in ('Expansion','Upsell','Renewal w/ Upsell','New Customer','Partnership') 
 order by fy.dte asc
 ),
 

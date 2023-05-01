@@ -106,10 +106,15 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R00001A4rGJQAZ' then to_date('2024-02-14') /* End date adjustment because it is wrong in SFDC. McKinsey 30k */
      when opp_id = '0061R000014wHDFQA2' then to_date('2023-02-15') /* End date adjustment because it is wrong in SFDC. Mckinsey 150k */
      when opp_id = '0061R000013edS8QAI' then to_date('2023-04-15') /* End date adjustment because it is wrong in SFDC. Amex 275k */
-     when opp_id = '0061R000014wI4bQAE' then to_date('2023-04-15') /* End date adjustment to reflect known churn. Manulife 375k */
-     when opp_id = '0061R0000136ZbBQAU' then to_date('2023-05-15') /* End date adjustment because of open negotiatios. Reveal 8.8k */
- --    when opp_id = '0061R000010QozNQAS' then to_date('2023-05-15') /* End date adjustment because of open negotiations. Spark Theraputics 8k */
-     when opp_id = '0061R000016kGCyQAM' then to_date('2023-05-15') /* End date adjustment because of open negotiations. WRK 75k */
+     when opp_id = '0061R000014wI4bQAE' then to_date('2023-05-15') /* End date adjustment to reflect known churn. Manulife 375k */
+     when opp_id = '0061R0000136ZbBQAU' then to_date('2023-06-15') /* End date adjustment because of open negotiatios. Reveal 8.8k */
+     when opp_id = '0061R000016kGCyQAM' then to_date('2023-06-15') /* End date adjustment because of open negotiations. WRK 75k */
+     when opp_id = '0061R0000135VUDQA2' then to_date('2023-06-15') /* End date adjustment because of open negotiations. QBE 300k */
+     when opp_id = '0061R000014vRzBQAU' then to_date('2023-06-15') /* End date adjustment because of open negotiations. MIssion Underwriters 145k */ 
+     when opp_id = '0061R000014wI4qQAE' then to_date('2023-06-15') /* End date adjustment because of open negotiations. Guardian 300k */ 
+     when opp_id = '0061R000014wKFCQA2' then to_date('2023-06-15') /* End date adjustment because of open negotiations. Teknei 50k */ 
+     when opp_id = '0061R00000yFci4QAC' then to_date('2023-06-15') /* End date adjustment because of open negotiations. Natera 250k */ 
+     when opp_id = '0061R000013fuawQAA' then to_date('2023-06-15') /* End date adjustment because of open negotiations. IRS 97.5k */ 
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
