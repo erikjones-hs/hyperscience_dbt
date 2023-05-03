@@ -110,11 +110,11 @@ new_bookings,
 new_bookings - lag(new_bookings,1,0) over(order by date_month asc) as new_bookings_yoy_change,
 (new_bookings - lag(new_bookings,1,0) over(order by date_month asc)) / NULLIFZERO(lag(new_bookings,1,0) over(order by date_month asc)) as new_bookings_yoy_change_perc,
 churn_arr,
-churn_arr - lag(churn_arr,1,0) over(order by date_month asc) as churn_arr_yoy_change,
-(churn_arr - lag(churn_arr,1,0) over(order by date_month asc)) / NULLIFZERO(lag(churn_arr,1,0) over(order by date_month asc)) as churn_arr_yoy_change_perc,                                                                                  
-net_new_arr,
+abs(churn_arr) + lag(churn_arr,1,0) over(order by date_month asc) as churn_arr_yoy_change,
+(abs(churn_arr) - abs(lag(churn_arr,1,0) over(order by date_month asc))) / NULLIFZERO(abs(lag(churn_arr,1,0) over(order by date_month asc))) as churn_arr_yoy_change_perc,                                                                                  
+net_new_arr as net_new_arr,
 net_new_arr - lag(net_new_arr,1,0) over(order by date_month asc) as net_new_arr_yoy_change,
-(net_new_arr - lag(net_new_arr,1,0) over(order by date_month asc)) / NULLIFZERO(lag(net_new_arr,1,0) over(order by date_month asc))  as net_new_arr_yoy_change_perc,                                        
+(net_new_arr - lag(net_new_arr,1,0) over(order by date_month asc)) / NULLIFZERO(abs(lag(net_new_arr,1,0) over(order by date_month asc)))  as net_new_arr_yoy_change_perc,                                         
 ending_arr,
 ending_arr - lag(ending_arr,1,0) over(order by date_month asc) as ending_arr_yoy_change,
 (ending_arr - lag(ending_arr,1,0) over(order by date_month asc)) / NULLIFZERO(lag(ending_arr,1,0) over(order by date_month asc)) as ending_arr_yoy_change_perc                                          
@@ -122,3 +122,4 @@ from combined
 )
 
 select * from yoy_diff where date_month = add_months(date_trunc(month,to_date(current_date)),-1)
+
