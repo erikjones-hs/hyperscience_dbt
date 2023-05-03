@@ -123,6 +123,7 @@ select
 u.id as user_id,
 concat(u.first_name,' ',u.last_name) as opportunity_owner,
 u.username,
+u.department,
 ur.rollup_description as owner_description
 from "FIVETRAN_DATABASE"."SALESFORCE"."USER" as u
 left join "FIVETRAN_DATABASE"."SALESFORCE"."USER_ROLE" as ur on u.user_role_id = ur.id 
