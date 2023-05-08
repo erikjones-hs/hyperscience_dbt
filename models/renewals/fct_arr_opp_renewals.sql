@@ -58,6 +58,8 @@ end_dtes_unadjusted as (
 select 
 opp_id,
 CASE WHEN opp_id in (select * from transformed_opp_id) then end_dte_raw 
+     WHEN opp_id in (select * from transformed_opp_id) AND (end_dte_raw = last_day(end_dte_raw_month) and start_dte = start_dte_month) then dateadd(day,2,end_dte_raw) 
+     WHEN opp_id not in (select * from transformed_opp_id) AND (end_dte = last_day(end_dte_month) and start_dte = start_dte_month) then dateadd(day,2,end_dte)  
      else end_dte end as end_dte_raw,
 CASE WHEN opp_id in (select * from transformed_opp_id) AND (end_dte_raw = last_day(end_dte_raw_month) and start_dte = start_dte_month) then dateadd(month,1,end_dte_raw_month)  
      WHEN opp_id in (select * from transformed_opp_id) then end_dte_raw_month
