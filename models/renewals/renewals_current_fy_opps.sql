@@ -80,7 +80,8 @@ CASE WHEN net_new_arr > 0 then 'expansion'
 from renewal_opps as ro
 left join open_opps as oo on (ro.existing_opp_id = oo.prior_opp_id)
 where existing_opp_id not in ('0061R00000yEQVgQAO', /* Removing BenefitMall because open opp associated with usell opp */
-                              '0061R00000zAuShQAK') /* Removing GDVIT - VA because renewal bucketd with larger new opp */
+                              '0061R00000zAuShQAK', /* Removing GDVIT - VA because renewal bucketd with larger new opp */
+                              '0061R00000uINyXQAW') /* Can remove this opp in July, once Fidelity upsell goes live */
 order by renewal_month asc
 )
 
