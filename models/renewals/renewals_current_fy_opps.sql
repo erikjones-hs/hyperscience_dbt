@@ -35,6 +35,7 @@ CASE WHEN opp_id = '0061R00000yGqH3QAK' then '0061R000014wIeUQAU'
 opp_close_dte
 from "DEV"."SALES"."SALESFORCE_AGG_OPPORTUNITY"
 where opp_stage_name not in ('Closed Won','Opp DQed','Closed Lost')
+and opp_id not in ('006Dm0000046tabIAA')
 and is_deleted = false
 ),
 
@@ -43,7 +44,7 @@ select *
 from open_opps_int
 where prior_opp_id in (select distinct existing_opp_id from renewal_opps) 
 OR prior_opp_id = '0061R000013eo6oQAA' 
-and opp_id not in ('0061R000014wNrwQAE')
+and opp_id not in ('0061R000014wNrwQAE','006Dm0000046tabIAA')
 ),
 
 combined_opps as (
@@ -53,7 +54,9 @@ ro.account_id,
 ro.account_name,
 ro.existing_opp_id,
 ro.existing_opp_name,
-CASE WHEN ro.existing_opp_id in ('0061R00000zAI8KQAW','0061R00000r6r1iQAA') then 0 else ro.potential_churn_amount end as potential_churn_amount,
+CASE WHEN ro.existing_opp_id in ('0061R00000zAI8KQAW','0061R00000r6r1iQAA') then 0 
+     WHEN ro.existing_opp_id = '0061R000014wI4hQAE' then 20000 /* adjusting for peerstreet arr */
+     else ro.potential_churn_amount end as potential_churn_amount,
 ro.existing_opp_renewal_date,
 ro.has_churned_flag,
 ro.outstanding_renewal_flag,
@@ -66,8 +69,9 @@ oo.opp_close_dte as open_opp_close_dte,
 oo.opp_stage_name,
 oo.opp_commit_status as open_opp_commit_status,
 CASE WHEN ro.existing_opp_id in ('0061R00000zAI8KQAW','0061R00000r6r1iQAA') then 0
-     WHEN open_opp_id IS NULL then potential_churn_amount 
-     else (potential_churn_amount + open_opp_arr) end as net_new_arr,
+     WHEN ro.existing_opp_id = '0061R000014wI4hQAE' then 20000 /* adjusting for peerstreet arr */
+     WHEN open_opp_id IS NULL then (-1)*potential_churn_amount 
+     else ((-1)*potential_churn_amount + open_opp_arr) end as net_new_arr,
 CASE WHEN net_new_arr > 0 then 'expansion'
      WHEN net_new_arr < 0 and open_opp_id IS NULL then 'no open opp'
      WHEN net_new_arr < 0 and open_opp_id IS NOT NULL then 'churn'
