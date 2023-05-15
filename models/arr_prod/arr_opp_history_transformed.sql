@@ -112,7 +112,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R000016kGCyQAM' then to_date('2023-06-15') /* End date adjustment because of open negotiations. WRK 75k */
      when opp_id = '0061R000014vRzBQAU' then to_date('2023-06-15') /* End date adjustment because of open negotiations. MIssion Underwriters 145k */ 
      when opp_id = '0061R000014wKFCQA2' then to_date('2023-06-15') /* End date adjustment because of open negotiations. Teknei 50k */ 
-     when opp_id = '0061R000013fuawQAA' then to_date('2023-06-15') /* End date adjustment because of open negotiations. IRS 97.5k */ 
+ --    when opp_id = '0061R000013fuawQAA' then to_date('2023-06-15') /* End date adjustment because of open negotiations. IRS 97.5k */ 
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
