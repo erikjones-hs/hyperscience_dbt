@@ -17,7 +17,6 @@ potential_churn_amount,
 has_churned_flag,
 outstanding_renewal_flag,
 upcoming_renewal_flag,
-has_renewed_flag,
 open_opp_id,
 open_opp_name,
 open_opp_close_dte
