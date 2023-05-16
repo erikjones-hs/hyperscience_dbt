@@ -14,6 +14,7 @@ select distinct
 ro.date_month,
 ro.account_id,
 ro.account_name,
+faa.is_active_acct,
 ro.opp_id,
 ro.opp_name,
 ro.end_dte,
@@ -22,9 +23,8 @@ ro.qtr_end_dte,
 r.opp_id as renewal_opp_id,
 r.opp_name as renewal_opp_name,
 r.prior_opp_id,
-fao2.opp_arr as actual_renewal_amount,
+CASE WHEN faa.is_active_acct = true and fao2.opp_arr IS NULL then 0 else fao2.opp_arr end as actual_renewal_amount,
 (round(actual_renewal_amount) - round(potential_churn_amount)) as renewal_diff,
-faa.is_active_acct,
 CASE WHEN renewal_diff = 0 then 'flat'
      WHEN renewal_diff < 0 then 'arr decrease'
      WHEN renewal_diff IS NULL and faa.is_active_acct = true then 'arr decrease'

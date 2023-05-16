@@ -52,6 +52,26 @@ and opp_id in (select distinct opp_id from renewal_opps)
 order by date_month asc
 ),
 
+/* opps that have churned but account is still active */
+/* only maters for accounts ith multiple opps active at the same time */
+mult_opp_accts_with_churn as (
+select distinct
+date_month,
+account_id,
+account_name,
+opp_id,
+opp_name,
+prior_opp_id,
+is_active_acct
+from renewals_with_outcomes
+where renewal_type = 'arr decrease'
+and prior_opp_id IS NULL 
+and is_active_acct = true
+and to_date(date_month) <= date_trunc(month,to_date(current_date()))
+and opp_id in (select distinct opp_id from renewal_opps)
+order by date_month asc
+),
+
 /* Renewals that are past their renewal date */
 outstanding_renewals as (
 select distinct
@@ -61,9 +81,10 @@ opp_id,
 opp_name,
 1 as outstanding_renewal_flag
 from renewal_opps
-where to_date(end_dte) < date_trunc(month,to_date(current_date())) 
+where to_date(end_dte) < to_date(current_date()) 
 and opp_id not in (select distinct opp_id from churn)
 and opp_id not in (select distinct prior_opp_id from renewals)
+and opp_id not in (select distinct opp_id from mult_opp_accts_with_churn)
 ),
 
 /* Upcoming renewals */
@@ -75,9 +96,10 @@ opp_id,
 opp_name,
 1 as upcoming_renewal_flag
 from renewal_opps
-where to_date(end_dte) >= date_trunc(month,to_date(current_date()))
+where to_date(end_dte) >= to_date(current_date())
 and opp_id not in (select distinct opp_id from churn)
 and opp_id not in (select distinct prior_opp_id from renewals)
+and opp_id not in (select distinct opp_id from mult_opp_accts_with_churn)
 ),
 
 /* Combining all the above datasets */
