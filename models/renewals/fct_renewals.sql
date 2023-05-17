@@ -153,6 +153,7 @@ CASE WHEN opp_id = '006Dm000002e67VIAQ' then '0061R00000zAI8KQAW' /* Virginia DM
 opp_close_dte
 from "DEV"."SALES"."SALESFORCE_AGG_OPPORTUNITY"
 where opp_stage_name not in ('Closed Won','Opp DQed','Closed Lost')
+and opp_id not in ('006Dm0000046tabIAA') /* Removing Mutual of Omaha SaaS Migration Opp since another open opp is already open for the renewal */
 and is_deleted = false
 ),
 
@@ -179,7 +180,11 @@ fri.account_id,
 fri.account_name,
 fri.existing_opp_id,
 fri.existing_opp_name,
-fri.potential_churn_amount,
+CASE WHEN fri.existing_opp_id = '0061R000014wI4hQAE' then 20000 /* adjusting for peerstreet arr */
+     WHEN fri.existing_opp_id = '0061R00000yFonNQAS' then 0 /* MetaSource */
+     WHEN fri.existing_opp_id = '0061R00000zAI8KQAW' then 0 /* Virginina DMV */
+     WHEN fri.existing_opp_id = '0061R00000uL8ylQAC' then 0 /* PMP */
+     ELSE fri.potential_churn_amount end as potential_churn_amount,
 fri.has_account_renewed_flag,
 fri.renewal_type,
 fri.renewal_arr_change,
@@ -202,10 +207,13 @@ oo.opp_net_new_arr as open_opp_net_new_arr_raw,
 oo.opp_close_dte as open_opp_close_dte,
 oo.opp_stage_name as open_opp_stage_name,
 oo.opp_commit_status as open_opp_commit_status,
-CASE WHEN open_opp_id IS NULL AND (fri.outstanding_renewal_flag + fri.upcoming_renewal_flag) = 1 then (-1)*potential_churn_amount 
+CASE WHEN fri.existing_opp_id in ('0061R00000yFonNQAS','0061R00000uL8ylQAC') then 0 /* MetaSource and PMP */
+     WHEN open_opp_id IS NULL AND (fri.outstanding_renewal_flag + fri.upcoming_renewal_flag) = 1 and fri.existing_opp_id not in ('0061R00000yFonNQAS','0061R00000uL8ylQAC') then round((-1)*potential_churn_amount) 
      WHEN open_opp_id IS NULL and (fri.outstanding_renewal_flag + fri.upcoming_renewal_flag) = 0 then NULL
      WHEN open_opp_id = '0061R00001A6iWpQAJ' then 0
-     else ((-1)*potential_churn_amount + open_opp_arr) end as open_opp_net_new_arr,
+     when open_opp_id = '0061R00001A5wigQAB' then 0
+     when open_opp_id = '006Dm000002e67VIAQ' then 43225
+     else round(((-1)*potential_churn_amount + open_opp_arr)) end as open_opp_net_new_arr,
 CASE WHEN open_opp_net_new_arr > 0 then 'expansion'
      WHEN open_opp_net_new_arr < 0 and open_opp_id IS NULL then 'no open opp'
      WHEN open_opp_net_new_arr < 0 and open_opp_id IS NOT NULL then 'churn'
