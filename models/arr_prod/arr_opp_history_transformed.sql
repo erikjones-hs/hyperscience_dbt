@@ -108,9 +108,9 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R000014wI4bQAE' then to_date('2023-05-02') /* End date adjustment because they churned early. Manulife 375k */
      when opp_id = '0061R000014wNt6QAE' then to_date('2023-06-02') /* End date adjustment because it is wrong in SFDC. ADP 9.6k */
      when opp_id = '0061R00000yGqH3QAK' then to_date('2023-09-15') /* End date adjustment requested for SSA so all SSA contracts up in Sep. */
-     when opp_id = '0061R000013fuawQAA' then to_date('2023-05-13') /* End date adjustment because of open negotiations. IRS 97.5k */  
+     when opp_id = '0061R000013fuawQAA' then to_date('2023-05-13') /* End date adjustment because of early churn. IRS 97.5k */  
+     when opp_id = '0061R000016kGCyQAM' then to_date('2024-08-24') /* End date adjustment because it is wrong in SFDC. WRK 75k */
      when opp_id = '0061R0000136ZbBQAU' then to_date('2023-06-15') /* End date adjustment because of open negotiatios. Reveal 8.8k */
-     when opp_id = '0061R000016kGCyQAM' then to_date('2023-06-15') /* End date adjustment because of open negotiations. WRK 75k */
      when opp_id = '0061R000014vRzBQAU' then to_date('2023-06-15') /* End date adjustment because of open negotiations. MIssion Underwriters 145k */ 
      when opp_id = '0061R000014wKFCQA2' then to_date('2023-06-15') /* End date adjustment because of open negotiations. Teknei 50k */ 
      ELSE end_dte_raw end as end_dte,
