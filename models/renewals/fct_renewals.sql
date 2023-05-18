@@ -172,6 +172,13 @@ where is_deleted = 'FALSE'
 and _fivetran_active = 'TRUE'
 ),
 
+account_region_lu as (
+select distinct
+account_id,
+sales_region
+from {{ref('account_sales_region_lu')}} 
+),
+
 fct_renewals as (
 select distinct
 fri.renewal_month,
@@ -220,10 +227,12 @@ CASE WHEN open_opp_net_new_arr > 0 then 'expansion'
      WHEN open_opp_net_new_arr = 0 and (fri.outstanding_renewal_flag + fri.upcoming_renewal_flag) = 1 then 'flat'
      WHEN open_opp_net_new_arr IS NULL then NULL
      ELSE 'other' end as open_opp_projected_renewal_type,
-hs.health_score
+hs.health_score,
+arl.sales_region
 from fct_renewals_int as fri
 left join open_opps as oo on (fri.existing_opp_id = oo.prior_opp_id)
 left join health_scores as hs on (hs.opp_id = fri.existing_opp_id)
+left join account_region_lu as arl on (fri.account_id = arl.account_id)
 where fri.existing_opp_id not in ('0061R00000yEQVgQAO', /* Removing BenefitMall because open opp associated with usell opp */
                                   '0061R00000zAuShQAK', /* Removing GDVIT - VA because renewal bucketd with larger new opp */
                                   '0061R00001A6F76QAF', /* Removing WRK Upsell because renewal is asscoaited with Various Use Cases Opp */

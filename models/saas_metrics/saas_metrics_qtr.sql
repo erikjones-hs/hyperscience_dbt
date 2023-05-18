@@ -55,6 +55,8 @@ CASE WHEN b.metric = 'ARR' then 1
      when b.metric = 'FINANCE_FTE' then 31
      when b.metric = 'PEOPLE_FTE' then 32
      when b.metric = 'LEGAL_FTE' then 33
+     when b.metric = 'NEW_ARR' then 34
+     when b.metric = 'CHURN_ARR' then 35
      else NULL end as metric_order_by_column, 
 CASE WHEN b.metric = 'ARR' then 'ARR'
      WHEN b.metric = 'REVENUE' then 'Revenue'
@@ -90,6 +92,8 @@ CASE WHEN b.metric = 'ARR' then 'ARR'
      when b.metric = 'FINANCE_FTE' then 'Finance FTEs'
      when b.metric = 'PEOPLE_FTE' then 'People FTEs'
      when b.metric = 'LEGAL_FTE' then 'Legal FTEs'
+     when b.metric = 'NEW_ARR' then 'New ARR'
+     when b.metric = 'CHURN_ARR' then 'Churn ARR'
      else 'other' end as metric_label,
 b.budget,
 f.forecast,
