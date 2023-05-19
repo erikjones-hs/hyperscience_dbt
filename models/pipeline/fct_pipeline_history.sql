@@ -23,6 +23,7 @@ where id in (
 opps as (
 select distinct
 id,
+account_id,
 name,
 stage_name,
 active_opportunity_c,
@@ -32,7 +33,10 @@ CASE WHEN closed_won_date_c IS NOT NULL AND stage_name != 'Closed Won' then NULL
      WHEN id in (select id from missing_closed_won_dates) then to_timestamp(start_date_c)
      else to_timestamp(closed_won_date_c) end as opp_closed_won_dte,
 CASE WHEN closed_lost_date_c IS NOT NULL AND stage_name != 'Closed Lost' then NULL else to_timestamp(closed_lost_date_c) end as opp_closed_lost_dte,
-to_timestamp(created_date) as opp_created_dte
+to_timestamp(created_date) as opp_created_dte,
+to_timestamp(close_date) as opp_close_dte,
+forecasted_arr_c as opp_arr,
+net_new_arr_forecast_c as opp_net_new_arr
 from "FIVETRAN_DATABASE"."SALESFORCE"."OPPORTUNITY"
 where is_deleted = 'FALSE'
 and _fivetran_active = 'TRUE'
@@ -57,6 +61,7 @@ and id not in (
 fct_opps as (
 select distinct
 id as opp_id,
+account_id,
 name as opp_name,
 stage_name as opp_stage_name,
 active_opportunity_c as opp_is_active_fl,
@@ -65,6 +70,9 @@ commit_status_c as opp_commit_status,
 opp_closed_won_dte,
 opp_closed_lost_dte,
 opp_created_dte,
+opp_close_dte,
+opp_arr,
+opp_net_new_arr,
 CASE WHEN opp_closed_won_dte IS NOT NULL then opp_closed_won_dte
      WHEN opp_closed_lost_dte IS NOT NULL then opp_closed_lost_dte
      ELSE dateadd(days,30,to_date(current_date()))
@@ -86,6 +94,7 @@ opp_dates as (
 select distinct 
 fd.dte,
 fd.qtr_end_dte,
+fo.account_id,
 fo.opp_id,
 fo.opp_name,
 fo.opp_stage_name,
@@ -96,6 +105,9 @@ fo.opp_closed_won_dte,
 fo.opp_closed_lost_dte,
 fo.opp_created_dte,
 fo.opp_closed_dte,
+fo.opp_close_dte,
+fo.opp_arr,
+fo.opp_net_new_arr,
 CASE WHEN to_date(fd.dte) < to_date(fo.opp_closed_dte) then 1 else 0 end as open_pipeline_fl,
 CASE WHEN to_date(fd.dte) < to_date(fo.opp_closed_dte) then 'open' else 'closed' end as status_category,
 CASE WHEN to_date(fd.dte) = to_date(fo.opp_created_dte) then 1 else 0 end as created_dte_fl,
