@@ -228,10 +228,11 @@ CASE WHEN open_opp_net_new_arr > 0 then 'expansion'
      WHEN open_opp_net_new_arr IS NULL then NULL
      ELSE 'other' end as open_opp_projected_renewal_type,
 hs.health_score,
+CASE WHEN hs.health_score = 'Red' then 1 else 0 end as renewal_at_risk,
 arl.sales_region
 from fct_renewals_int as fri
 left join open_opps as oo on (fri.existing_opp_id = oo.prior_opp_id)
-left join health_scores as hs on (hs.opp_id = fri.existing_opp_id)
+left join health_scores as hs on (hs.opp_id = oo.opp_id)
 left join account_region_lu as arl on (fri.account_id = arl.account_id)
 where fri.existing_opp_id not in ('0061R00000yEQVgQAO', /* Removing BenefitMall because open opp associated with usell opp */
                                   '0061R00000zAuShQAK', /* Removing GDVIT - VA because renewal bucketd with larger new opp */

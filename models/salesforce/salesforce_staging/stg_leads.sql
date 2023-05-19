@@ -67,7 +67,8 @@ date(date_stage_mal_c) as mal_date,
 date(date_stage_mel_c) as mel_date,
     
 -- combining a historical mql date and current mql date fields
-date(ifnull(date_stage_mql_c, mql_check_date_c)) as mql_date,
+--date(ifnull(date_stage_mql_c, mql_check_date_c)) as mql_date,
+date(date_stage_mql_c) as mql_date,
     
 -- combining a historical sal stage date and a current sal stage date
 -- note: from a marketing point of view sal means an SDR accepted the lead, but from a SDR point of view this lead was moved into working
