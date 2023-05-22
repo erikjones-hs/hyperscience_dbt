@@ -134,6 +134,8 @@ UNION
 select * from {{ref('arr_opp_history_62')}}
 UNION
 select * from {{ref('arr_opp_history_63')}}
+UNION
+select * from {{ref('arr_opp_history_64')}}
 order by account_id, start_dte_raw asc
 )
 
