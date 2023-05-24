@@ -92,7 +92,7 @@ CASE WHEN customer_int = 'irc-prod' then 'IRC'
      when customer_int = 'carmax-prod' then 'CarMax'
      when customer_int = 'outgo-prod' then 'OutGo'
      when customer_int = 'cleanharbors-prod' then 'Clean Harbors' 
-     when customer_int = 'harborcompliance-prod' then 'Harbor Complaince'
+     when customer_int = 'harborcompliance-prod' then 'Harbor Compliance'
      ELSE 'non-prod' end as customer 
 from "RAW"."USAGE_REPORTING"."SAAS_PROD"
 where customer_int in ('irc-prod','promomash-prod','transflo-prod','benefitmall-prod','kovack-prod','missionunderwriters-prod','cifinancial-prod',
