@@ -106,7 +106,6 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R000014wHDFQA2' then to_date('2023-02-15') /* End date adjustment because it is wrong in SFDC. Mckinsey 150k */
      when opp_id = '0061R000013edS8QAI' then to_date('2023-04-15') /* End date adjustment because it is wrong in SFDC. Amex 275k */
      when opp_id = '0061R000014wI4bQAE' then to_date('2023-05-02') /* End date adjustment because they churned early. Manulife 375k */
-     when opp_id = '0061R000014wNt6QAE' then to_date('2023-06-02') /* End date adjustment because it is wrong in SFDC. ADP 9.6k */
      when opp_id = '0061R00000yGqH3QAK' then to_date('2023-09-15') /* End date adjustment requested for SSA so all SSA contracts up in Sep. */
      when opp_id = '0061R000013fuawQAA' then to_date('2023-05-13') /* End date adjustment because of early churn. IRS 97.5k */  
      when opp_id = '0061R000016kGCyQAM' then to_date('2024-08-24') /* End date adjustment because it is wrong in SFDC. WRK 75k */
