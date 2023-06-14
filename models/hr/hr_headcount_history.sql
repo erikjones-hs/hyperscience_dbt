@@ -18,6 +18,21 @@ from "FIVETRAN_DATABASE"."BAMBOOHR_FIVETRAN"."EMPLOYEE"
 where to_date(hire_dte) <= to_date(current_date()) 
 and employment_status in ('Full-Time', 'Terminated')
 and last_name not ilike '%(TEST EMPLOYEE)%'
+and employee_id not in (
+777,
+742,
+328,
+716,
+285,
+791,
+836,
+749,
+281,
+774,
+818,
+660,
+790    
+)
 ),
 
 months as (
