@@ -110,8 +110,8 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R00000yGqH3QAK' then to_date('2023-09-15') /* End date adjustment requested for SSA so all SSA contracts up in Sep. */
      when opp_id = '0061R000013fuawQAA' then to_date('2023-05-13') /* End date adjustment because of early churn. IRS 97.5k */  
      when opp_id = '0061R000016kGCyQAM' then to_date('2024-08-24') /* End date adjustment because it is wrong in SFDC. WRK 75k */
+     when opp_id = '0061R00001A4rItQAJ' then to_date('2023-06-15') /* End date adjustment due to expansion. MPower 99k */
      when opp_id = '0061R0000136ZbBQAU' then to_date('2023-07-15') /* End date adjustment because of open negotiatios. Reveal 8.8k */
-     when opp_id = '0061R000014wNt6QAE' then to_date('2023-07-15') /* End date adjustment because of open negotiations. ADP 9.6k */
      when opp_id = '0061R000014wI4nQAE' then to_date('2023-07-15') /* End date adjustment because of open negotiations. Consiel 16k */
      when opp_id = '0061R000014xeQwQAI' then to_date('2023-07-15') /* End date adjustment because of open negotiations. BenefitMall 13.3k */
      ELSE end_dte_raw end as end_dte,
@@ -144,6 +144,7 @@ CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
      when opp_id = '0061R00001A3ujGQAR' then to_date('2022-03-15')
      when opp_id = '006Dm000002eKjzIAE' then to_date('2022-12-15')
      when opp_id = '0061R00001A4rGJQAZ' then to_date('2023-02-15')
+     when opp_id = '006Dm000003LobKIAS' then to_date('2023-06-15')
      ELSE start_dte_raw end as start_dte,
 closed_won_dte,
 date_trunc('month',to_date(start_dte)) as start_dte_month,
