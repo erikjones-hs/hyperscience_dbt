@@ -111,9 +111,22 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R000013fuawQAA' then to_date('2023-05-13') /* End date adjustment because of early churn. IRS 97.5k */  
      when opp_id = '0061R000016kGCyQAM' then to_date('2024-08-24') /* End date adjustment because it is wrong in SFDC. WRK 75k */
      when opp_id = '0061R00001A4rItQAJ' then to_date('2023-06-15') /* End date adjustment due to expansion. MPower 99k */
-     when opp_id = '0061R0000136ZbBQAU' then to_date('2023-07-15') /* End date adjustment because of open negotiatios. Reveal 8.8k */
-     when opp_id = '0061R000014wI4nQAE' then to_date('2023-07-15') /* End date adjustment because of open negotiations. Consiel 16k */
-     when opp_id = '0061R000014xeQwQAI' then to_date('2023-07-15') /* End date adjustment because of open negotiations. BenefitMall 13.3k */
+     when opp_id = '0061R00000uINyXQAW' then to_date('2023-07-15') /* End date adjustment bevause it is wrong in SFDC. Fidelity 1.4M */
+     when opp_id = '0061R000014xeQwQAI' then to_date('2023-07-15') /* End date adjustment because it is wrong in SFDC. BenefitMall 13.3k */
+     when opp_id = '0061R0000136ZbBQAU' then to_date('2023-08-15') /* End date adjustment because of open negotiatios. Reveal 8.8k */
+     when opp_id = '0061R000014wI4nQAE' then to_date('2023-08-15') /* End date adjustment because of open negotiations. Consiel 16k */
+     when opp_id = '0061R000016kwHtQAI' then to_date('2023-08-15') /* End date adjustment because of open negotiations. Miss. Health 689k */ 
+     when opp_id = '0061R000014wQD2QAM' then to_date('2023-08-15') /* End date adjustment because of open negotiations. VHA 276k */ 
+     when opp_id = '0061R000014wNsOQAU' then to_date('2023-08-15') /* End date adjustment because of open negotiations. Clean Harbors 228k */ 
+     when opp_id = '0061R000014wNroQAE' then to_date('2023-08-15') /* End date adjustment because of open negotiations. Pac LIfe 180k */
+     when opp_id = '0061R000014wNrpQAE' then to_date('2023-08-15') /* End date adjustment because of open negotiations. QAI 35k */ 
+     when opp_id = '0061R000014vUKMQA2' then to_date('2023-08-15') /* End date adjustment because of open negotiations. USAF 115k */ 
+     when opp_id = '0061R000014wI4lQAE' then to_date('2023-08-15') /* End date adjustment because of open negotiations. FATCO 75k */ 
+     when opp_id = '0061R000016myLZQAY' then to_date('2023-08-15') /* End date adjustment because of open negotiations. DOJ 41.5k */ 
+     when opp_id = '0061R000014yeOrQAI' then to_date('2023-08-15') /* End date adjustment because of open negotiations. Mathematica 100k */ 
+     when opp_id = '0061R000014wRB4QAM' then to_date('2023-08-15') /* End date adjustment because of open negotiations. IRS 330k */ 
+     when opp_id = '0061R000016n7iAQAQ' then to_date('2023-08-15') /* End date adjustment because of open negotiations. Tech Mahindra 125k */
+     when opp_id = '0061R000014wI4sQAE' then to_date('2023-08-15') /* End date adjustment because of open negotiations. Canada LIfe 71k */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
