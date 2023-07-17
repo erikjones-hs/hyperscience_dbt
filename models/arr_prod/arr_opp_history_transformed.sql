@@ -113,6 +113,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R00001A4rItQAJ' then to_date('2023-06-15') /* End date adjustment due to expansion. MPower 99k */
      when opp_id = '0061R00000uINyXQAW' then to_date('2023-07-15') /* End date adjustment bevause it is wrong in SFDC. Fidelity 1.4M */
      when opp_id = '0061R000014xeQwQAI' then to_date('2023-07-15') /* End date adjustment because it is wrong in SFDC. BenefitMall 13.3k */
+     when opp_id = '0061R0000135VUDQA2' then to_date('2023-05-01') /* End date adjustment because of early renewal. QBE Australia 300k */ 
      when opp_id = '0061R0000136ZbBQAU' then to_date('2023-08-15') /* End date adjustment because of open negotiatios. Reveal 8.8k */
      when opp_id = '0061R000014wI4nQAE' then to_date('2023-08-15') /* End date adjustment because of open negotiations. Consiel 16k */
      when opp_id = '0061R000016kwHtQAI' then to_date('2023-08-15') /* End date adjustment because of open negotiations. Miss. Health 689k */ 
