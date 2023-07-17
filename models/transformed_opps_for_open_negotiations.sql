@@ -21,7 +21,7 @@ where opp_id in (
 '0061R000014vUKMQA2', /* End date adjustment because of open negotiations. USAF 115k */ 
 '0061R000014wI4lQAE', /* End date adjustment because of open negotiations. FATCO 75k */ 
 '0061R000016myLZQAY', /* End date adjustment because of open negotiations. DOJ 41.5k */ 
-'0061R000014yeOrQAI'  /* End date adjustment because of open negotiations. Mathematica 100k */
+'0061R000014yeOrQAI', /* End date adjustment because of open negotiations. Mathematica 100k */
 '0061R000014wRB4QAM', /* End date adjustment because of open negotiations. IRS 330k */ 
 '0061R000016n7iAQAQ', /* End date adjustment because of open negotiations. Tech Mahindra 125k */
 '0061R000014wI4sQAE'  /* End date adjustment because of open negotiations. Canada LIfe 71k */ 
