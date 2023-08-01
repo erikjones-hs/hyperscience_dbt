@@ -12,7 +12,7 @@ select distinct opp_id
 from {{ref('arr_opp_history')}}
 where opp_id in (
 --'0061R0000136ZbBQAU', /* End date adjustment because of open negotiatios. Reveal 8.8k */
-'0061R000014wI4nQAE', /* Consiel 16k */
+--'0061R000014wI4nQAE', /* Consiel 16k */
 '0061R000016kwHtQAI', /* End date adjustment because of open negotiations. Miss. Health 689k */ 
 '0061R000014wQD2QAM', /* End date adjustment because of open negotiations. VHA 276k */ 
 '0061R000014wNsOQAU', /* End date adjustment because of open negotiations. Clean Harbors 228k */ 
