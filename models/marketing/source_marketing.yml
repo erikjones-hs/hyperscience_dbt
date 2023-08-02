@@ -6,4 +6,5 @@ sources:
     schema: google_analytics_4
     tables:
       - name: acquisition_report
+      - name: acquisition_report_version_2
       - name: page_path_report
