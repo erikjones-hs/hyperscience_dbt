@@ -1,12 +1,11 @@
 select 
 
 date,
-session_default_channel_grouping as channel_grouping,
+session_default_channel_group as channel_grouping,
 conversions,
 new_users,
 sessions,
 total_users,
-event_count as events,
 engaged_sessions,
 screen_page_views
 
