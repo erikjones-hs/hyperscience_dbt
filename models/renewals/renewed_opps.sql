@@ -33,6 +33,7 @@ CASE WHEN opp_id = '0061R00000yGqH3QAK' then '0061R000014wIeUQAU'
      when opp_id = '006Dm000002dhpbIAA' then '0061R00000r6r1iQAA'
      when opp_id = '0061R00001A6BeZQAV' then '0061R000014wI4qQAE'
      when opp_id = '0061R00001BAvduQAD' then '0061R00000uINyXQAW'
+     when opp_id = '0061R000014wI4cQAE' then '0061R00000zAuShQAK'
      when opp_id = '0061R00000oE2hbQAC' then NULL
      else prior_opp_id end as prior_opp_id
 from "DEV"."SALES"."SALESFORCE_AGG_OPPORTUNITY"
