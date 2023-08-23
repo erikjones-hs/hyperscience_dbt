@@ -121,8 +121,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R000014vUKMQA2' then to_date('2023-09-15') /* End date adjustment because of open negotiations. USAF 115k */ 
      when opp_id = '0061R000014wI4lQAE' then to_date('2023-09-15') /* End date adjustment because of open negotiations. FATCO 75k */ 
      when opp_id = '0061R000016myLZQAY' then to_date('2023-09-15') /* End date adjustment because of open negotiations. DOJ 41.5k */ 
-     when opp_id = '0061R000014yeOrQAI' then to_date('2023-09-15') /* End date adjustment because of open negotiations. Mathematica 100k */ 
-     when opp_id = '0061R000014wRB4QAM' then to_date('2023-09-15') /* End date adjustment because of open negotiations. IRS 330k */ 
+     when opp_id = '0061R000014yeOrQAI' then to_date('2023-09-15') /* End date adjustment because of open negotiations. Mathematica 100k */  
      when opp_id = '0061R000014wI4sQAE' then to_date('2023-09-15') /* End date adjustment because of open negotiations. Canada LIfe 71k */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
