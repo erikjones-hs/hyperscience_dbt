@@ -17,7 +17,13 @@ where opp_id in (
 '0061R000014wI4lQAE', /* End date adjustment because of open negotiations. FATCO 75k */ 
 '0061R000016myLZQAY', /* End date adjustment because of open negotiations. DOJ 41.5k */ 
 '0061R000014yeOrQAI', /* End date adjustment because of open negotiations. Mathematica 100k */
-'0061R000014wI4sQAE' /* End date adjustment because of open negotiations. Canada LIfe 71k */ 
+'0061R000014wI4sQAE', /* End date adjustment because of open negotiations. Canada LIfe 71k */
+'0061R00000yGqH3QAK', /* End date adjustment because of open negotiations. SSA 2.3M */
+'006Dm000002cdEUIAY', /* End date adjustment because of open negotiations. VA VICCS 1.5M */
+'0061R000016nZwpQAE', /* End date adjustment because of open negotiations. VetsEZ 50k */
+'0061R000014wI34QAE', /* End date adjustment because of open negotiations. CompIQ 173k */
+'0061R00001A5k8bQAB', /* End date adjustment because of open negotiations. SSA 1.45M */
+'0061R000014wNrtQAE'  /* End date adjustment because of open negotiations. SSA 1.93M */ 
 )
 )
 
