@@ -116,6 +116,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R0000135VUDQA2' then to_date('2023-05-01') /* End date adjustment because of early renewal. QBE Australia 300k */ 
      when opp_id = '0061R0000136ZbBQAU' then to_date('2023-06-15') /* End date adjustment because it is wrong in SFDC. Reveal 8.8k */
      when opp_id = '0061R000014wRB4QAM' then to_date('2023-08-15') /* End date adjustment because it is wrong in SFDC. IRS 300k */ 
+     when opp_id = '0061R000014wNroQAE' then to_date('2023-09-15') /* End date adjustment because it is wrong in SFDC. Pacific Life 180k */
     -- when opp_id = '0061R000014wI4hQAE' then to_date('2023-08-15') /* ENd date adjustment because it is incorrect in SFDC. PeerStreet 20k */
  --    when opp_id = '0061R000016kwHtQAI' then to_date('2023-10-15') /* End date adjustment because of open negotiations. Miss. Health 689k */ 
  --    when opp_id = '0061R000014wNrpQAE' then to_date('2023-10-15') /* End date adjustment because of open negotiations. QAI 35k */ 
@@ -124,12 +125,12 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
   --   when opp_id = '0061R000016myLZQAY' then to_date('2023-10-15') /* End date adjustment because of open negotiations. DOJ 41.5k */ 
      when opp_id = '0061R000014yeOrQAI' then to_date('2023-10-15') /* End date adjustment because of open negotiations. Mathematica 100k */  
   --   when opp_id = '0061R000014wI4sQAE' then to_date('2023-10-15') /* End date adjustment because of open negotiations. Canada LIfe 71k */
-     when opp_id = '0061R00000yGqH3QAK' then to_date('2023-10-15') /* End date adjustment because of open negotiations. SSA 2.3M */
+     when opp_id = '0061R00000yGqH3QAK' then to_date('2024-02-15') /* End date adjustment because of open negotiations. SSA 2.3M */
      when opp_id = '006Dm000002cdEUIAY' then to_date('2023-10-15') /* End date adjustment because of open negotiations. VA VICCS 1.5M */
      when opp_id = '0061R000016nZwpQAE' then to_date('2023-10-15') /* End date adjustment because of open negotiations. VetsEZ 50k */
   --   when opp_id = '0061R000014wI34QAE' then to_date('2023-10-15') /* End date adjustment because of open negotiations. CompIQ 173k */
-     when opp_id = '0061R00001A5k8bQAB' then to_date('2023-10-15') /* End date adjustment because of open negotiations. SSA 1.45M */
-     when opp_id = '0061R000014wNrtQAE' then to_date('2023-10-15') /* End date adjustment because of open negotiations. SSA 1.93M */
+     when opp_id = '0061R00001A5k8bQAB' then to_date('2024-02-15') /* End date adjustment because of open negotiations. SSA 1.45M */
+     when opp_id = '0061R000014wNrtQAE' then to_date('2024-02-15') /* End date adjustment because of open negotiations. SSA 1.93M */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
@@ -199,5 +200,6 @@ select * from raw_data_transformed where opp_id not in
 '0061R000013gx5GQAQ', /* Chanel F&B 5k. Was an NRR Deal. Should have not been in here as ARR */
 '0061R00000zCCLQQA4', /* Air Force opp that was mistakenly moved to closed win in SFDC */
 '006Dm000003M0dVIAS', /* Paid Pilot that in not recurring. Australian Department of Defense */
-'0061R00001A5wigQAB' /* Removing Peer Street because this is a churn */
+'0061R00001A5wigQAB', /* Removing Peer Street because this is a churn */
+'0061R00001BAugnQAD' /* Removing Pacific Life 180k Renewal because it should have never gone Closed Won */
 )
