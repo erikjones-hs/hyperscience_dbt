@@ -162,6 +162,7 @@ CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
      when opp_id = '006Dm000002eKjzIAE' then to_date('2022-12-15')
      when opp_id = '0061R00001A4rGJQAZ' then to_date('2023-02-15')
      when opp_id = '006Dm000003LobKIAS' then to_date('2023-06-15')
+     when opp_id = '006Dm000005MfwnIAC' then to_date('2023-09-01')
      ELSE start_dte_raw end as start_dte,
 closed_won_dte,
 date_trunc('month',to_date(start_dte)) as start_dte_month,
@@ -201,5 +202,6 @@ select * from raw_data_transformed where opp_id not in
 '0061R00000zCCLQQA4', /* Air Force opp that was mistakenly moved to closed win in SFDC */
 '006Dm000003M0dVIAS', /* Paid Pilot that in not recurring. Australian Department of Defense */
 '0061R00001A5wigQAB', /* Removing Peer Street because this is a churn */
-'0061R00001BAugnQAD' /* Removing Pacific Life 180k Renewal because it should have never gone Closed Won */
+'0061R00001BAugnQAD', /* Removing Pacific Life 180k Renewal because it should have never gone Closed Won */
+'006Dm000005ESjnIAG' /* Removing SSA Amendment Opp because it is incorporated in the ARR adjustment to existing opp */
 )
