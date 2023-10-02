@@ -20,7 +20,9 @@ where opp_id in (
 '0061R00001A4pwsQAB', /* End date adjustment because of open negotiations. Ascensus 216k */
 '0061R000014wI4uQAE', /* End date adjustment because of open negotiations. AIG 528k */
 '0061R00001A4pwYQAR', /* End date adjustment because of open negotiations. Unum 690k */
-'006Dm000002dhpbIAA'  /* End date adjustment because of open negotiations. CRL 100k */ 
+'006Dm000002dhpbIAA', /* End date adjustment because of open negotiations. CRL 100k */
+'0061R000019PUmDQAW', /* End date adjustment because of open negtiations. VA Conslidated Contract 5.1M */
+'0061R00001BAPkAQAX'  /* End date adjustment because of open negitotaions. IRS 330k */ 
 )
 )
 

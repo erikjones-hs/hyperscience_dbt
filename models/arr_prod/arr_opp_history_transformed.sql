@@ -79,13 +79,11 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R0000137jsqQAA' then to_date('2022-08-15') /* Adjusting End Date for historical accuracy. Pac Life 330k */
      when opp_id = '0061R000010O65hQAC' then to_date('2022-08-15') /* Adjusting End Date for historical accuracy. First American Financial 1M */
      when opp_id = '0061R0000137hQzQAI' then to_date('2022-10-15') /* End date adjustment for historical accuracy. Allstate 15k */
-     when opp_id = '0061R00001A4pwsQAB' then to_date('2023-10-29') /* End date adjustment because it is wrong in SFDC. Ascensus 216k */
      when opp_id = '0061R000010OgSrQAK' then to_date('2022-11-15') /* End date adjustment for historical accuracy. GAIG 180k */
      when opp_id = '0061R000013fHgQQAU' then to_date('2022-10-15') /* End date adjustment for historical accuracy. IRS phase 2 */
      when opp_id = '0061R0000137hOKQAY' then to_date('2022-09-15') /* End date adjustment for historical accuracy. SSA DeDupe 1.9M */
      when opp_id = '0061R000013flkIQAQ' then to_date('2022-10-15') /* End date adjustment for historical accuracy. VBA IBM 2.3M */
      when opp_id = '0061R000010tH9RQAU' then to_date('2022-10-15') /* End date adjustment for historical accuracy. VA VICCS 1.2M */
-     when opp_id = '0061R00001A4pwYQAR' then to_date('2023-10-29') /* End date adjustment because end date is incorrect in SFDC. Unum Group 690k */
      when opp_id = '0061R000013gijQQAQ' then to_date('2022-11-15') /* End Date Adjustment per FP&A. Not paying. MindMap 150k */
      when opp_id = '0061R000016mzrWQAQ' then to_date('2022-11-15') /* End Date Adjustment per FP&A. Not paying. Featsystems 60k */
      when opp_id = '0061R0000137scfQAA' then to_date('2022-11-15') /* End Date Adjustment per FP&A. Not Paying. Cogent 95k */ 
@@ -128,6 +126,8 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R000014wI4uQAE' then to_date('2023-11-15') /* End date adjustment because of open negotiations. AIG 528k */
      when opp_id = '0061R00001A4pwYQAR' then to_date('2023-11-15') /* End date adjustment because of open negotiations. Unum 690k */
      when opp_id = '006Dm000002dhpbIAA' then to_date('2023-11-15') /* ENd date adjustment because of open negotiations. CRL 100k */
+     when opp_id = '0061R000019PUmDQAW' then to_date('2023-11-15') /* End date adjustment because of open negtiations. VA Conslidated Contract 5.1M */
+     when opp_id = '0061R00001BAPkAQAX' then to_date('2023-11-15') /* End date adjustment because of open negitotaions. IRS 330k */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
