@@ -136,6 +136,7 @@ revenue_type_c,
 total_price as opp_services_nrr
 from "FIVETRAN_DATABASE"."SALESFORCE"."OPPORTUNITY_LINE_ITEM"
 where revenue_type_c = 'Services NRR'
+and is_deleted = FALSE 
 order by opportunity_id
 ),
 
