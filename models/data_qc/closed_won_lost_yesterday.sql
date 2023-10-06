@@ -8,13 +8,16 @@
 
 with change_history as (
 select distinct
-updated_dte,
-opp_id,
+to_timestamp(created_date) as updated_dte,
+opportunity_id as opp_id,
 field,
 old_value,
-new_value 
-from {{ref('closed_lost_won')}}
-where new_value = 'Closed Won'    
+new_value
+from "FIVETRAN_DATABASE"."SALESFORCE"."OPPORTUNITY_FIELD_HISTORY"
+where field in ('StageName')
+and new_value in ('Closed Lost','Closed Won')
+and to_date(created_date) = dateadd(day,-1,(to_date(current_date))) 
+)
 ),
 
 opp as (
@@ -29,7 +32,7 @@ opp_start_dte
 from "DEV"."SALES"."SALESFORCE_AGG_OPPORTUNITY"
 ),
 
-opp_new_closed_won_int as (
+opp_new_closed_won_lost as (
 select distinct
 sao.account_id,
 sao.account_name,
@@ -40,28 +43,6 @@ sao.opp_net_new_arr,
 sao.opp_start_dte,
 from change_history as ch
 left join opp as sao on (ch.opp_id = sao.opp_id) 
-),
-
-current_closed_won as (
-select distinct 
-opp_id
-from {{ref('fct_arr_opp')}}     
-),
-
-opp_new_closed_won as (
-select distinct 
-account_id,
-account_name,
-opp_id,
-opp_name,
-opp_arr,
-opp_net_new_arr,
-opp_start_dte,
-field,
-old_value,
-new_value
-from opp_new_closed_won_int
-where opp_id not in (select * from current_closed_won)    
 )
 
-select * from opp_new_closed_won
+select * from opp_new_closed_won_lost
