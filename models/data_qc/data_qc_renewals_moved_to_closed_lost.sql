@@ -17,7 +17,8 @@ potential_churn_amount,
 outstanding_renewal_flag,
 upcoming_renewal_flag,
 open_opp_id,
-open_opp_name
+open_opp_name,
+renewal_type
 from {{ref('fct_renewals')}}
 ),
 
@@ -33,7 +34,9 @@ where clw.new_value = 'Closed Lost'
 renewals_moved_to_closed_lost as (
 select *
 from renewal_opps
-where existing_opp_id in (select distinct prior_opp_id from closed_won_opps)
+where existing_opp_id in (select distinct prior_opp_id from closed_lost_opps)
+and renewal_type IS NOT NULL
+and upcoming_renewal_flag = 0
 order by renewal_month asc
 )
 

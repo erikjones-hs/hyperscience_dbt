@@ -16,8 +16,7 @@ new_value
 from "FIVETRAN_DATABASE"."SALESFORCE"."OPPORTUNITY_FIELD_HISTORY"
 where field in ('StageName')
 and new_value in ('Closed Lost','Closed Won')
-and to_date(created_date) = dateadd(day,-1,(to_date(current_date))) 
-)
+and to_date(created_date) >= dateadd(day,-30,(to_date(current_date))) 
 ),
 
 opp as (
@@ -34,6 +33,7 @@ from "DEV"."SALES"."SALESFORCE_AGG_OPPORTUNITY"
 
 opp_new_closed_won_lost as (
 select distinct
+ch.updated_dte,
 sao.account_id,
 sao.account_name,
 ch.opp_id,
@@ -41,6 +41,8 @@ sao.opp_name,
 sao.opp_arr,
 sao.opp_net_new_arr,
 sao.opp_start_dte,
+ch.old_value,
+ch.new_value
 from change_history as ch
 left join opp as sao on (ch.opp_id = sao.opp_id) 
 )

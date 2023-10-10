@@ -38,6 +38,9 @@ sao.opp_name,
 sao.opp_arr,
 sao.opp_net_new_arr,
 sao.opp_start_dte,
+ch.field,
+ch.old_value,
+ch.new_value
 from change_history as ch
 left join opp as sao on (ch.opp_id = sao.opp_id) 
 ),
