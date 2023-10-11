@@ -33,9 +33,7 @@ where opp_id not in ('0061R00000r6eqOQAQ',
                      '0061R00000zBqNRQA0',
                      '0061R000014xeQwQAI',
                      '0061R000014xzVaQAI',
-                     '006Dm000002cdEUIAY',
-                     '006Dm000002cdEUIAY',
-                     '0061R000014xeQwQAI'
+                     '006Dm000002cdEUIAY'
 )
 and opp_category = 'churn'
 order by end_dte asc

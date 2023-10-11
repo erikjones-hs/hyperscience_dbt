@@ -18,7 +18,8 @@ outstanding_renewal_flag,
 upcoming_renewal_flag,
 open_opp_id,
 open_opp_name,
-renewal_type
+renewal_type,
+renewal_opp_id
 from {{ref('fct_renewals')}}
 ),
 
@@ -31,12 +32,27 @@ left join "DEV"."SALES"."SALESFORCE_AGG_OPPORTUNITY" as sao on (clw.opp_id = sao
 where clw.new_value = 'Closed Won'  
 ),
 
+renewed_opps as (
+select distinct
+renewal_opp_id,
+renewal_type
+from renewal_opps
+where renewal_type IS NOT NULL
+),
+
+churned_opps as (
+select distinct 
+existing_opp_id
+from renewal_opps
+where renewal_type = 'logo churn'    
+),
+
 renewals_moved_to_closed_won as (
 select *
 from renewal_opps
 where existing_opp_id in (select distinct prior_opp_id from closed_won_opps)
-and renewal_type IS NOT NULL
-and upcoming_renewal_flag = 0
+and existing_opp_id not in (select distinct renewal_opp_id from renewed_opps)
+and existing_opp_id not in (select distinct existing_opp_id from churned_opps)
 order by renewal_month asc
 )
 
