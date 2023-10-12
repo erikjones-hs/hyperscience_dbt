@@ -129,9 +129,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '006Dm000002dhpbIAA' then to_date('2023-11-15') /* ENd date adjustment because of open negotiations. CRL 100k */
      when opp_id = '0061R00001BAPkAQAX' then to_date('2023-11-15') /* End date adjustment because of open negitotaions. IRS 330k */
      ELSE end_dte_raw end as end_dte,
-CASE WHEN opp_id = '0061R00001A4pwYQAR' then to_date('2023-10-29') 
-     WHEN opp_id = '0061R00001A4pwsQAB' then to_date('2023-10-29') 
-     else end_dte_raw end as end_date_raw,
+end_date_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
      WHEN opp_id = '0061R00000uIehuQAC' then to_date('2020-01-01')
      WHEN opp_id = '0061R00000zD2sxQAC' then to_date('2020-12-01')
