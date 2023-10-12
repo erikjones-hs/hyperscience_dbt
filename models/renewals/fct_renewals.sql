@@ -32,7 +32,7 @@ select * from {{ref('renewals_with_outcomes')}}
 arr_opp_history as (
 select distinct 
 opp_id,
-round(opp_arr) as arr
+CASE WHEN opp_id = '0061R00001BAPkAQAX' then 330000 else round(opp_arr) end as arr
 from {{ref('arr_opp_history')}}
 ),
 
