@@ -28,6 +28,7 @@ CASE WHEN account_name = 'TD Ameritrade' then 'Charles Schwab'
      WHEN account_name = 'IBM' then 'Department of Veterans Affairs'
      when account_name = 'Momentum Metropolitan Holdings Limited' then 'Momentum'
      when account_name = 'ALMAC.' then 'ALMAC'
+     when account_name = 'Mutual of Omaha' then 'Mutual of Omaha Insurance Company'
      else account_name end as account_name,
 opp_id,
 opp_name,
@@ -129,7 +130,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '006Dm000002dhpbIAA' then to_date('2023-11-15') /* ENd date adjustment because of open negotiations. CRL 100k */
      when opp_id = '0061R00001BAPkAQAX' then to_date('2023-11-15') /* End date adjustment because of open negitotaions. IRS 330k */
      ELSE end_dte_raw end as end_dte,
-end_date_raw,
+end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
      WHEN opp_id = '0061R00000uIehuQAC' then to_date('2020-01-01')
      WHEN opp_id = '0061R00000zD2sxQAC' then to_date('2020-12-01')
@@ -200,5 +201,6 @@ select * from raw_data_transformed where opp_id not in
 '006Dm000003M0dVIAS', /* Paid Pilot that in not recurring. Australian Department of Defense */
 '0061R00001A5wigQAB', /* Removing Peer Street because this is a churn */
 '0061R00001BAugnQAD', /* Removing Pacific Life 180k Renewal because it should have never gone Closed Won */
-'006Dm000005ESjnIAG' /* Removing SSA Amendment Opp because it is incorporated in the ARR adjustment to existing opp */
+'006Dm000005ESjnIAG', /* Removing SSA Amendment Opp because it is incorporated in the ARR adjustment to existing opp */
+'0061R000019R8fwQAC'  /* Removing mutual of Omaha because it was replaced by an upsell opp */
 )
