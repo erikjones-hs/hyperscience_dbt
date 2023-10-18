@@ -16,6 +16,8 @@ select
     utm_medium_c,
     utm_campaign_c,
     utm_term_c,
-    utm_content_c
+    utm_content_c,
+    form_host_url_c,
+    referrer_url_c
 
 from {{ source('salesforce', 'campaign_member') }}
