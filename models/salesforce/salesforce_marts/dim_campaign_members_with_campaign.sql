@@ -33,7 +33,7 @@ select
     campaign_member.utm_term_c,
     campaign_member.utm_content_c,
     campaign_member.form_host_url_c,
-    campaign_member.referrer_url_c
+    campaign_member.referrer_url_c,
 
     campaign.campaign_name,
     campaign.parent_id as parent_campaign_id,
