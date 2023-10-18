@@ -14,27 +14,45 @@ account_name,
 existing_opp_id,
 existing_opp_name,
 potential_churn_amount,
-has_churned_flag,
 outstanding_renewal_flag,
 upcoming_renewal_flag,
 open_opp_id,
 open_opp_name,
-open_opp_close_dte
-from {{ref('renewals_current_fy_opps')}}
-where to_date(renewal_month) >= date_trunc(month,to_date(current_date()))
+renewal_type,
+renewal_opp_id
+from {{ref('fct_renewals')}}
 ),
 
 closed_lost_opps as (
-select * 
-from {{ref('agg_opportunity_incremental')}}
-where to_date(date_ran) = dateadd(day,-1,(to_date(current_date)))
-and (opp_stage_name = 'Closed Lost')  
+select distinct 
+clw.opp_id,
+sao.prior_opp_id
+from {{ref('closed_lost_won')}} as clw
+left join "DEV"."SALES"."SALESFORCE_AGG_OPPORTUNITY" as sao on (clw.opp_id = sao.opp_id)
+where clw.new_value = 'Closed Lost'  
+),
+
+renewed_opps as (
+select distinct
+renewal_opp_id,
+renewal_type
+from renewal_opps
+where renewal_type IS NOT NULL
+),
+
+churned_opps as (
+select distinct 
+existing_opp_id
+from renewal_opps
+where renewal_type = 'logo churn'    
 ),
 
 renewals_moved_to_closed_lost as (
 select *
 from renewal_opps
-where open_opp_id in (select distinct opp_id from closed_lost_opps)
+where existing_opp_id in (select distinct prior_opp_id from closed_lost_opps)
+and existing_opp_id not in (select distinct renewal_opp_id from renewed_opps)
+and existing_opp_id not in (select distinct existing_opp_id from churned_opps)
 order by renewal_month asc
 )
 

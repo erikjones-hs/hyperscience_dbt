@@ -28,6 +28,7 @@ CASE WHEN account_name = 'TD Ameritrade' then 'Charles Schwab'
      WHEN account_name = 'IBM' then 'Department of Veterans Affairs'
      when account_name = 'Momentum Metropolitan Holdings Limited' then 'Momentum'
      when account_name = 'ALMAC.' then 'ALMAC'
+     when account_name = 'Mutual of Omaha' then 'Mutual of Omaha Insurance Company'
      else account_name end as account_name,
 opp_id,
 opp_name,
@@ -79,13 +80,11 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R0000137jsqQAA' then to_date('2022-08-15') /* Adjusting End Date for historical accuracy. Pac Life 330k */
      when opp_id = '0061R000010O65hQAC' then to_date('2022-08-15') /* Adjusting End Date for historical accuracy. First American Financial 1M */
      when opp_id = '0061R0000137hQzQAI' then to_date('2022-10-15') /* End date adjustment for historical accuracy. Allstate 15k */
-     when opp_id = '0061R00001A4pwsQAB' then to_date('2023-10-29') /* End date adjustment because it is wrong in SFDC. Ascensus 216k */
      when opp_id = '0061R000010OgSrQAK' then to_date('2022-11-15') /* End date adjustment for historical accuracy. GAIG 180k */
      when opp_id = '0061R000013fHgQQAU' then to_date('2022-10-15') /* End date adjustment for historical accuracy. IRS phase 2 */
      when opp_id = '0061R0000137hOKQAY' then to_date('2022-09-15') /* End date adjustment for historical accuracy. SSA DeDupe 1.9M */
      when opp_id = '0061R000013flkIQAQ' then to_date('2022-10-15') /* End date adjustment for historical accuracy. VBA IBM 2.3M */
      when opp_id = '0061R000010tH9RQAU' then to_date('2022-10-15') /* End date adjustment for historical accuracy. VA VICCS 1.2M */
-     when opp_id = '0061R00001A4pwYQAR' then to_date('2023-10-29') /* End date adjustment because end date is incorrect in SFDC. Unum Group 690k */
      when opp_id = '0061R000013gijQQAQ' then to_date('2022-11-15') /* End Date Adjustment per FP&A. Not paying. MindMap 150k */
      when opp_id = '0061R000016mzrWQAQ' then to_date('2022-11-15') /* End Date Adjustment per FP&A. Not paying. Featsystems 60k */
      when opp_id = '0061R0000137scfQAA' then to_date('2022-11-15') /* End Date Adjustment per FP&A. Not Paying. Cogent 95k */ 
@@ -107,27 +106,29 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R000014wHDFQA2' then to_date('2023-02-15') /* End date adjustment because it is wrong in SFDC. Mckinsey 150k */
      when opp_id = '0061R000013edS8QAI' then to_date('2023-04-15') /* End date adjustment because it is wrong in SFDC. Amex 275k */
      when opp_id = '0061R000014wI4bQAE' then to_date('2023-05-02') /* End date adjustment because they churned early. Manulife 375k */
-     when opp_id = '0061R00000yGqH3QAK' then to_date('2023-09-15') /* End date adjustment requested for SSA so all SSA contracts up in Sep. */
      when opp_id = '0061R000013fuawQAA' then to_date('2023-05-13') /* End date adjustment because of early churn. IRS 97.5k */  
      when opp_id = '0061R000016kGCyQAM' then to_date('2024-08-24') /* End date adjustment because it is wrong in SFDC. WRK 75k */
      when opp_id = '0061R00001A4rItQAJ' then to_date('2023-06-15') /* End date adjustment due to expansion. MPower 99k */
+     when opp_id = '0061R000014wI4lQAE' then to_date('2023-09-15') /* End date adjustment because of extended end date. FATCO 75k */
      when opp_id = '0061R00000uINyXQAW' then to_date('2023-07-15') /* End date adjustment bevause it is wrong in SFDC. Fidelity 1.4M */
      when opp_id = '0061R000014xeQwQAI' then to_date('2023-07-15') /* End date adjustment because it is wrong in SFDC. BenefitMall 13.3k */
      when opp_id = '0061R0000135VUDQA2' then to_date('2023-05-01') /* End date adjustment because of early renewal. QBE Australia 300k */ 
      when opp_id = '0061R0000136ZbBQAU' then to_date('2023-06-15') /* End date adjustment because it is wrong in SFDC. Reveal 8.8k */
- --    when opp_id = '0061R000014wI4nQAE' then to_date('2023-09-15') /* End date adjustment because of open negotiations. Consiel 16k */
-     when opp_id = '0061R000016kwHtQAI' then to_date('2023-09-15') /* End date adjustment because of open negotiations. Miss. Health 689k */ 
-     when opp_id = '0061R000014wQD2QAM' then to_date('2023-09-15') /* End date adjustment because of open negotiations. VHA 276k */ 
-     when opp_id = '0061R000014wNsOQAU' then to_date('2023-09-15') /* End date adjustment because of open negotiations. Clean Harbors 228k */ 
-     when opp_id = '0061R000014wNroQAE' then to_date('2023-09-15') /* End date adjustment because of open negotiations. Pac LIfe 180k */
-     when opp_id = '0061R000014wNrpQAE' then to_date('2023-09-15') /* End date adjustment because of open negotiations. QAI 35k */ 
-     when opp_id = '0061R000014vUKMQA2' then to_date('2023-09-15') /* End date adjustment because of open negotiations. USAF 115k */ 
-     when opp_id = '0061R000014wI4lQAE' then to_date('2023-09-15') /* End date adjustment because of open negotiations. FATCO 75k */ 
-     when opp_id = '0061R000016myLZQAY' then to_date('2023-09-15') /* End date adjustment because of open negotiations. DOJ 41.5k */ 
-     when opp_id = '0061R000014yeOrQAI' then to_date('2023-09-15') /* End date adjustment because of open negotiations. Mathematica 100k */ 
-     when opp_id = '0061R000014wRB4QAM' then to_date('2023-09-15') /* End date adjustment because of open negotiations. IRS 330k */ 
-     when opp_id = '0061R000014wI4sQAE' then to_date('2023-09-15') /* End date adjustment because of open negotiations. Canada LIfe 71k */
---     when opp_id = '0061R000014wI4hQAE' then to_date('2023-09-15') /* End date adjustment because of open negotiations. PeerStreet 20k */
+     when opp_id = '0061R000014wRB4QAM' then to_date('2023-08-15') /* End date adjustment because it is wrong in SFDC. IRS 300k */ 
+     when opp_id = '0061R000014wNroQAE' then to_date('2023-09-15') /* End date adjustment because it is wrong in SFDC. Pacific Life 180k */ 
+     when opp_id = '006Dm000002cdEUIAY' then to_date('2023-10-15') /* End date adjustment because wrong in SFDC. VA VICCS 1.5M */
+     when opp_id = '0061R000014vUKMQA2' then to_date('2023-12-15') /* End date adjustment because of extension. USAF 115k */  
+     when opp_id = '0061R000014yeOrQAI' then to_date('2023-12-15') /* End date adjustment because of extension. Mathematica 100k */
+     when opp_id = '0061R000016nZwpQAE' then to_date('2023-11-15') /* End date adjustment because of extension. VetsEZ 500k */  
+     when opp_id = '0061R00000yGqH3QAK' then to_date('2024-02-15') /* End date adjustment because of extension. SSA 2.3M */
+     when opp_id = '0061R00001A5k8bQAB' then to_date('2024-02-15') /* End date adjustment because of extension. SSA 1.45M */
+     when opp_id = '0061R000014wNrtQAE' then to_date('2024-02-15') /* End date adjustment because of extension. SSA 1.93M */
+ --    when opp_id = '0061R000019PUmDQAW' then to_date('2023-11-15') /* End date adjustment because of open negtiations. VA Conslidated Contract 5.1M */
+     when opp_id = '0061R00001A4pwsQAB' then to_date('2023-11-15') /* End date adjustment because of open negotiations. Ascensus 216k */
+     when opp_id = '0061R000014wI4uQAE' then to_date('2023-11-15') /* End date adjustment because of open negotiations. AIG 528k */
+     when opp_id = '0061R00001A4pwYQAR' then to_date('2023-11-15') /* End date adjustment because of open negotiations. Unum 690k */
+     when opp_id = '006Dm000002dhpbIAA' then to_date('2023-11-15') /* ENd date adjustment because of open negotiations. CRL 100k */
+     when opp_id = '0061R00001BAPkAQAX' then to_date('2023-11-15') /* End date adjustment because of open negitotaions. IRS 330k */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
@@ -159,6 +160,7 @@ CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
      when opp_id = '006Dm000002eKjzIAE' then to_date('2022-12-15')
      when opp_id = '0061R00001A4rGJQAZ' then to_date('2023-02-15')
      when opp_id = '006Dm000003LobKIAS' then to_date('2023-06-15')
+     when opp_id = '006Dm000005MfwnIAC' then to_date('2023-09-01')
      ELSE start_dte_raw end as start_dte,
 closed_won_dte,
 date_trunc('month',to_date(start_dte)) as start_dte_month,
@@ -196,5 +198,9 @@ select * from raw_data_transformed where opp_id not in
 '0061R00001A3TIAQA3', /* Vida Capital 1.6k. Was an NRR Deal. Should have not been in here as ARR */
 '0061R000013gx5GQAQ', /* Chanel F&B 5k. Was an NRR Deal. Should have not been in here as ARR */
 '0061R00000zCCLQQA4', /* Air Force opp that was mistakenly moved to closed win in SFDC */
-'006Dm000003M0dVIAS' /* Paid Pilot that in not recurring. Australian Department of Defense */
+'006Dm000003M0dVIAS', /* Paid Pilot that in not recurring. Australian Department of Defense */
+'0061R00001A5wigQAB', /* Removing Peer Street because this is a churn */
+'0061R00001BAugnQAD', /* Removing Pacific Life 180k Renewal because it should have never gone Closed Won */
+'006Dm000005ESjnIAG', /* Removing SSA Amendment Opp because it is incorporated in the ARR adjustment to existing opp */
+'0061R000019R8fwQAC'  /* Removing mutual of Omaha because it was replaced by an upsell opp */
 )

@@ -32,7 +32,7 @@ select * from {{ref('renewals_with_outcomes')}}
 arr_opp_history as (
 select distinct 
 opp_id,
-round(opp_arr) as arr
+CASE WHEN opp_id = '0061R00001BAPkAQAX' then 330000 else round(opp_arr) end as arr
 from {{ref('arr_opp_history')}}
 ),
 
@@ -234,10 +234,9 @@ from fct_renewals_int as fri
 left join open_opps as oo on (fri.existing_opp_id = oo.prior_opp_id)
 left join health_scores as hs on (hs.opp_id = oo.opp_id)
 left join account_region_lu as arl on (fri.account_id = arl.account_id)
-where fri.existing_opp_id not in ('0061R00000yEQVgQAO', /* Removing BenefitMall because open opp associated with usell opp */
-                                  '0061R00000zAuShQAK', /* Removing GDVIT - VA because renewal bucketd with larger new opp */
-                                  '0061R00001A6F76QAF', /* Removing WRK Upsell because renewal is asscoaited with Various Use Cases Opp */
-                                  '0061R00000uINyXQAW') /* Can remove this opp in July, once Fidelity upsell goes live */
+where fri.existing_opp_id not in ('0061R00000yEQVgQAO', /* Removing GDVIT - VA because renewal bucketd with larger new opp */
+                                  '0061R00001A6F76QAF' /* Removing WRK Upsell because renewal is asscoaited with Various Use Cases Opp */
+                                  ) 
 order by renewal_month asc
 )
 
