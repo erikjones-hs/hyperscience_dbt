@@ -90,13 +90,21 @@ select
 sum(gross_profit) as gross_profit,
 sum(revenue) as revenue
 from {{ref('saas_metrics')}} 
-WHERE dte >= (TO_TIMESTAMP('2022-08-01')) AND dte <= (TO_TIMESTAMP('2023-08-01'))
+WHERE dte >= (TO_TIMESTAMP('2022-08-31')) AND dte <= (TO_TIMESTAMP('2023-08-31'))
 ),
 
 gm_ttm as (
 select to_date(current_date) as dte,
 (gross_profit / revenue) as gross_margin_ttm
 from gm_ttm_int1
+),
+
+gross_dollar_retention as (
+SELECT
+to_date(current_date) as dte,
+gross_dollar_retention as gross_dollar_retention_ttm
+from {{ref('saas_metrics')}}
+WHERE dte = (TO_TIMESTAMP('2023-08-31'))
 ),
 
 combined as (
@@ -107,13 +115,15 @@ ayg.arr_growth_perc,
 aa.avg_arr,
 ne.num_employees,
 n.net_arr_retention,
-gt.gross_margin_ttm
+gt.gross_margin_ttm,
+gdr.gross_dollar_retention_ttm
 from arr as a
 left join arr_yoy_growth as ayg on (a.dte = ayg.dte)
 left join avg_arr as aa on (a.dte = aa.dte)
 left join num_employees as ne on (a.dte = ne.dte)
 left join nrr as n on (a.dte = n.dte)
 left join gm_ttm as gt on (a.dte = gt.dte)
+left join gross_dollar_retention as gdr on (a.dte = gdr.dte)
 )
 
 select * from combined
