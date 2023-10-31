@@ -95,11 +95,12 @@ CASE WHEN customer_int = 'irc-prod' then 'IRC'
      when customer_int = 'harborcompliance-prod' then 'Harbor Compliance'
      when customer_int = 'sentryfunding-prod' then 'Sentry Funding'
      when customer_int = 'gac-prod' then 'Gulf Agency Company'
+     when customer_int = 'sahomeloans-prod' then 'SA Home Loans'
      ELSE 'non-prod' end as customer 
 from "RAW"."USAGE_REPORTING"."SAAS_PROD"
 where customer_int in ('irc-prod','promomash-prod','transflo-prod','benefitmall-prod','kovack-prod','missionunderwriters-prod','cifinancial-prod',
                        'lossexpress-prod','vault-prod','resound-prod','navix-prod','rtstransflo-prod','momentum','carmax-prod','outgo-prod','cleanharbors-prod',
-                       'harborcompliance-prod','sentryfunding-prod','gac-prod')
+                       'harborcompliance-prod','sentryfunding-prod','gac-prod','sahomeloans-prod')
 order by customer, period_start asc
 ),
 
