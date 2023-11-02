@@ -19,7 +19,9 @@ ORDER BY 1 DESC
 quarter_end as (
 select 
 to_timestamp(date_month_month) as dte,
-CASE WHEN to_date(dte) = '2023-02-01' then 1.09267361 else net_dollar_retention end as net_dollar_retention
+CASE WHEN to_date(dte) = '2023-02-01' then 1.09267361 
+     WHEN to_date(dte) = '2023-11-01' then 1.06
+     else net_dollar_retention end as net_dollar_retention
 from full_dataset
 where monthname(date_month_month) in ('Feb','May','Aug','Nov')
 order by date_month_month asc
