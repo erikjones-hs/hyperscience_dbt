@@ -39,6 +39,7 @@ sum(rd.gross_profit) over (partition by fd.fy_year order by rd.dte asc rows betw
 sum(rd.gross_profit) over (order by rd.dte asc rows between 11 preceding and current row) as gross_profit_ttm,
 (gross_profit_fy / NULLIFZERO(revenue_fy)) as gross_margin_fy,
 (rd.gross_profit / NULLIFZERO(rd.revenue)) as gross_margin,
+(gross_profit_ttm / NULLIFZERO(revenue_ttm)) as gross_margin_ttm,
 rd.net_logo_churn,
 rd.cac_payback_months,
 rd.cash_conversion_score,
