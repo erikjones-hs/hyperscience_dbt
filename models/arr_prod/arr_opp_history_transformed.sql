@@ -112,13 +112,13 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R000014wRB4QAM' then to_date('2023-08-15') /* End date adjustment because it is wrong in SFDC. IRS 300k */ 
      when opp_id = '0061R000014wNroQAE' then to_date('2023-09-15') /* End date adjustment because it is wrong in SFDC. Pacific Life 180k */ 
      when opp_id = '006Dm000002cdEUIAY' then to_date('2023-10-15') /* End date adjustment because wrong in SFDC. VA VICCS 1.5M */ 
+     when opp_id = '006Dm000002dhpbIAA' then to_date('2024-02-15') /* ENd date adjustment because it is wrong in SFDC. CRL 100k */
      when opp_id = '0061R00000yGqH3QAK' then to_date('2024-02-15') /* End date adjustment because of extension. SSA 2.3M */
      when opp_id = '0061R00001A5k8bQAB' then to_date('2024-02-15') /* End date adjustment because of extension. SSA 1.45M */
      when opp_id = '0061R000014wNrtQAE' then to_date('2024-02-15') /* End date adjustment because of extension. SSA 1.93M */
      when opp_id = '0061R00001A4pwsQAB' then to_date('2023-12-15') /* End date adjustment because of open negotiations. Ascensus 216k */
      when opp_id = '0061R000014wI4uQAE' then to_date('2023-12-15') /* End date adjustment because of open negotiations. AIG 528k */
      when opp_id = '0061R00001A4pwYQAR' then to_date('2023-12-15') /* End date adjustment because of open negotiations. Unum 690k */
-     when opp_id = '006Dm000002dhpbIAA' then to_date('2023-12-15') /* ENd date adjustment because of open negotiations. CRL 100k */
      when opp_id = '0061R00001BAPkAQAX' then to_date('2023-12-15') /* End date adjustment because of open negitotaions. IRS 330k */
      when opp_id = '0061R00000uL8ylQAC' then to_date('2023-12-15') /* End date adjustment because of open negitotaions. PMP $0 */
      when opp_id = '0061R000014wNrYQAU' then to_date('2023-12-15') /* End date adjustment because of open negitotaions. Aviso Wealth 225k */
@@ -164,6 +164,7 @@ CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
      when opp_id = '006Dm000003LobKIAS' then to_date('2023-06-15')
      when opp_id = '006Dm000005MfwnIAC' then to_date('2023-09-01')
      when opp_id = '006Dm0000049v2TIAQ' then to_date('2023-10-01')
+     when opp_id = '006Dm000002dNKAIA2' then to_date('2023-11-01')
      ELSE start_dte_raw end as start_dte,
 closed_won_dte,
 date_trunc('month',to_date(start_dte)) as start_dte_month,

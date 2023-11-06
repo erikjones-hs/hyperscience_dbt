@@ -26,7 +26,8 @@ where opp_id in (
 '0061R000019RTs5QAG', /* End date adjustment because of extension. USAC 6.4k */ 
 '0061R00000zAI8KQAW', /* End date adjustment because of extension. Virginia DMV $0 */ 
 '0061R00001A4pwxQAB', /* End date adjustment because of extension. Accerta 81.9k */
-'0061R000014wNrUQAU'  /* End date adjustment because of extension. divvydose 145k */
+'0061R000014wNrUQAU', /* End date adjustment because of extension. divvydose 145k */
+'0061R00001A4rKQQAZ'  /* Kovack. Transformed for renewal date purposes only */
 )
 )
 
