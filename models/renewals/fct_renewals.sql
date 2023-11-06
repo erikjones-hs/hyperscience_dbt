@@ -191,10 +191,11 @@ CASE WHEN fri.existing_opp_id = '0061R000014wI4hQAE' then 20000 /* adjusting for
      WHEN fri.existing_opp_id = '0061R00000yFonNQAS' then 0 /* MetaSource */
      WHEN fri.existing_opp_id = '0061R00000zAI8KQAW' then 0 /* Virginina DMV */
      WHEN fri.existing_opp_id = '0061R00000uL8ylQAC' then 0 /* PMP */
+     when fri.existing_opp_id = '0061R000019PUmDQAW' then 6600000 /* Dept of VA Combined opps */
      ELSE fri.potential_churn_amount end as potential_churn_amount,
 fri.has_account_renewed_flag,
 fri.renewal_type,
-fri.renewal_arr_change,
+CASE WHEN fri.existing_opp_id = '0061R000014wI4hQAE' then 20000 else fri.renewal_arr_change end as renewal_arr_change,
 fri.renewal_opp_id,
 fri.renewal_opp_name,
 fri.actual_renewal_amount,

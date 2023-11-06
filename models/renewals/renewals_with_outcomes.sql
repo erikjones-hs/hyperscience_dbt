@@ -18,7 +18,9 @@ faa.is_active_acct,
 ro.opp_id,
 ro.opp_name,
 ro.end_dte,
-CASE WHEN ro.opp_id = '0061R00000zAuShQAK' then 183115 else fao1.opp_arr end as potential_churn_amount,
+CASE WHEN ro.opp_id = '0061R00000zAuShQAK' then 183115 
+     WHEN ro.opp_id = '0061R000019PUmDQAW' then 6600000
+     else fao1.opp_arr end as potential_churn_amount,
 ro.qtr_end_dte,
 r.opp_id as renewal_opp_id,
 r.opp_name as renewal_opp_name,
