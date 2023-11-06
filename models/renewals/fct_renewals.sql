@@ -194,6 +194,9 @@ CASE WHEN fri.existing_opp_id = '0061R000014wI4hQAE' then 20000 /* adjusting for
      when fri.existing_opp_id = '0061R000019PUmDQAW' then 6600000 /* Dept of VA Combined opps */
      when fri.existing_opp_id = '0061R00001BAPkAQAX' then 510000 /* Combined IRS opps */
      when fri.existing_opp_id = '0061R000014wNrUQAU' then 145000 /* divvyDose */
+     when fri.existing_opp_id = '0061R00000zAuShQAK' then 183115 /* BenefitMall adding in the combined upsell opp */
+     when fri.existing_opp_id = '0061R00001A4rFVQAZ' then 253000 /* Legal and General America */
+     when fri.existing_opp_id = '0061R00001A4rItQAJ' then 127286 /* Combining MPower opps */
      ELSE fri.potential_churn_amount end as potential_churn_amount,
 fri.has_account_renewed_flag,
 fri.renewal_type,
@@ -238,7 +241,9 @@ left join open_opps as oo on (fri.existing_opp_id = oo.prior_opp_id)
 left join health_scores as hs on (hs.opp_id = oo.opp_id)
 left join account_region_lu as arl on (fri.account_id = arl.account_id)
 where fri.existing_opp_id not in ('0061R00000yEQVgQAO', /* Removing GDVIT - VA because renewal bucketd with larger new opp */
-                                  '0061R00001A6F76QAF' /* Removing WRK Upsell because renewal is asscoaited with Various Use Cases Opp */
+                                  '0061R00001A6F76QAF', /* Removing WRK Upsell because renewal is asscoaited with Various Use Cases Opp */
+                                  '0061R00001A43h0QAB', /* Removing IRS because it is being combined with a different IRS opp */
+                                  '006Dm000003LobKIAS'  /* Removing MPower because it is combined with another opp */
                                   ) 
 order by renewal_month asc
 )
