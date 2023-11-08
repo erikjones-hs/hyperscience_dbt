@@ -6,18 +6,6 @@ with data as (
 
 )
 
-select 
-
-date,
-session_source_medium,
---session_default_channel_group as channel_grouping,
-conversions,
-new_users,
-sessions,
-total_users,
-engaged_sessions,
-screen_page_views
-
+select *
 from data
-where session_source_medium like '%google%'
 order by date desc
