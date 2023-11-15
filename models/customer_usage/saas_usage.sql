@@ -79,7 +79,8 @@ CUSTOM_SUPERVISION_TRANSCRIBED_FIELDS_COUNT as number_of_fields_extracted_in_cus
 split_part(report_id,'_',0) as customer_int,
 CASE WHEN customer_int = 'irc-prod' then 'IRC'
      WHEN customer_int = 'promomash-prod' then 'Promomash'
-     WHEN customer_int in ('transflo-prod','rtstransflo-prod') then 'Transflo'
+     WHEN customer_int in ('transflo-prod') then 'Transflo prod'
+     when customer_int in ('rtstransflo-prod') then 'RTS Transflo prod'
      WHEN customer_int = 'benefitmall-prod' then 'Benefit Mall'
      WHEN customer_int = 'kovack-prod' then 'Kovack'
      WHEN customer_int = 'missionunderwriters-prod' then 'Mission Underwriters'
@@ -96,6 +97,7 @@ CASE WHEN customer_int = 'irc-prod' then 'IRC'
      when customer_int = 'sentryfunding-prod' then 'Sentry Funding'
      when customer_int = 'gac-prod' then 'Gulf Agency Company'
      when customer_int = 'sahomeloans-prod' then 'SA Home Loans'
+     when customer_int = 'stryker-prod' then 'Stryker'
      ELSE 'non-prod' end as customer 
 from "RAW"."USAGE_REPORTING"."SAAS_PROD"
 where customer_int in ('irc-prod','promomash-prod','transflo-prod','benefitmall-prod','kovack-prod','missionunderwriters-prod','cifinancial-prod',
