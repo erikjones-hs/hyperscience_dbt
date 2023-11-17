@@ -102,7 +102,7 @@ CASE WHEN customer_int = 'irc-prod' then 'IRC'
 from "RAW"."USAGE_REPORTING"."SAAS_PROD"
 where customer_int in ('irc-prod','promomash-prod','transflo-prod','benefitmall-prod','kovack-prod','missionunderwriters-prod','cifinancial-prod',
                        'lossexpress-prod','vault-prod','resound-prod','navix-prod','rtstransflo-prod','momentum','carmax-prod','outgo-prod','cleanharbors-prod',
-                       'harborcompliance-prod','sentryfunding-prod','gac-prod','sahomeloans-prod')
+                       'harborcompliance-prod','sentryfunding-prod','gac-prod','sahomeloans-prod','stryker-prod')
 order by customer, period_start asc
 ),
 
@@ -179,7 +179,8 @@ CUSTOM_SUPERVISION_TRANSCRIBED_FIELDS_COUNT as number_of_fields_extracted_in_cus
 split_part(report_id,'_',0) as customer_int,
 CASE WHEN customer_int = 'irc-prod' then 'IRC'
      WHEN customer_int = 'promomash-prod' then 'Promomash'
-     WHEN customer_int = 'transflo-prod' then 'Transflo'
+     WHEN customer_int in ('transflo-prod') then 'Transflo prod'
+     when customer_int in ('rtstransflo-prod') then 'RTS Transflo prod'
      WHEN customer_int = 'benefitmall-prod' then 'Benefit Mall'
      WHEN customer_int = 'kovack-prod' then 'Kovack'
      ELSE 'non-prod' end as customer
@@ -260,7 +261,8 @@ CUSTOM_SUPERVISION_TRANSCRIBED_FIELDS_COUNT as number_of_fields_extracted_in_cus
 split_part(report_id,'_',0) as customer_int,
 CASE WHEN customer_int = 'irc-prod' then 'IRC'
      WHEN customer_int = 'promomash-prod' then 'Promomash'
-     WHEN customer_int = 'transflo-prod' then 'Transflo'
+     WHEN customer_int in ('transflo-prod') then 'Transflo prod'
+     when customer_int in ('rtstransflo-prod') then 'RTS Transflo prod'
      WHEN customer_int = 'benefitmall-prod' then 'BenefitMall'
      WHEN customer_int = 'kovack-prod' then 'Kovack'
      ELSE 'non-prod' end as customer

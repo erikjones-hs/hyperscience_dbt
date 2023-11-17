@@ -204,7 +204,10 @@ zeroifnull(rd.healthcare_benefits) as healthcare_benefits,
 zeroifnull(rd.referral_bonus) as referral_bonus,	
 zeroifnull(rd.commissions) as commissions,
 zeroifnull(rd.guarantees) as guarantees,
-rd.cash_balance
+rd.cash_balance,
+rd.ndr_annualized,
+rd.gdr_annualized,
+rd.logo_retention_annualized
 from raw_data as rd
 left join fy_dates as fd on (rd.dte = fd.dte)
 order by dte asc
