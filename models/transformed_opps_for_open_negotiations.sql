@@ -21,7 +21,6 @@ where opp_id in (
 '0061R00001A4rFVQAZ', /* End date adjustment because of open negotations. Legal and General 253k */
 '0061R00001BAun6QAD', /* End date adjustment because of open negotiations. Vailt Health 69.6k */
 '0061R000010seZeQAI', /* End date adjustment because of open negotiations. Corner Banca 200k */
-'0061R00001A4rKQQAZ'  /* End date adjustment because of open negotiatios. Kovack 35k */
 )
 )
 
