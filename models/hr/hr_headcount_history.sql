@@ -18,6 +18,7 @@ from "FIVETRAN_DATABASE"."BAMBOOHR_FIVETRAN"."EMPLOYEE"
 where to_date(hire_dte) <= to_date(current_date()) 
 and employment_status in ('Full-Time', 'Terminated')
 and last_name not ilike '%(TEST EMPLOYEE)%'
+and _fivetran_deleted = FALSE
 and employee_id not in (
 777,
 742,
