@@ -122,6 +122,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '006Dm000004A3YbIAK' then to_date('2023-11-15') /* End date adjustment because combined with another opp. Caada Life 40k */
      when opp_id = '0061R00001A4rKQQAZ' then to_date('2023-11-15') /* End date adjustment because wrong in SFDC. Kovack 35k */
      when opp_id = '0061R00001A4pwxQAB' then to_date('2023-11-15') /* End date adjustment because wrong in SFDC. Accerta 81.9k */
+     when opp_id = '0061R00001BAufzQAD' then to_date('2023-09-15') /* End date adjustment because it is wrong in SFDC. Tech Mahindra 125k */ 
      when opp_id = '0061R00000yGqH3QAK' then to_date('2024-02-15') /* End date adjustment because of extension. SSA 2.3M */
      when opp_id = '0061R00001A5k8bQAB' then to_date('2024-02-15') /* End date adjustment because of extension. SSA 1.45M */
      when opp_id = '0061R000014wNrtQAE' then to_date('2024-02-15') /* End date adjustment because of extension. SSA 1.93M */
@@ -131,8 +132,8 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R00000yFonNQAS' then to_date('2024-01-15') /* ENd date adjustment because of open negotiations. Metasource $0 */
      when opp_id = '0061R000014vUKMQA2' then to_date('2024-01-15') /* End date adjustment because of extension. USAF 115k */  
      when opp_id = '0061R000014yeOrQAI' then to_date('2024-01-15') /* End date adjustment because of extension. Mathematica 100k */   
-     when opp_id = '0061R00001A4rFVQAZ' then to_date('2024-01-15') /* End date adjustment because of open negotations. Legal and General 253k */
-     when opp_id = '0061R00001BAun6QAD' then to_date('2024-01-15') /* End date adjustment because of open negotiations. Vailt Health 69.6k */
+ --    when opp_id = '0061R00001A4rFVQAZ' then to_date('2024-01-15') /* End date adjustment because of open negotations. Legal and General 253k */
+ --    when opp_id = '0061R00001BAun6QAD' then to_date('2024-01-15') /* End date adjustment because of open negotiations. Vailt Health 69.6k */
      when opp_id = '0061R000010seZeQAI' then to_date('2024-01-15') /* End date adjustment because of open negotiations. Corner Banca 200k */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
