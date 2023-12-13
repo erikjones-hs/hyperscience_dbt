@@ -97,7 +97,7 @@ joi.opp_arr,
 joi.opp_net_new_arr,
 CASE WHEN opp_id = '0063600000X36zWAAR' and to_date(joi.date_month) <= '2019-06-01' then 128000 
      WHEN opp_id = '0063600000dsPsjAAE' and to_date(joi.date_month) <= '2019-07-01' then 560000 
-     when opp_id = '0061R00000r6r1iQAA' and to_date(joi.date_month) >= '2021-11-01' then 0.00000000001
+ --    when opp_id = '0061R00000r6r1iQAA' and to_date(joi.date_month) >= '2021-11-01' then 0.00000000001
      when opp_id = '0061R00000uL8ylQAC' and to_date(joi.date_month) >= '2021-11-01' then 0.00000000001
      when opp_id = '0061R00000yFonNQAS' and to_date(joi.date_month) >= '2022-05-01' then 0.00000000001
      when opp_id = '0061R00000zAI8KQAW' and to_date(joi.date_month) >= '2022-05-01' then 0.00000000001
