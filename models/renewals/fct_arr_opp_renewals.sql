@@ -18,9 +18,19 @@ fao.opp_name,
 to_timestamp(fao.start_dte_month) as start_dte_month,
 to_timestamp(fao.start_dte) as start_dte,
 to_timestamp(fao.end_dte_month) as end_dte_month,
-to_timestamp(date_trunc('month',aoh.end_dte_raw)) as end_dte_raw_month,
+CASE WHEN aoh.opp_id = '0061R00001A4pwYQAR' then to_timestamp('2023-10-01') 
+     WHEN aoh.opp_id = '0061R00001A4pwsQAB' then to_timestamp('2023-10-01')
+     when aoh.opp_id = '0061R00001A4pwxQAB' then to_timestamp('2023-11-01')
+     when aoh.opp_id = '0061R00001A4rKQQAZ' then to_timestamp('2023-11-01')
+     when aoh.opp_id = '006Dm000002dhpbIAA' then to_timestamp('2024-02-01')
+     else to_timestamp(date_trunc('month',aoh.end_dte_raw)) end as end_dte_raw_month,
 to_timestamp(fao.end_dte) as end_dte,
-to_timestamp(aoh.end_dte_raw) as end_dte_raw,
+CASE WHEN aoh.opp_id = '0061R00001A4pwYQAR' then to_timestamp('2023-10-29') 
+     WHEN aoh.opp_id = '0061R00001A4pwsQAB' then to_timestamp('2023-10-29')
+     when aoh.opp_id = '0061R00001A4pwxQAB' then to_timestamp('2023-11-29')
+     when aoh.opp_id = '0061R00001A4rKQQAZ' then to_timestamp('2023-11-29')
+     when aoh.opp_id = '006Dm000002dhpbIAA' then to_timestamp('2024-02-15')
+     else to_timestamp(aoh.end_dte_raw) end as end_dte_raw,
 fao.mrr,
 fao.mrr_change,
 CASE WHEN fao.mrr = 0 then fao.mrr_change else fao.mrr end as mrr_reporting,
@@ -58,6 +68,8 @@ end_dtes_unadjusted as (
 select 
 opp_id,
 CASE WHEN opp_id in (select * from transformed_opp_id) then end_dte_raw 
+     WHEN opp_id in (select * from transformed_opp_id) AND (end_dte_raw = last_day(end_dte_raw_month) and start_dte = start_dte_month) then dateadd(day,2,end_dte_raw) 
+     WHEN opp_id not in (select * from transformed_opp_id) AND (end_dte = last_day(end_dte_month) and start_dte = start_dte_month) then dateadd(day,2,end_dte)  
      else end_dte end as end_dte_raw,
 CASE WHEN opp_id in (select * from transformed_opp_id) AND (end_dte_raw = last_day(end_dte_raw_month) and start_dte = start_dte_month) then dateadd(month,1,end_dte_raw_month)  
      WHEN opp_id in (select * from transformed_opp_id) then end_dte_raw_month

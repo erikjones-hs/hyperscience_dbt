@@ -124,6 +124,58 @@ UNION
 select * from {{ref('arr_opp_history_57')}}
 UNION
 select * from {{ref('arr_opp_history_58')}}
+UNION
+select * from {{ref('arr_opp_history_59')}}
+UNION
+select * from {{ref('arr_opp_history_60')}}
+UNION
+select * from {{ref('arr_opp_history_61')}}
+UNION
+select * from {{ref('arr_opp_history_62')}}
+UNION
+select * from {{ref('arr_opp_history_63')}}
+UNION
+select * from {{ref('arr_opp_history_64')}}
+UNION
+select * from {{ref('arr_opp_history_65')}}
+UNION
+select * from {{ref('arr_opp_history_66')}}
+UNION
+select * from {{ref('arr_opp_history_67')}}
+UNION
+select * from {{ref('arr_opp_history_68')}}
+UNION
+select * from {{ref('arr_opp_history_69')}}
+UNION
+select * from {{ref('arr_opp_history_70')}}
+UNION
+select * from {{ref('arr_opp_history_71')}}
+UNION
+select * from {{ref('arr_opp_history_72')}}
+UNION
+select * from {{ref('arr_opp_history_73')}}
+UNION
+select * from {{ref('arr_opp_history_74')}}
+UNION
+select * from {{ref('arr_opp_history_75')}}
+UNION
+select * from {{ref('arr_opp_history_76')}}
+UNION
+select * from {{ref('arr_opp_history_77')}}
+UNION
+select * from {{ref('arr_opp_history_78')}}
+UNION
+select * from {{ref('arr_opp_history_79')}}
+UNION
+select * from {{ref('arr_opp_history_80')}}
+UNION
+select * from {{ref('arr_opp_history_81')}}
+UNION
+select * from {{ref('arr_opp_history_82')}}
+UNION
+select * from {{ref('arr_opp_history_83')}}
+UNION
+select * from {{ref('arr_opp_history_84')}}
 order by account_id, start_dte_raw asc
 )
 

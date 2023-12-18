@@ -123,6 +123,7 @@ select
 u.id as user_id,
 concat(u.first_name,' ',u.last_name) as opportunity_owner,
 u.username,
+u.department,
 ur.rollup_description as owner_description
 from "FIVETRAN_DATABASE"."SALESFORCE"."USER" as u
 left join "FIVETRAN_DATABASE"."SALESFORCE"."USER_ROLE" as ur on u.user_role_id = ur.id 
@@ -135,6 +136,7 @@ revenue_type_c,
 total_price as opp_services_nrr
 from "FIVETRAN_DATABASE"."SALESFORCE"."OPPORTUNITY_LINE_ITEM"
 where revenue_type_c = 'Services NRR'
+and is_deleted = FALSE 
 order by opportunity_id
 ),
 

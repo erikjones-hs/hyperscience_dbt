@@ -85,13 +85,22 @@ CASE WHEN customer_int = 'irc-prod' then 'IRC'
      WHEN customer_int = 'missionunderwriters-prod' then 'Mission Underwriters'
      WHEN customer_int = 'cifinancial-prod' then 'CI Financial'
      when customer_int = 'lossexpress-prod' then 'Loss Express'
-     when customer_int = 'vault-prod' then 'Valut'
+     when customer_int = 'vault-prod' then 'Vault'
      when customer_int = 'resound-prod' then 'ReSound'
      when customer_int = 'navix-prod' then 'Navix'
+     when customer_int = 'momentum' then 'Momentum SaaS'
+     when customer_int = 'carmax-prod' then 'CarMax'
+     when customer_int = 'outgo-prod' then 'OutGo'
+     when customer_int = 'cleanharbors-prod' then 'Clean Harbors' 
+     when customer_int = 'harborcompliance-prod' then 'Harbor Compliance'
+     when customer_int = 'sentryfunding-prod' then 'Sentry Funding'
+     when customer_int = 'gac-prod' then 'Gulf Agency Company'
+     when customer_int = 'sahomeloans-prod' then 'SA Home Loans'
      ELSE 'non-prod' end as customer 
 from "RAW"."USAGE_REPORTING"."SAAS_PROD"
 where customer_int in ('irc-prod','promomash-prod','transflo-prod','benefitmall-prod','kovack-prod','missionunderwriters-prod','cifinancial-prod',
-                       'lossexpress-prod','vault-prod','resound-prod','navix-prod','rtstransflo-prod')
+                       'lossexpress-prod','vault-prod','resound-prod','navix-prod','rtstransflo-prod','momentum','carmax-prod','outgo-prod','cleanharbors-prod',
+                       'harborcompliance-prod','sentryfunding-prod','gac-prod','sahomeloans-prod')
 order by customer, period_start asc
 ),
 

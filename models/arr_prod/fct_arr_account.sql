@@ -62,26 +62,26 @@ order by aaa.account_id, aaa.date_month asc
 
 agg_account_arr as (
 select distinct
-date_month,
-account_id,
-account_name,
-mrr_acct,
-mrr_change_acct,
-mrr_reporting_acct,
-is_active_acct,
-first_active_month,
-last_active_month,
-is_first_month_acct,
-is_last_month_acct,
-customer_category,
-revenue_category,
-months_since_start,
-fy_year,
-fy_qtr_year,
-qtr_end_dte,
-row_number() over (partition by account_id, fy_year order by date_month desc) as fy_row_num,
-row_number() over (partition by account_id, fy_qtr_year order by date_month desc) as fq_row_num  
-from agg_account_arr_int2
+aaa.date_month,
+aaa.account_id,
+aaa.account_name,
+aaa.mrr_acct,
+aaa.mrr_change_acct,
+aaa.mrr_reporting_acct,
+aaa.is_active_acct,
+aaa.first_active_month,
+aaa.last_active_month,
+aaa.is_first_month_acct,
+aaa.is_last_month_acct,
+aaa.customer_category,
+aaa.revenue_category,
+aaa.months_since_start,
+aaa.fy_year,
+aaa.fy_qtr_year,
+aaa.qtr_end_dte,
+row_number() over (partition by aaa.account_id, aaa.fy_year order by aaa.date_month desc) as fy_row_num,
+row_number() over (partition by aaa.account_id, aaa.fy_qtr_year order by aaa.date_month desc) as fq_row_num  
+from agg_account_arr_int2 as aaa
 order by account_id, date_month asc
 )
 

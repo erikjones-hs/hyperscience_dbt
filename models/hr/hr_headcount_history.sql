@@ -10,7 +10,7 @@ with raw_data as (
 select distinct 
 id as employee_id,
 to_date(hire_date) as hire_dte,
-CASE WHEN termination_date IS NULL then dateadd(days,30,to_date(current_date()))
+CASE WHEN termination_date IS NULL then dateadd(days,31,to_date(current_date()))
      ELSE to_date(termination_date) end as end_dte,
 date_trunc('month',to_date(hire_dte)) as hire_dte_month,
 date_trunc('month',to_date(end_dte)) as end_dte_month
@@ -18,6 +18,21 @@ from "FIVETRAN_DATABASE"."BAMBOOHR_FIVETRAN"."EMPLOYEE"
 where to_date(hire_dte) <= to_date(current_date()) 
 and employment_status in ('Full-Time', 'Terminated')
 and last_name not ilike '%(TEST EMPLOYEE)%'
+and employee_id not in (
+777,
+742,
+328,
+716,
+285,
+791,
+836,
+749,
+281,
+774,
+818,
+660,
+790    
+)
 ),
 
 months as (

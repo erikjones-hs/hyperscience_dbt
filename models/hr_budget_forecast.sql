@@ -19,9 +19,10 @@ to_number(corp_dev_budget) as corp_dev,
 to_number(engineering_budget) as engineering,
 to_number(it_sec_budget) as it_sec,
 to_number(finance_budget) as finance,
-to_number(sales_budget) as sales,
+to_number(sales_budget) as sales_og,
 to_number(legal_budget) as legal,
-to_number((ml + product + engineering + it_sec)) as tech
+to_number((ml + product + engineering + it_sec)) as tech,
+to_number((sales_og + corp_dev)) as sales
 from "FIVETRAN_DATABASE"."GOOGLE_SHEETS"."FY_22_FORECAST_FINANCE_INPUTS"
 order by dte asc
 ),
@@ -37,11 +38,12 @@ to_number(legal_forecast) as legal,
 to_number(people_forecast) as people,
 to_number(marketing_forecast) as marketing,
 to_number(operations_forecast) as operations,
-to_number(sales_forecast) as sales,
+to_number(sales_forecast) as sales_og,
 to_number(corp_dev_forecast) as corp_dev,
 to_number(engineering_forecast) as engineering,
 to_number(it_sec_forecast) as it_sec,
-to_number((ml + product + engineering + it_sec)) as tech
+to_number((ml + product + engineering + it_sec)) as tech,
+to_number((sales_og + corp_dev)) as sales
 from "FIVETRAN_DATABASE"."GOOGLE_SHEETS"."FY_22_FORECAST_FINANCE_INPUTS"
 order by dte asc
 ),
@@ -50,7 +52,7 @@ budget_unpivot_int as (
 select *,
 'budget' as category
 from headcount_budget
-unpivot(headcount for department in (product, finance, ml, cs, legal, people, marketing, operations, sales, corp_dev, engineering, it_sec, tech))
+unpivot(headcount for department in (product, finance, ml, cs, legal, people, marketing, operations, sales, engineering, it_sec, tech))
 order by dte asc
 ),
 
@@ -68,7 +70,6 @@ CASE WHEN department = 'ENGINEERING' then 'Engineering'
      WHEN department = 'MARKETING' then 'Marketing'
      WHEN department = 'OPERATIONS' then 'Operations'
      WHEN department = 'SALES' then 'Sales'
-     WHEN department = 'CORP_DEV' then 'Corp. Dev'
      WHEN department = 'LEGAL' then 'Legal'
      ELSE 'Other' end as department,
 category,
@@ -82,7 +83,7 @@ forecast_unpivot_int as (
 select *,
 'forecast' as category
 from headcount_forecast
-unpivot(headcount for department in (product, finance, ml, cs, legal, people, marketing, operations, sales, corp_dev, engineering, it_sec, tech))
+unpivot(headcount for department in (product, finance, ml, cs, legal, people, marketing, operations, sales, engineering, it_sec, tech))
 order by dte asc
 ),
 
@@ -100,7 +101,6 @@ CASE WHEN department = 'ENGINEERING' then 'Engineering'
      WHEN department = 'MARKETING' then 'Marketing'
      WHEN department = 'OPERATIONS' then 'Operations'
      WHEN department = 'SALES' then 'Sales'
-     WHEN department = 'CORP_DEV' then 'Corp. Dev'
      WHEN department = 'LEGAL' then 'Legal'
      ELSE 'Other' end as department,
 category,
