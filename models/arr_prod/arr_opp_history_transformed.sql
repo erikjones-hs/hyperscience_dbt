@@ -130,12 +130,11 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R00000yFDbcQAG' then to_date('2023-11-15') /* End date adjustment because it is replaced by an upsell. Irish Life 138.8k */
      when opp_id = '0061R00000uL8ylQAC' then to_date('2024-01-15') /* End date adjustment because of open negitotaions. PMP $0 */
      when opp_id = '0061R00000yFonNQAS' then to_date('2024-01-15') /* ENd date adjustment because of open negotiations. Metasource $0 */
-     when opp_id = '0061R000014vUKMQA2' then to_date('2024-01-15') /* End date adjustment because of extension. USAF 115k */  
+     when opp_id = '0061R000014vUKMQA2' then to_date('2023-12-15') /* End date adjustment because of extension. USAF 115k */  
      when opp_id = '0061R000014yeOrQAI' then to_date('2024-01-15') /* End date adjustment because of extension. Mathematica 100k */   
      when opp_id = '0061R00001A4rFVQAZ' then to_date('2023-12-15') /* End date adjustment because of open negotations. Legal and General 253k */
- --    when opp_id = '0061R00001BAun6QAD' then to_date('2024-01-15') /* End date adjustment because of open negotiations. Vailt Health 69.6k */
      when opp_id = '0061R00000r6r1iQAA' then to_date('2023-02-15') /* End date adjustment because it is wrong in SFDC. CRL 375k */
-     when opp_id = '0061R000010seZeQAI' then to_date('2024-01-15') /* End date adjustment because of open negotiations. Corner Banca 200k */
+    -- when opp_id = '0061R000010seZeQAI' then to_date('2024-01-15') /* End date adjustment because of open negotiations. Corner Banca 200k */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
