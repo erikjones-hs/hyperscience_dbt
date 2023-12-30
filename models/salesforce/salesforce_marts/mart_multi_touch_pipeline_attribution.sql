@@ -128,6 +128,8 @@ WITH
       id,
       opp_id,
       opp_arr,
+      opp_name,
+      opp_owner_name,
       b.created_date AS engagement_date,
       opp_created_dte,
       CASE
@@ -180,6 +182,8 @@ WITH
       id,
       opp_id,
       opp_arr,
+      opp_name,
+      opp_owner_name,
       engagement_date,
       opp_created_dte,
       fy_qtr_year AS opp_created_fy_qtr,
