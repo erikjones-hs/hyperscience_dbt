@@ -129,9 +129,9 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R000014wNrtQAE' then to_date('2024-03-15') /* End date adjustment because of extension. SSA 1.93M */
      when opp_id = '0061R00000uL8ylQAC' then to_date('2024-03-15') /* End date adjustment because of open negitotaions. PMP $0 */
      when opp_id = '0061R00000yFonNQAS' then to_date('2024-03-15') /* ENd date adjustment because of open negotiations. Metasource $0 */
-     when opp_id = '0061R00001A4rIoQAJ' then to_date('2024-03-15') /* End date adjustment because of open negotiations. Protective Life 120k */
+ --    when opp_id = '0061R00001A4rIoQAJ' then to_date('2024-03-15') /* End date adjustment because of open negotiations. Protective Life 120k */
      when opp_id = '0061R00000yEx04QAC' then to_date('2024-03-15') /* End date adjustment because of open negotiations. HMRC / NICE 400k */
-     when opp_id = '0061R00001A4rFfQAJ' then to_date('2024-03-15') /* End date adjustment because of open negotiations. Mercury Insuarance 225k */
+ --    when opp_id = '0061R00001A4rFfQAJ' then to_date('2024-03-15') /* End date adjustment because of open negotiations. Mercury Insuarance 225k */
      when opp_id = '0061R000010Q9dvQAC' then to_date('2024-03-15') /* End date adjustment because of open negotiations. TTC 142.5k */
      when opp_id = '006Dm000002dhpbIAA' then to_date('2024-03-15') /* End date adjustment because of open negotiations. CRL 100k */
      ELSE end_dte_raw end as end_dte,
