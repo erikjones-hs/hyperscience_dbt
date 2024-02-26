@@ -404,10 +404,10 @@ last_active_month,
 is_first_month,
 is_last_month,
 account_mrr as mrr_acct,
-mrr_change_acct,
+CASE WHEN account_id = '0011R00002GUq1HQAT' and to_date(date_month) = '2023-12-01' then 245000 else mrr_change_acct end as mrr_change_acct,
 CASE WHEN mrr_acct = 0 then mrr_change_acct else mrr_acct end as mrr_reporting_acct,
 is_active_acct,
-first_active_month_acct,
+CASE WHEN account_id = '0011R00002GUq1HQAT' then to_date('2023-12-01') else first_active_month_acct end as first_active_month_acct,
 last_active_month_acct,
 is_first_month_acct,
 is_last_month_acct,
@@ -422,12 +422,14 @@ CASE WHEN opp_id = '0061R000010t71kQAA' and to_date(date_month) = '2022-01-01' t
      when opp_id = '0061R000013gijQQAQ' and to_date(date_month) = '2022-11-01' then 'de-book' /* MindMap */
      when opp_id = '0061R000016mzrWQAQ' and to_date(date_month) = '2022-11-01' then 'de-book' /* FeatSystems */
      when opp_id = '0061R0000137scfQAA' and to_date(date_month) = '2022-11-01' then 'de-book' /* Cogent */
+     when opp_id = '006Dm000005CfdRIAS' and to_date(date_month) = '2023-12-01' then 'new' /* DISA */
      else customer_category end as customer_category,
 CASE WHEN opp_id = '0061R000010t71kQAA' and to_date(date_month) = '2022-01-01' then 'de-book' /* Sience SAS */
      when opp_id = '0061R000014vnNlQAI' and to_date(date_month) = '2023-01-01' then 'de-book' /* i3 Systems */
      when opp_id = '0061R000013gijQQAQ' and to_date(date_month) = '2022-11-01' then 'de-book' /* MindMap */
      when opp_id = '0061R000016mzrWQAQ' and to_date(date_month) = '2022-11-01' then 'de-book' /* FeatSystems */
      when opp_id = '0061R0000137scfQAA' and to_date(date_month) = '2022-11-01' then 'de-book' /* Cogent */
+     when opp_id = '006Dm000005CfdRIAS' and to_date(date_month) = '2023-12-01' then 'new' /* DISA */
      else revenue_category end as revenue_category
 from change_table
 order by account_id, start_dte_month asc, date_month asc
