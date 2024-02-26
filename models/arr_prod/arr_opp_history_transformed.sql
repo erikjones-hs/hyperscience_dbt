@@ -31,6 +31,7 @@ CASE WHEN account_name = 'TD Ameritrade' then 'Charles Schwab'
      when account_name = 'ALMAC.' then 'ALMAC'
      when account_name = 'Mutual of Omaha' then 'Mutual of Omaha Insurance Company'
      when account_name = 'AIG (American International Group, Inc)' then 'Corebridge Financial'
+     when account_name = 'Clinical Reference Laboratory' then 'Clinical Reference Laboratory, Inc.'
      else account_name end as account_name,
 opp_id,
 opp_name,
@@ -93,7 +94,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R000014vnNlQAI' then to_date('2023-01-15') /* End Date adjustment because they are not paying. I3systems 120k */
      when opp_id = '0061R000013f0rkQAA' then to_date('2023-02-15') /* End date adjustment because it is wrong in SFDC. State of CO 214k */
      when opp_id = '0061R000014vAD7QAM' then to_date('2023-02-15') /* End date adjustment because it is wrong in SFDC. Mercury Insurance 225k */
-     when opp_id = '0061R000014uXZrQAM' then to_date('2023-01-15') /* End date adjustment because it is wrong in SFDC. MPower 99k */
+     when opp_id = '0061R000014uXZrQAM' then to_date('2024-01-15') /* End date adjustment because it is wrong in SFDC. MPower 99k */
      when opp_id = '0061R00001A4rGJQAZ' then to_date('2025-03-09') /* End date adjustment because it is wrong in SFDC. McKinsey 30k */
      when opp_id = '0061R000014wHDFQA2' then to_date('2023-02-15') /* End date adjustment because it is wrong in SFDC. Mckinsey 150k */
      when opp_id = '0061R000013edS8QAI' then to_date('2023-04-15') /* End date adjustment because it is wrong in SFDC. Amex 275k */
@@ -125,17 +126,17 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R00001A4rFVQAZ' then to_date('2023-12-15') /* End date adjustment because of extension. Legal and General 253k */
      when opp_id = '0061R00001A4rFfQAJ' then to_date('2024-02-15') /* End date adjustment because it is wrong in SFDC. Mercury Insuarance 225k */
      when opp_id = '0061R00001A4rIoQAJ' then to_date('2024-01-15') /* End date adjustment because it is wrong in SFDC. Protective Life 120k */
-     when opp_id = '0061R000014wKFCQA2' then to_date('2024-02-15') /* End date adjustment because we learned about churn. Teknei 50k */
+     when opp_id = '0061R000014wKFCQA2' then to_date('2023-05-15') /* End date adjustment because we learned about churn. Teknei 50k */
      when opp_id = '0061R00001BAug4QAD' then to_date('2024-02-15') /* End date adjustment because we learned about churn. Teknei 50k */
+     when opp_id = '006Dm000002dhpbIAA' then to_date('2024-02-15') /* End date adjustment because it is wrong in SFDC. CRL 100k */
      when opp_id = '0061R000010sXv7QAE' then to_date('2024-01-01') /* End date adjustment because it is wrong in SFDC */
+     when opp_id = '0061R000014wcRjQAI' then to_date('2024-02-15') /* End date adjustment because we learned about churn. PLUS PLatform 30k */
      when opp_id = '0061R00000yGqH3QAK' then to_date('2024-03-15') /* End date adjustment because of extension. SSA 2.3M */
      when opp_id = '0061R00001A5k8bQAB' then to_date('2024-03-15') /* End date adjustment because of extension. SSA 1.45M */
      when opp_id = '0061R000014wNrtQAE' then to_date('2024-03-15') /* End date adjustment because of extension. SSA 1.93M */
      when opp_id = '0061R00000uL8ylQAC' then to_date('2024-03-15') /* End date adjustment because of open negitotaions. PMP $0 */
      when opp_id = '0061R00000yFonNQAS' then to_date('2024-03-15') /* ENd date adjustment because of open negotiations. Metasource $0 */
-     when opp_id = '0061R00000yEx04QAC' then to_date('2024-03-15') /* End date adjustment because of open negotiations. HMRC / NICE 400k */
      when opp_id = '0061R000010Q9dvQAC' then to_date('2024-03-15') /* End date adjustment because of open negotiations. TTC 142.5k */
-     when opp_id = '006Dm000002dhpbIAA' then to_date('2024-03-15') /* End date adjustment because of open negotiations. CRL 100k */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
@@ -189,6 +190,8 @@ CASE WHEN opp_id = '0063600000M73LuAAJ' then 200000
      when opp_id = '0061R000014xeQwQAI' then 13269
      when opp_id = '0061R00001A6F76QAF' then 15000
      when opp_id = '0061R00001BAPkAQAX' then 330000
+     when opp_id = '0061R00000oERITQA4' then 520000
+     when opp_id = '0061R000010tCbNQAU' then 520000
      ELSE opp_arr end as opp_arr,
 CASE WHEN opp_id = '0061R0000135gO1QAI' then 5040 
      WHEN opp_id = '0061R000014xeQwQAI' then 13269
