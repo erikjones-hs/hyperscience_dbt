@@ -131,12 +131,14 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '006Dm000002dhpbIAA' then to_date('2024-02-15') /* End date adjustment because it is wrong in SFDC. CRL 100k */
      when opp_id = '0061R000010sXv7QAE' then to_date('2024-01-01') /* End date adjustment because it is wrong in SFDC */
      when opp_id = '0061R000014wcRjQAI' then to_date('2024-02-15') /* End date adjustment because we learned about churn. PLUS PLatform 30k */
-     when opp_id = '0061R00000yGqH3QAK' then to_date('2024-03-15') /* End date adjustment because of extension. SSA 2.3M */
-     when opp_id = '0061R00001A5k8bQAB' then to_date('2024-03-15') /* End date adjustment because of extension. SSA 1.45M */
-     when opp_id = '0061R000014wNrtQAE' then to_date('2024-03-15') /* End date adjustment because of extension. SSA 1.93M */
-     when opp_id = '0061R00000uL8ylQAC' then to_date('2024-03-15') /* End date adjustment because of open negitotaions. PMP $0 */
-     when opp_id = '0061R00000yFonNQAS' then to_date('2024-03-15') /* ENd date adjustment because of open negotiations. Metasource $0 */
-     when opp_id = '0061R000010Q9dvQAC' then to_date('2024-03-15') /* End date adjustment because of open negotiations. TTC 142.5k */
+     when opp_id = '0061R00000yGqH3QAK' then to_date('2024-04-15') /* End date adjustment because of extension. SSA 2.3M */
+     when opp_id = '0061R00001A5k8bQAB' then to_date('2024-04-15') /* End date adjustment because of extension. SSA 1.45M */
+     when opp_id = '0061R000014wNrtQAE' then to_date('2024-04-15') /* End date adjustment because of extension. SSA 1.93M */
+     when opp_id = '0061R00000uL8ylQAC' then to_date('2024-04-15') /* End date adjustment because of open negitotaions. PMP $0 */
+     when opp_id = '0061R00000yFonNQAS' then to_date('2024-04-15') /* ENd date adjustment because of open negotiations. Metasource $0 */
+     when opp_id = '0061R000010Q9dvQAC' then to_date('2024-04-15') /* End date adjustment because of open negotiations. TTC 142.5k */
+     when opp_id = '0061R000019QwEZQA0' then to_date('2024-04-15') /* End date adjustment because of open negotiations. DLA 40k */
+     when opp_id = '0061R00000zD2sxQAC' then to_dtae('2024-04-15') /* End date adjustment because of open negotiations. Coduent 1.98M */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')

@@ -13,11 +13,13 @@ from {{ref('arr_opp_history')}}
 where opp_id in (
 '0061R00000uL8ylQAC', /* End date adjustment because of open negitotaions. PMP $0 */
 '0061R00000yFonNQAS', /* ENd date adjustment because of open negotiations. Metasource $0 */   
-'0061R00001A4rIoQAJ', /* End date adjustment because of open negotiations. Protective Life 120k */
-'0061R00000yEx04QAC', /* End date adjustment because of open negotiations. HMRC / NICE 400k */
-'0061R00001A4rFfQAJ', /* End date adjustment because of open negotiations. Mercury Insuarance 225k */
 '0061R000010Q9dvQAC', /* End date adjustment because of open negotiations. TTC 142.5k */  
-'0061R00001A4rKQQAZ'  /* Kovack. Transformed for renewal date purposes only */
+'0061R00001A4rKQQAZ', /* Kovack. Transformed for renewal date purposes only */
+'0061R00000yGqH3QAK', /* End date adjustment because of extension. SSA 2.3M */
+'0061R00001A5k8bQAB', /* End date adjustment because of extension. SSA 1.45M */
+'0061R000014wNrtQAE', /* End date adjustment because of extension. SSA 1.93M */
+'0061R000019QwEZQA0', /* End date adjustment because of open negotiations. DLA 40k */
+'0061R00000zD2sxQAC'  /* End date adjustment because of open negotiations. Coduent 1.98M */
 )
 )
 
