@@ -110,6 +110,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' and to_date(joi.date_month) <= '2019-06-
      when opp_id = '0061R000014vUKMQA2' and to_date(joi.date_month) >= '2023-08-01' then 86250
      when opp_id = '0061R000014yeOrQAI' and to_date(joi.date_month) >= '2023-08-01' then 75000
      when opp_id = '0061R000014wNrtQAE' and to_date(joi.date_month) >= '2023-09-01' then 1106559
+     when opp_id = '0061R000010Q9dvQAC' and to_date(joi.date_month) >= '2024-03-01' then 45000
      ELSE joi.mrr end as mrr
 from joined_opportunity_int as joi 
 ),
@@ -416,12 +417,14 @@ CASE WHEN opp_id = '0061R000010t71kQAA' and to_date(date_month) = '2022-01-01' t
      when opp_id = '0061R000013gijQQAQ' and to_date(date_month) = '2022-11-01' then 'de-book' /* MindMap */
      when opp_id = '0061R000016mzrWQAQ' and to_date(date_month) = '2022-11-01' then 'de-book' /* FeatSystems */
      when opp_id = '0061R0000137scfQAA' and to_date(date_month) = '2022-11-01' then 'de-book' /* Cogent */
+     when opp_id = '0061R0000135QZ1QAM' and to_date(date_month) = '2024-03-01' then 'de-book' /* Umlaut */
      else opp_category end as opp_category,
 CASE WHEN opp_id = '0061R000010t71kQAA' and to_date(date_month) = '2022-01-01' then 'de-book' /* Sience SAS */
      when opp_id = '0061R000014vnNlQAI' and to_date(date_month) = '2023-01-01' then 'de-book' /* i3 Systems */
      when opp_id = '0061R000013gijQQAQ' and to_date(date_month) = '2022-11-01' then 'de-book' /* MindMap */
      when opp_id = '0061R000016mzrWQAQ' and to_date(date_month) = '2022-11-01' then 'de-book' /* FeatSystems */
      when opp_id = '0061R0000137scfQAA' and to_date(date_month) = '2022-11-01' then 'de-book' /* Cogent */
+     when opp_id = '0061R0000135QZ1QAM' and to_date(date_month) = '2024-03-01' then 'de-book' /* Umlaut */
      when opp_id = '006Dm000005CfdRIAS' and to_date(date_month) = '2023-12-01' then 'new' /* DISA */
      else customer_category end as customer_category,
 CASE WHEN opp_id = '0061R000010t71kQAA' and to_date(date_month) = '2022-01-01' then 'de-book' /* Sience SAS */
@@ -429,6 +432,7 @@ CASE WHEN opp_id = '0061R000010t71kQAA' and to_date(date_month) = '2022-01-01' t
      when opp_id = '0061R000013gijQQAQ' and to_date(date_month) = '2022-11-01' then 'de-book' /* MindMap */
      when opp_id = '0061R000016mzrWQAQ' and to_date(date_month) = '2022-11-01' then 'de-book' /* FeatSystems */
      when opp_id = '0061R0000137scfQAA' and to_date(date_month) = '2022-11-01' then 'de-book' /* Cogent */
+     when opp_id = '0061R0000135QZ1QAM' and to_date(date_month) = '2024-03-01' then 'de-book' /* Umlaut */
      when opp_id = '006Dm000005CfdRIAS' and to_date(date_month) = '2023-12-01' then 'new' /* DISA */
      else revenue_category end as revenue_category
 from change_table

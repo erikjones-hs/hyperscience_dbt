@@ -71,7 +71,6 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_Id = '0061R0000137tYlQAI' then to_date('2022-03-15') /* Customer churned. Close this out in Mar. per FP&A. Record Connect 239k */
      when opp_id = '0061R0000137kNxQAI' then to_date('2022-04-15') /* Customer Churned in April per FP&A. State of Texas 402.5k total. 17.5k opp */
      when opp_id = '0061R000010ujZ5QAI' then to_date('2022-06-15') /* Adjusting end date because of new contract with expansion that starts in June */
-     when opp_id = '0061R00000zD2sxQAC' then to_date('2024-03-15') /* End date adjustment because renewal date is incorrect in SFDC. Conduent 1.98M */
      when opp_id = '0061R0000137ijiQAA' then to_date('2022-06-29') /* End date adjustment due to negotiated end of contract. Johnson Law Group 25k */
      when opp_id = '0061R0000137jqkQAA' then to_date('2022-08-19') /* Adjusting end date because wrong in Salesforce. QAI 35k */
      when opp_id = '0061R00000zDCt9QAG' then to_date('2024-08-24') /* End date adjustment because renewal date was wrong in snapshot */
@@ -131,6 +130,9 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '006Dm000002dhpbIAA' then to_date('2024-02-15') /* End date adjustment because it is wrong in SFDC. CRL 100k */
      when opp_id = '0061R000010sXv7QAE' then to_date('2024-01-01') /* End date adjustment because it is wrong in SFDC */
      when opp_id = '0061R000014wcRjQAI' then to_date('2024-02-15') /* End date adjustment because we learned about churn. PLUS PLatform 30k */
+     when opp_id = '0061R000014xuWkQAI' then to_date('2024-02-15') /* End date adjustment because we learned about churn WNS AIS 400k */
+     when opp_id = '006Dm000004mRoiIAE' then to_date('2024-01-26') /* End date adjustment because we learned about churn MPower 126k */
+     when opp_id = '0061R0000135QZ1QAM' then to_date('2024-03-15') /* End date adjustment because of known churn Umlaut 500k */
      when opp_id = '0061R00000yGqH3QAK' then to_date('2024-04-15') /* End date adjustment because of extension. SSA 2.3M */
      when opp_id = '0061R00001A5k8bQAB' then to_date('2024-04-15') /* End date adjustment because of extension. SSA 1.45M */
      when opp_id = '0061R000014wNrtQAE' then to_date('2024-04-15') /* End date adjustment because of extension. SSA 1.93M */
@@ -138,7 +140,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R00000yFonNQAS' then to_date('2024-04-15') /* ENd date adjustment because of open negotiations. Metasource $0 */
      when opp_id = '0061R000010Q9dvQAC' then to_date('2024-04-15') /* End date adjustment because of open negotiations. TTC 142.5k */
      when opp_id = '0061R000019QwEZQA0' then to_date('2024-04-15') /* End date adjustment because of open negotiations. DLA 40k */
-     when opp_id = '0061R00000zD2sxQAC' then to_dtae('2024-04-15') /* End date adjustment because of open negotiations. Coduent 1.98M */
+     when opp_id = '0061R00000zD2sxQAC' then to_date('2024-04-15') /* End date adjustment because of open negotiations. Coduent 1.98M */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
