@@ -395,7 +395,7 @@ to_date(opp_renewal_dte) as end_dte_raw,
 to_date(opp_closed_won_dte) as closed_won_dte,
 opp_arr,
 opp_net_new_arr
-from "DEV"."ERIKJONES"."SALESFORCE_AGG_OPPORTUNITY_v93"
+from "DEV"."ERIKJONES"."SALESFORCE_AGG_OPPORTUNITY_v94"
 where (opp_stage_name = 'Closed Won')
 and opp_id not in (select opp_id from raw_data_hist)
 and opp_id not in (select opp_id from raw_data_inc)
