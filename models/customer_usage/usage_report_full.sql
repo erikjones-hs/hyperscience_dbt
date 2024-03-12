@@ -82,7 +82,7 @@ order by customer, date asc
 
 on_prem_usage as (
 select distinct
-CUSTOMER,
+trim(CUSTOMER) as CUSTOMER,
 DATE,
 NUMBER_OF_ARCHIVED_LAYOUTS,
 NUMBER_OF_ARCHIVED_RELEASES,
