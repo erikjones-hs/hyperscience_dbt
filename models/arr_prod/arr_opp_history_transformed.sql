@@ -21,6 +21,7 @@ CASE WHEN account_id = '0011R000026iP6rQAE' then '0013600001iRke2AAC'
      when account_id = '0011R00002UxEwKQAV' then '0011R00002pmZ7LQAU'
      when account_id = '00136000009czySAAQ' then '001Dm000002jMVdIAM'
      else account_id end as account_id,
+/*
 CASE WHEN account_id = '0011R00002d3lTCQAY' then '1-800 Contacts, Inc.'
      WHEN account_id = '0011R00002Et0aoQAB' then 'AccertaClaim Servicorp Inc.'
      WHEN account_id = '0011R00002dAkDPQA0' then 'Almac Group Limited'
@@ -114,7 +115,7 @@ CASE WHEN account_id = '0011R00002d3lTCQAY' then '1-800 Contacts, Inc.'
      WHEN account_id = '0011R00002jT99DQAS' then 'WRK Technologies Inc'
      WHEN account_id = '0011R00002UxEwKQAV' then 'Mathematica (USDA)'
      else account_name end as account_name,
-/*
+*/
 CASE WHEN account_name = 'TD Ameritrade' then 'Charles Schwab' 
      WHEN account_name = '8053580156557' then 'Department of Justice' 
      WHEN account_name = '8780895197581' then 'Mathematica, Inc.'
@@ -127,7 +128,6 @@ CASE WHEN account_name = 'TD Ameritrade' then 'Charles Schwab'
      when account_name = 'AIG (American International Group, Inc)' then 'Corebridge Financial'
      when account_name = 'Clinical Reference Laboratory' then 'Clinical Reference Laboratory, Inc.'
      else account_name end as account_name,
-*/
 opp_id,
 opp_name,
 opp_revenue_type,
