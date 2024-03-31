@@ -110,6 +110,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' and to_date(joi.date_month) <= '2019-06-
      when opp_id = '0061R000014vUKMQA2' and to_date(joi.date_month) >= '2023-08-01' then 86250
      when opp_id = '0061R000014yeOrQAI' and to_date(joi.date_month) >= '2023-08-01' then 75000
      when opp_id = '0061R000014wNrtQAE' and to_date(joi.date_month) >= '2023-09-01' then 1106559
+     when opp_id = '006Dm000002cWWgIAM' and to_date(joi.date_month) >= '2024-03-01' then 500000
      ELSE joi.mrr end as mrr
 from joined_opportunity_int as joi 
 ),
@@ -388,7 +389,99 @@ fct_arr as (
 select distinct
 to_timestamp(date_month) as date_month,
 account_id,
-account_name,
+CASE WHEN account_id = '0011R00002d3lTCQAY' then '1-800 Contacts, Inc.'
+     WHEN account_id = '0011R00002Et0aoQAB' then 'AccertaClaim Servicorp Inc.'
+     WHEN account_id = '0011R00002dAkDPQA0' then 'Almac Group Limited'
+     WHEN account_id = '00136000009d1dBAAQ' then 'American Express Travel Related Services Company, Inc'
+     WHEN account_id = '0011R00002HJhpnQAD' then 'ADP'
+     WHEN account_id = '00136000009czySAAQ' then 'SAFG Technologies, LLC'
+     WHEN account_id = '0011R00002Vw38YQAR' then 'Ascensus, LLC'
+     WHEN account_id = '0011R00002cy1rnQAA' then 'Australian Postal Corporation'
+     WHEN account_id = '0011R00002kpSt0QAE' then 'Aviso Wealth Inc.'
+     WHEN account_id = '0011R00002opqvYQAQ' then 'Bedag Informatik AG'
+     WHEN account_id = '0011R00002TV26YQAT' then 'Defense Logistics Agency'
+     WHEN account_id = '0011R00002Omxz1QAB' then 'California Department of Corrections and Rehabilitation'
+     WHEN account_id = '001Dm000002mNxCIAU' then 'Canada Life Assurance Europe PLC'
+     WHEN account_id = '0011R00002jWe8NQAS' then 'CarMax Enterprise Services, LLC'
+     WHEN account_id = '0011R00002YYeD0QAL' then 'Centerstone Insurance and Financial Services, dba BenefitMall'
+     WHEN account_id = '0011R00002HJhsuQAD' then 'CI Investments Inc.'
+     WHEN account_id = '0011R00002dAgw9QAC' then 'U.S. Department of Justice (MLARS)'
+     WHEN account_id = '0011R00002QQDJkQAP' then 'Clean Harbors Environmental Services, Inc.'
+     WHEN account_id = '001Dm00000D3B0yIAF' then 'CLFIS (U.K.) Limited'
+     WHEN account_id = '0011R00002FThvXQAT' then 'Clinical Reference Laboratory, Inc.'
+     WHEN account_id = '001Dm00000IEoClIAL' then 'Community Health Choice, Inc.'
+     WHEN account_id = '0011R00002g14yyQAA' then 'CompIQ Solutions, LLC'
+     WHEN account_id = '00136000016awtNAAQ' then 'Conduent Business Services, LLC'
+     WHEN account_id = '0011R00002d9f23QAA' then 'Cornèr Banca SA'
+     WHEN account_id = '0011R00002GUq1HQAT' then 'DISA Global Solutions, Inc.'
+     WHEN account_id = '0011R00002KmuU0QAJ' then 'DivvyMed, LLC'
+     WHEN account_id = '0013600001hyq3WAAQ' then 'Factory Mutual Insurance Company'
+     WHEN account_id = '0011R00002HJhu7QAD' then 'Federated Mutual Insurance Company'
+     WHEN account_id = '0013600000yBKDHAA4' then 'Fidelity Investments Institutional Operations Company, Inc.'
+     WHEN account_id = '0011R00002koPUlQAM' then 'First Hospital Laboratories, Inc. d/b/a Vault Health'
+     WHEN account_id = '0011R00002SBnnFQAT' then 'FirstRand Bank Limited'
+     WHEN account_id = '001Dm00000IEHiqIAH' then 'Frank, Rimerman + Co. LLP'
+     WHEN account_id = '0011R00002uOt21QAC' then 'FTI Touristik GmbH'
+     WHEN account_id = '0011R00002nGqFaQAK' then 'GAC Group (Holdings) Limited'
+     WHEN account_id = '0011R00002wuO0lQAE' then 'GN Hearing Care Corporation dba Resound Corp.'
+     WHEN account_id = '0011R00002HJhuXQAT' then 'Great American Insurance Group'
+     WHEN account_id = '001Dm000002kOjmIAE' then 'Harbor Business Compliance Corporation DBA Harbor Compliance'
+     WHEN account_id = '0011R00002SAtNvQAL' then 'His Majestys Revenue and Customs'
+     WHEN account_id = '0011R00002lTymSQAS' then 'Hyper Automation Corp'
+     WHEN account_id = '0011R00002TV26tQAD' then 'U.S. Navy Medicine Records Activity (NMRA)'
+     WHEN account_id = '001Pm000004hjIwIAI' then 'Institute for Defense Analyses'
+     WHEN account_id = '0011R00002HKzaCQAT' then 'U.S. Department of Veterans Affairs'
+     WHEN account_id = '00136000007aT6gAAE' then 'Equitable Life Insurance Company'
+     WHEN account_id = '0011R00002JZJ9qQAH' then 'Internal Revenue Service'
+     WHEN account_id = '0011R00002p4GKbQAM' then 'PepsiCo, Inc.'
+     WHEN account_id = '0011R00002SgH7RQAV' then 'Irish Life Health DAC'
+     WHEN account_id = '0011R00002kehsWQAQ' then 'Kovack Securities Inc.'
+     WHEN account_id = '0013600001hzFw5AAE' then 'Legal & General America, Inc.'
+     WHEN account_id = '001Dm000002iiMIIAY' then 'Liberty Source PBC'
+     WHEN account_id = '0011R00002e9Wc4QAE' then 'Mars Information Services, Inc.'
+     WHEN account_id = '0013600001lO951AAC' then 'McKinsey & Company, Inc.'
+     WHEN account_id = '0011R00002HJhwWQAT' then 'Mercury Insurance Services, LLC'
+     WHEN account_id = '0011R00002lIHOLQA4' then 'Mission Underwriting Managers, LLC'
+     WHEN account_id = '0011R00002fyeuBQAQ' then 'Missouri Department of Social Services - Family Support Division'
+     WHEN account_id = '0011R00002lY5ObQAK' then 'Missouri Employers Mutual'
+     WHEN account_id = '001Dm00000D0MSLIA3' then 'Momentum Metropolitan Holdings Limited'
+     WHEN account_id = '0011R00002TWu7lQAD' then 'Momentum Metropolitan Holdings Limited'
+     WHEN account_id = '0011R00002ZEz5KQAT' then 'Multi Service Technology Solutions, Inc. (dba TreviPay)'
+     WHEN account_id = '0013600001heOHEAA2' then 'Mutual of Omaha Insurance Company'
+     WHEN account_id = '0011R000025UXKPQA4' then 'Natera, Inc.'
+     WHEN account_id = '0011R00002TV26bQAD' then 'National Reconnaissance Office'
+     WHEN account_id = '0011R00002rWK4fQAG' then 'Navix'
+     WHEN account_id = '0011R00002a6MTDQA2' then 'OIP Robotics Inc.'
+     WHEN account_id = '0011R00002yrqC8QAI' then 'Outgo Inc'
+     WHEN account_id = '0011R00002ZF9J0QAL' then 'Pegasus TransTech, LLC dba Transflo'
+     WHEN account_id = '0013600001hyqB2AAI' then 'Principal Life Insurance Company'
+     WHEN account_id = '0013600001lPO5WAAW' then 'Protective Life Insurance Company'
+     WHEN account_id = '00136000015Fz7iAAC' then 'QBE Group Services Pty Ltd'
+     WHEN account_id = '0011R00002UwyqSQAR' then 'Quality Associates, Inc.'
+     WHEN account_id = '0013600001iRkeKAAS' then 'Raymond James & Associates, Inc.'
+     WHEN account_id = '0011R00002wDmCyQAK' then 'Philadelphia Insurance Companies'
+     WHEN account_id = '0011R00002fayJ8QAI' then 'SA Home Loans Proprietary Limited'
+     WHEN account_id = '0011R00002ShccsQAB' then 'Roche'
+     WHEN account_id = '001Dm000002iZHiIAM' then 'Sentry Portal Limited'
+     WHEN account_id = '0013600000QfzD9AAJ' then 'Social Security Administration'
+     WHEN account_id = '001Dm000002mQAlIAM' then 'Stryker European Operations Limited'
+     WHEN account_id = '0011R00002HJhqHQAT' then 'The Canada Life Assurance Company'
+     WHEN account_id = '0013600001iRke2AAC' then 'The Charles Schwab Corporation'
+     WHEN account_id = '0013600001iRwDFAA0' then 'The Guardian Life Insurance Company of America'
+     WHEN account_id = '0011R00002HJhuGQAT' then 'The Independent Order of Foresters'
+     WHEN account_id = '0011R00002SeeMfQAJ' then 'The State of Colorado'
+     WHEN account_id = '0011R00002fxpHYQAY' then 'The State of New Mexico'
+     WHEN account_id = '0011R00002N4pxuQAB' then 'The TEAM Companies, LLC'
+     WHEN account_id = '0011R00002Op5b2QAB' then 'U.S. Citizenship and Immigration Services'
+     WHEN account_id = '0013600001jp4MdAAI' then 'Unum Group'
+     WHEN account_id = '0011R00002JZJ9zQAH' then 'US Customs and Border Protection'
+     WHEN account_id = '0013600001ZDst2AAD' then 'Voya Services Company'
+     WHEN account_id = '0011R00002HJhqDQAT' then 'Westpac Banking Corporation'
+     WHEN account_id = '0011R00002faFsyQAE' then 'Universal Service Administrative Corporation'
+     WHEN account_id = '001Dm00000F7UHMIA3' then 'World Shipping, Inc.'
+     WHEN account_id = '0011R00002jT99DQAS' then 'WRK Technologies Inc'
+     WHEN account_id = '0011R00002pmZ7LQAU' then 'Mathematica (USDA)'
+     else account_name end as account_name,
 opp_id,
 opp_name,
 to_timestamp(start_dte_month) as start_dte_month,
@@ -404,10 +497,14 @@ last_active_month,
 is_first_month,
 is_last_month,
 account_mrr as mrr_acct,
-CASE WHEN account_id = '0011R00002GUq1HQAT' and to_date(date_month) = '2023-12-01' then 245000 else mrr_change_acct end as mrr_change_acct,
+CASE WHEN account_id = '0011R00002GUq1HQAT' and to_date(date_month) = '2023-12-01' then 245000 
+     WHEN account_id = '0011R00002YVbLNQA1' and to_date(date_month) = '2024-03-01' then 167686
+     else mrr_change_acct end as mrr_change_acct,
 CASE WHEN mrr_acct = 0 then mrr_change_acct else mrr_acct end as mrr_reporting_acct,
 is_active_acct,
-CASE WHEN account_id = '0011R00002GUq1HQAT' then to_date('2023-12-01') else first_active_month_acct end as first_active_month_acct,
+CASE WHEN account_id = '0011R00002GUq1HQAT' then to_date('2023-12-01') 
+     WHEN account_id = '0011R00002YVbLNQA1' then to_date('2024-03-01') 
+     else first_active_month_acct end as first_active_month_acct,
 last_active_month_acct,
 is_first_month_acct,
 is_last_month_acct,

@@ -113,7 +113,7 @@ CASE WHEN account_id = '0011R00002d3lTCQAY' then '1-800 Contacts, Inc.'
      WHEN account_id = '0011R00002faFsyQAE' then 'Universal Service Administrative Corporation'
      WHEN account_id = '001Dm00000F7UHMIA3' then 'World Shipping, Inc.'
      WHEN account_id = '0011R00002jT99DQAS' then 'WRK Technologies Inc'
-     WHEN account_id = '0011R00002UxEwKQAV' then 'Mathematica (USDA)'
+     WHEN account_id = '0011R00002pmZ7LQAU' then 'Mathematica (USDA)'
      else account_name end as account_name,
 */
 CASE WHEN account_name = 'TD Ameritrade' then 'Charles Schwab' 
@@ -230,13 +230,17 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R0000135QZ1QAM' then to_date('2024-03-15') /* End date adjustment because of known churn Umlaut 500k */
      when opp_id = '0061R000010Q9dvQAC' then to_date('2024-03-15') /* End date adjustment because wrong in SFDC. TTC 142.5k */
      when opp_id = '0061R000013fGPFQA2' then to_date('2024-03-15') /* End date adjustment because replaced by expansion opp. MMH 60k */
-     when opp_id = '0061R00000yGqH3QAK' then to_date('2024-04-15') /* End date adjustment because of extension. SSA 2.3M */
-     when opp_id = '0061R00001A5k8bQAB' then to_date('2024-04-15') /* End date adjustment because of extension. SSA 1.45M */
-     when opp_id = '0061R000014wNrtQAE' then to_date('2024-04-15') /* End date adjustment because of extension. SSA 1.93M */
-     when opp_id = '0061R00000uL8ylQAC' then to_date('2024-04-15') /* End date adjustment because of open negitotaions. PMP $0 */
-     when opp_id = '0061R00000yFonNQAS' then to_date('2024-04-15') /* ENd date adjustment because of open negotiations. Metasource $0 */
-     when opp_id = '0061R000019QwEZQA0' then to_date('2024-04-15') /* End date adjustment because of open negotiations. DLA 40k */
-     when opp_id = '0061R00000zD2sxQAC' then to_date('2024-04-15') /* End date adjustment because of open negotiations. Coduent 1.98M */
+     when opp_id = '0061R00000yGqH3QAK' then to_date('2024-03-15') /* End date adjustment because of extension. SSA 2.3M */
+     when opp_id = '0061R00001A5k8bQAB' then to_date('2024-03-15') /* End date adjustment because of extension. SSA 1.45M */
+     when opp_id = '0061R000014wNrtQAE' then to_date('2024-03-15') /* End date adjustment because of extension. SSA 1.93M */
+     when opp_id = '006Dm0000047m76IAA' then to_date('2024-03-15') /* End date adjustment because wog in SFDC. Transflo upsell 236k */
+     when opp_id = '0061R00000uL8ylQAC' then to_date('2024-05-15') /* End date adjustment because of open negitotaions. PMP $0 */
+     when opp_id = '0061R00000yFonNQAS' then to_date('2024-05-15') /* ENd date adjustment because of open negotiations. Metasource $0 */
+     when opp_id = '0061R000019QwEZQA0' then to_date('2024-05-15') /* End date adjustment because of open negotiations. DLA 40k */
+     when opp_id = '0061R00000zD2sxQAC' then to_date('2024-05-15') /* End date adjustment because of open negotiations. Coduent 1.98M */
+     when opp_id = '0061R000014yHlcQAE' then to_date('2024-05-15') /* End date adjustment because of open negotiations. Transflo 1.3M */
+     when opp_id = '0061R000014wI4vQAE' then to_date('2024-05-15') /* End date adjustment because of open negotiations. State of CO 214k */
+     when opp_id = '006Dm0000049UIxIAM' then to_date('2024-05-15') /* End date adjustment because of open negotiations. Kovack 50k */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')

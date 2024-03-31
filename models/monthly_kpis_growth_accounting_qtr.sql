@@ -156,7 +156,9 @@ ga.new_arr,
 ga.expansion_arr,
 ga.churn_arr,
 ga.de_book_arr,
-CASE WHEN to_date(qtr_end_dte) > '2021-11-30' then (ga.ending_arr - 64286) else ga.ending_arr end as ending_arr,
+CASE WHEN to_date(qtr_end_dte) > '2021-11-30' and to_date(qtr_end_dte) < '2023-02-28' then (ga.ending_arr - 64286) 
+     WHEN to_date(qtr_end_dte) >= '2023-02-28' then (ga.ending_arr - 112936)
+     else ga.ending_arr end as ending_arr,
 ga.logo_churn_arr,
 ga.arr_churn_arr,
 ga.beginning_customer,
