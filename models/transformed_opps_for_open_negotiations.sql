@@ -16,10 +16,8 @@ where opp_id in (
 '0061R000010Q9dvQAC', /* End date adjustment because of open negotiations. TTC 142.5k */  
 '0061R00001A4rKQQAZ', /* Kovack. Transformed for renewal date purposes only */
 '0061R000019QwEZQA0', /* End date adjustment because of open negotiations. DLA 40k */
-'0061R00000zD2sxQAC',  /* End date adjustment because of open negotiations. Coduent 1.98M */
 '0061R000014yHlcQAE', /* End date adjustment because of open negotiations. Transflo 1.3M */
-'0061R000014wI4vQAE', /* End date adjustment because of open negotiations. State of CO 214k */
-'006Dm0000049UIxIAM'  /* End date adjustment because of open negotiations. Kovack 50k */
+'0061R000014wI4vQAE' /* End date adjustment because of open negotiations. State of CO 214k */
 )
 )
 
