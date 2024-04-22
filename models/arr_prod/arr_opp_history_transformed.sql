@@ -148,7 +148,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R00000yFonNQAS' then to_date('2024-05-15') /* ENd date adjustment because of open negotiations. Metasource $0 */
      when opp_id = '0061R000019QwEZQA0' then to_date('2024-05-15') /* End date adjustment because of open negotiations. DLA 40k */
      when opp_id = '0061R000014yHlcQAE' then to_date('2024-05-15') /* End date adjustment because of open negotiations. Transflo 1.3M */
-     when opp_id = '0061R000014wI4vQAE' then to_date('2024-05-15') /* End date adjustment because of open negotiations. State of CO 214k */
+ --    when opp_id = '0061R000014wI4vQAE' then to_date('2024-05-15') /* End date adjustment because of open negotiations. State of CO 214k */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
