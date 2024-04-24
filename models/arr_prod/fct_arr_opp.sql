@@ -373,13 +373,13 @@ CASE WHEN is_first_month = true and mrr > 0 then 'new'
 CASE WHEN is_first_month_acct = true then 'new'
      WHEN is_active_acct = false and previous_month_is_active_acct = true and next_month_is_active_acct = false then 'churn'
      WHEN (is_active_acct = true OR (is_active_acct = false AND previous_month_is_active_acct = true AND next_month_is_active_acct = true)) then 'active'
-     ELSE NULL
+     ELSE 'churn'
      END AS customer_category,
 CASE WHEN customer_category = 'new' and mrr_change_acct > 0 then 'new'
      WHEN customer_category = 'active' and mrr_change_acct = 0 then 'recurring'
      WHEN customer_category = 'active' and mrr_change_acct > 0 then 'expansion'
      WHEN mrr_change_acct < 0 then 'churn'
-     ELSE NULL end as revenue_category
+     ELSE 'churn' end as revenue_category
 from change_table_int
 ),
 
@@ -498,8 +498,15 @@ is_first_month,
 is_last_month,
 account_mrr as mrr_acct,
 CASE WHEN account_id = '0011R00002GUq1HQAT' and to_date(date_month) = '2023-12-01' then 245000 
+     WHEN account_id = '0011R00002GUq1HQAT' and to_date(date_month) = '2022-02-01' then -64285.71  
+     WHEN account_id = '0011R00002YVbLNQA1' and to_date(date_month) = '2024-03-01' then 167686
+     WHEN account_id = '0011R00002YVbLNQA1' and to_date(date_month) = '2022-12-01' then -48650
+     else mrr_change_acct end as mrr_change_acct,
+/*
+CASE WHEN account_id = '0011R00002GUq1HQAT' and to_date(date_month) = '2023-12-01' then 245000 
      WHEN account_id = '0011R00002YVbLNQA1' and to_date(date_month) = '2024-03-01' then 167686
      else mrr_change_acct end as mrr_change_acct,
+*/
 CASE WHEN mrr_acct = 0 then mrr_change_acct else mrr_acct end as mrr_reporting_acct,
 is_active_acct,
 CASE WHEN account_id = '0011R00002GUq1HQAT' then to_date('2023-12-01') 
