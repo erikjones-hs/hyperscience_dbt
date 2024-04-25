@@ -231,5 +231,6 @@ select * from raw_data_transformed where opp_id not in
 '006Dm000005ESjnIAG', /* Removing SSA Amendment Opp because it is incorporated in the ARR adjustment to existing opp */
 '0061R000019R8fwQAC', /* Removing mutual of Omaha because it was replaced by an upsell opp */
 '006Dm000005ET13IAG', /* Air Force Renewal Churn Tracking */
-'006Dm000005ESOCIA4'  /* Mathematica Churn Tracking */
+'006Dm000005ESOCIA4', /* Mathematica Churn Tracking */
+'006Dm000004AP8WIAW'  /* CarMAx */
 )
