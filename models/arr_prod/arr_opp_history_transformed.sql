@@ -19,7 +19,6 @@ select
 CASE WHEN account_id = '0011R000026iP6rQAE' then '0013600001iRke2AAC' 
      WHEN account_id = '0013600001hWo0yAAC' then '0011R00002HKzaCQAT'
      when account_id = '0011R00002UxEwKQAV' then '0011R00002pmZ7LQAU'
-     when account_id = '00136000009czySAAQ' then '001Dm000002jMVdIAM'
      when account_id = '001Dm000002jMVdIAM' then '00136000009czySAAQ'
      else account_id end as account_id,
 CASE WHEN account_name = 'TD Ameritrade' then 'Charles Schwab' 
