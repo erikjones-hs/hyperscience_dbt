@@ -501,6 +501,7 @@ CASE WHEN account_id = '0011R00002GUq1HQAT' and to_date(date_month) = '2023-12-0
      WHEN account_id = '0011R00002GUq1HQAT' and to_date(date_month) = '2022-02-01' then -64285.71  
      WHEN account_id = '0011R00002YVbLNQA1' and to_date(date_month) = '2024-03-01' then 167686
      WHEN account_id = '0011R00002YVbLNQA1' and to_date(date_month) = '2022-12-01' then -48650
+     when account_id = '0011R00002p4GKbQAM' and to_date(date_month) = '2024-02-01' then -125000
      else mrr_change_acct end as mrr_change_acct,
 /*
 CASE WHEN account_id = '0011R00002GUq1HQAT' and to_date(date_month) = '2023-12-01' then 245000 
@@ -511,6 +512,7 @@ CASE WHEN mrr_acct = 0 then mrr_change_acct else mrr_acct end as mrr_reporting_a
 is_active_acct,
 CASE WHEN account_id = '0011R00002GUq1HQAT' then to_date('2023-12-01') 
      WHEN account_id = '0011R00002YVbLNQA1' then to_date('2024-03-01') 
+     when account_id = '0011R00002p4GKbQAM' then to_date('2024-05-01')
      else first_active_month_acct end as first_active_month_acct,
 last_active_month_acct,
 is_first_month_acct,
@@ -534,6 +536,7 @@ CASE WHEN opp_id = '0061R000010t71kQAA' and to_date(date_month) = '2022-01-01' t
      when opp_id = '0061R000014yfmYQAQ' and to_date(date_month) = '2024-02-01' then 'de-book' /* Pepsi */
      when opp_id = '006Dm000005CfdRIAS' and to_date(date_month) = '2023-12-01' then 'new' /* DISA */
      when opp_id = '006Pm000009gE9RIAU' and to_date(date_month) = '2024-03-01' then 'new' /* State of CT */
+     when opp_id = '006Pm00000ERWQLIA5' and to_date(date_month) = '2024-05-01' then 'new' /* Pepsi */
      else customer_category end as customer_category,
 CASE WHEN opp_id = '0061R000010t71kQAA' and to_date(date_month) = '2022-01-01' then 'de-book' /* Sience SAS */
      when opp_id = '0061R000014vnNlQAI' and to_date(date_month) = '2023-01-01' then 'de-book' /* i3 Systems */
@@ -545,6 +548,7 @@ CASE WHEN opp_id = '0061R000010t71kQAA' and to_date(date_month) = '2022-01-01' t
      when opp_id = '0061R000014yfmYQAQ' and to_date(date_month) = '2024-02-01' then 'de-book' /* Pepsi */
      when opp_id = '006Dm000005CfdRIAS' and to_date(date_month) = '2023-12-01' then 'new' /* DISA */
      when opp_id = '006Pm000009gE9RIAU' and to_date(date_month) = '2024-03-01' then 'new' /* State of CT */
+     when opp_id = '006Pm00000ERWQLIA5' and to_date(date_month) = '2024-05-01' then 'new' /* Pepsi */
      else revenue_category end as revenue_category
 from change_table
 order by account_id, start_dte_month asc, date_month asc
