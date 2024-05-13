@@ -502,6 +502,7 @@ CASE WHEN account_id = '0011R00002GUq1HQAT' and to_date(date_month) = '2023-12-0
      WHEN account_id = '0011R00002YVbLNQA1' and to_date(date_month) = '2024-03-01' then 167686
      WHEN account_id = '0011R00002YVbLNQA1' and to_date(date_month) = '2022-12-01' then -48650
      when account_id = '0011R00002p4GKbQAM' and to_date(date_month) = '2024-02-01' then -125000
+     when account_id = '0011R00002p4GKbQAM' and to_date(date_month) = '2024-05-01' then 125000
      else mrr_change_acct end as mrr_change_acct,
 /*
 CASE WHEN account_id = '0011R00002GUq1HQAT' and to_date(date_month) = '2023-12-01' then 245000 
