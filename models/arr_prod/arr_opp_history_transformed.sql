@@ -73,7 +73,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R000010ujZ5QAI' then to_date('2022-06-15') /* Adjusting end date because of new contract with expansion that starts in June */
      when opp_id = '0061R0000137ijiQAA' then to_date('2022-06-29') /* End date adjustment due to negotiated end of contract. Johnson Law Group 25k */
      when opp_id = '0061R0000137jqkQAA' then to_date('2022-08-19') /* Adjusting end date because wrong in Salesforce. QAI 35k */
-     when opp_id = '0061R00000zDCt9QAG' then to_date('2024-08-24') /* End date adjustment because renewal date was wrong in snapshot */
+     when opp_id = '0061R00000zDCt9QAG' then to_date('2024-05-15') /* End date adjustment because renewal date was wrong in snapshot */
      when opp_id = '0061R000010QadCQAS' then to_date('2027-03-15') /* End date adjustment to account for amended contract. Philadelphia Insureance Company 300k */
      when opp_id = '0061R0000137jsqQAA' then to_date('2022-08-15') /* Adjusting End Date for historical accuracy. Pac Life 330k */
      when opp_id = '0061R000010O65hQAC' then to_date('2022-08-15') /* Adjusting End Date for historical accuracy. First American Financial 1M */
@@ -156,8 +156,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
   --   when opp_id = '0061R00001A6BeZQAV' then to_date('2024-06-15') /* End date adjustment because of open negotiations. Guarddian Life 250k */
    --  when opp_id = '0061R00001A5eXkQAJ' then to_date('2024-07-15') /* ADP */
      when opp_id = '0061R000010O3QoQAK' then to_date('2024-07-15') /* CDCR */
-     when opp_id = '006Pm000008xmdVIAQ' then to_date('2024-07-15') /* Transflo */
-     when opp_id = '0061R00000zDCt9QAG' then to_date('2024-05-15') /* Foresters */   
+     when opp_id = '006Pm000008xmdVIAQ' then to_date('2024-07-15') /* Transflo */  
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
