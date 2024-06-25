@@ -158,6 +158,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R000010O3QoQAK' then to_date('2024-07-15') /* CDCR */
      when opp_id = '006Pm000008xmdVIAQ' then to_date('2024-07-15') /* Transflo */  
      when opp_id = '0061R000016nPUDQA2' then to_date('2024-06-15') /* End date adjustment because of early churn. FTI 130k */
+     when opp_id = '006Dm000002cWmAIAU' then to_date('2024-06-15') /* End date adjustment becayse of early churn. Sentry 75k */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
