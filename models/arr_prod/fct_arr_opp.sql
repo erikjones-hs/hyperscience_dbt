@@ -528,6 +528,7 @@ CASE WHEN opp_id = '0061R000010t71kQAA' and to_date(date_month) = '2022-01-01' t
      when opp_id = '0061R000014yfmYQAQ' and to_date(date_month) = '2024-02-01' then 'de-book' /* Pepsi */
      when opp_id = '0061R000016kGCyQAM' and to_date(date_month) = '2024-05-01' then 'de-book' /* WRK */
      when opp_id = '0061R00001A6F76QAF' and to_date(date_month) = '2024-05-01' then 'de-book' /* WRK */
+     when opp_id = '006Dm000002cWmAIAU' and to_date(date_month) = '2024-06-01' then 'de-book' /* Sentry */
      else opp_category end as opp_category,
 CASE WHEN opp_id = '0061R000010t71kQAA' and to_date(date_month) = '2022-01-01' then 'de-book' /* Sience SAS */
      when opp_id = '0061R000014vnNlQAI' and to_date(date_month) = '2023-01-01' then 'de-book' /* i3 Systems */
@@ -539,6 +540,7 @@ CASE WHEN opp_id = '0061R000010t71kQAA' and to_date(date_month) = '2022-01-01' t
      when opp_id = '0061R000014yfmYQAQ' and to_date(date_month) = '2024-02-01' then 'de-book' /* Pepsi */
      when opp_id = '0061R000016kGCyQAM' and to_date(date_month) = '2024-05-01' then 'de-book' /* WRK */
      when opp_id = '0061R00001A6F76QAF' and to_date(date_month) = '2024-05-01' then 'de-book' /* WRK */
+     when opp_id = '006Dm000002cWmAIAU' and to_date(date_month) = '2024-06-01' then 'de-book' /* Sentry */
      when opp_id = '006Dm000005CfdRIAS' and to_date(date_month) = '2023-12-01' then 'new' /* DISA */
      when opp_id = '006Pm000009gE9RIAU' and to_date(date_month) = '2024-03-01' then 'new' /* State of CT */
      when opp_id = '006Pm00000ERWQLIA5' and to_date(date_month) = '2024-05-01' then 'new' /* Pepsi */
@@ -553,6 +555,7 @@ CASE WHEN opp_id = '0061R000010t71kQAA' and to_date(date_month) = '2022-01-01' t
      when opp_id = '0061R000014yfmYQAQ' and to_date(date_month) = '2024-02-01' then 'de-book' /* Pepsi */
      when opp_id = '0061R000016kGCyQAM' and to_date(date_month) = '2024-05-01' then 'de-book' /* WRK */
      when opp_id = '0061R00001A6F76QAF' and to_date(date_month) = '2024-05-01' then 'de-book' /* WRK */
+     when opp_id = '006Dm000002cWmAIAU' and to_date(date_month) = '2024-06-01' then 'de-book' /* Sentry */
      when opp_id = '006Dm000005CfdRIAS' and to_date(date_month) = '2023-12-01' then 'new' /* DISA */
      when opp_id = '006Pm000009gE9RIAU' and to_date(date_month) = '2024-03-01' then 'new' /* State of CT */
      when opp_id = '006Pm00000ERWQLIA5' and to_date(date_month) = '2024-05-01' then 'new' /* Pepsi */
