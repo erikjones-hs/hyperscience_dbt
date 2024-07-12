@@ -200,6 +200,7 @@ CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
      when opp_id = '006Dm000002dNKAIA2' then to_date('2023-11-01')
      when opp_id = '006Dm000005O514IAC' then to_date('2023-11-15')
      when opp_id = '006Dm000002fQa8IAE' then to_date('2023-11-29')
+     when opp_id = '006Pm00000FTwEWIA1' then to_date('2024-07-11')
      ELSE start_dte_raw end as start_dte,
 closed_won_dte,
 date_trunc('month',to_date(start_dte)) as start_dte_month,
@@ -247,6 +248,5 @@ select * from raw_data_transformed where opp_id not in
 '0061R000019R8fwQAC', /* Removing mutual of Omaha because it was replaced by an upsell opp */
 '006Dm000005ET13IAG', /* Air Force Renewal Churn Tracking */
 '006Dm000005ESOCIA4', /* Mathematica Churn Tracking */
-'006Dm000004AP8WIAW', /* CarMAx */
-'006Pm00000FTwEWIA1' /* RTI. Can add this after 45 day trial period */
+'006Dm000004AP8WIAW'  /* CarMAx */
 )
