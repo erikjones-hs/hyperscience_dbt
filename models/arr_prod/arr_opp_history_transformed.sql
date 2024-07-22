@@ -143,8 +143,8 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R00001A4vicQAB' then to_date('2025-03-30') /* End date adjustment because it is wrong in SFDC. Conduent 1.98M */
      when opp_id = '0061R00001A3ujGQAR' then to_date('2024-03-15') /* End date adjustment because it is replaced by another opp. Philly Insurance 360k */
      when opp_id = '0061R00000zD2sxQAC' then to_date('2024-04-15') /* End date adjustment because it is wrong in SFDC. Coduent 1.98M */
-     when opp_id = '0061R00000uL8ylQAC' then to_date('2024-08-15') /* End date adjustment because of open negitotaions. PMP $0 */
-     when opp_id = '0061R00000yFonNQAS' then to_date('2024-08-15') /* ENd date adjustment because of open negotiations. Metasource $0 */
+     when opp_id = '0061R00000uL8ylQAC' then to_date('2022-10-15') /* End date adjustment because of open negitotaions. PMP $0 */
+     when opp_id = '0061R00000yFonNQAS' then to_date('2023-05-15') /* ENd date adjustment because of open negotiations. Metasource $0 */
      when opp_id = '0061R000019QwEZQA0' then to_date('2024-05-15') /* End date adjustment because it is wrong in SFDC. DLA 40k */
      when opp_id = '0061R000014yHlcQAE' then to_date('2024-08-15') /* End date adjustment because of open negotiations. Transflo 1.3M */
   --   when opp_id = '0061R00000wLePIQA0' then to_date('2024-06-15') /* End date adjustment because of open negotiations. FirstRand 500k */
@@ -248,5 +248,6 @@ select * from raw_data_transformed where opp_id not in
 '0061R000019R8fwQAC', /* Removing mutual of Omaha because it was replaced by an upsell opp */
 '006Dm000005ET13IAG', /* Air Force Renewal Churn Tracking */
 '006Dm000005ESOCIA4', /* Mathematica Churn Tracking */
-'006Dm000004AP8WIAW'  /* CarMAx */
+'006Dm000004AP8WIAW', /* Carmax */
+'006Pm00000FTwEWIA1'  /* RTI */
 )
