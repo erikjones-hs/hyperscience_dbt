@@ -300,7 +300,7 @@ opp.SEATS,
 opp.SOFTWARE_VERSION
 from RAW.USAGE_REPORTING.ON_PREM_PROD as opp 
 left join FIVETRAN_DATABASE.SALESFORCE.INSTANCE_C as sfdc on (sfdc.id = opp.environment_id)
-where i.type_c = 'Prod'  
+where sfdc.type_c = 'Prod'  
 ),
 
 usage_all as (
