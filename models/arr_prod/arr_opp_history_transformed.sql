@@ -173,8 +173,9 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R000010POBOQA4' then to_date('2024-09-15') /* 1800 COntacts */
      when opp_id = '0061R0000137Uv3QAE' then to_date('2024-09-15') /* USAC */
      when opp_id = '0061R00001A5vURQAZ' then to_date('2024-09-15') /* Clean Harbors */
-     when opp_id = '006Dm000005MfwnIAC' then to_date('2024-09-15') /* Roche */
-     when opp_id = '006Dm000002dNKAIA2' then to_date('2024-09-15') /* US Navy */  
+ --    when opp_id = '006Dm000005MfwnIAC' then to_date('2024-09-15') /* Roche */
+     when opp_id = '006Dm000002dNKAIA2' then to_date('2024-09-15') /* US Navy */ 
+     when opp_id = '0061R000014yM9tQAE' then to_date('2024-09-15') /* Bedag */ 
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
@@ -260,5 +261,6 @@ select * from raw_data_transformed where opp_id not in
 '006Dm000005ET13IAG', /* Air Force Renewal Churn Tracking */
 '006Dm000005ESOCIA4', /* Mathematica Churn Tracking */
 '006Dm000004AP8WIAW', /* Carmax */
-'006Pm00000FTwEWIA1'  /* RTI */
+'006Pm00000FTwEWIA1', /* RTI */
+'006Dm000005Mb3uIAC'  /* QAI */
 )
