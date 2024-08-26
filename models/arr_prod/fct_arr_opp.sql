@@ -481,7 +481,7 @@ CASE WHEN account_id = '0011R00002d3lTCQAY' then '1-800 Contacts, Inc.'
      WHEN account_id = '001Dm00000F7UHMIA3' then 'World Shipping, Inc.'
      WHEN account_id = '0011R00002jT99DQAS' then 'WRK Technologies Inc'
      WHEN account_id = '0011R00002pmZ7LQAU' then 'Mathematica (USDA)'
-     when account_id = '0011R00002osNjBQAU' then 'Ciphix B.V.'
+ --    when account_id = '0011R00002osNjBQAU' then 'Ciphix B.V.'
      else account_name end as account_name,
 opp_id,
 opp_name,
