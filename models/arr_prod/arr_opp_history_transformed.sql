@@ -16,7 +16,8 @@ select * from {{ref('arr_opp_history')}}
 /* adjusting arr to match historical finance data from ARR Google Sheet */
 raw_data_transformed as (
 select 
-CASE WHEN account_id = '0011R000026iP6rQAE' then '0013600001iRke2AAC' 
+CASE WHEN opp_id in ('0061R00000zBWKMQA4','0061R000013fGPFQA2','0061R000016muACQAY') then '001Dm00000D0MSLIA3'
+     WHEN account_id = '0011R000026iP6rQAE' then '0013600001iRke2AAC' 
      WHEN account_id = '0013600001hWo0yAAC' then '0011R00002HKzaCQAT'
      when account_id = '0011R00002UxEwKQAV' then '0011R00002pmZ7LQAU'
      when account_id = '001Dm000002jMVdIAM' then '00136000009czySAAQ'
