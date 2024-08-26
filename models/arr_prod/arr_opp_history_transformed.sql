@@ -21,7 +21,7 @@ CASE WHEN opp_id in ('0061R00000zBWKMQA4','0061R000013fGPFQA2','0061R000016muACQ
      WHEN account_id = '0013600001hWo0yAAC' then '0011R00002HKzaCQAT'
      when account_id = '0011R00002UxEwKQAV' then '0011R00002pmZ7LQAU'
      when account_id = '001Dm000002jMVdIAM' then '00136000009czySAAQ'
-     when account_id = '001Dm000002mQAlIAM' then '0011R00002osNjBQAU'
+ --    when account_id = '001Dm000002mQAlIAM' then '0011R00002osNjBQAU'
      else account_id end as account_id,
 CASE WHEN account_name = 'TD Ameritrade' then 'Charles Schwab' 
      WHEN account_name = '8053580156557' then 'Department of Justice' 
@@ -168,7 +168,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R00001A6LOvQAN' then to_date('2024-07-15') /* Missouri Health */
      when opp_id = '006Dm000002dALYIA2' then to_date('2024-09-15') /* SSA */
      when opp_id = '006Dm000002ev8uIAA' then to_date('2024-09-15') /* State of New Mexico */
-     when opp_id = '006Dm000004jmVVIAY' then to_date('2024-09-15') /* Ciphix */
+ --    when opp_id = '006Dm000004jmVVIAY' then to_date('2024-09-15') /* Ciphix */
      when opp_id = '0061R00001363r8QAA' then to_date('2024-09-15') /* Border Patrol */
      when opp_id = '0061R00000zCBtnQAG' then to_date('2024-09-15') /* Trevi Pay */
      when opp_id = '0061R000010POBOQA4' then to_date('2024-09-15') /* 1800 COntacts */
