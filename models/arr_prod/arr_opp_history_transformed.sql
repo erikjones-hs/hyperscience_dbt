@@ -164,6 +164,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '006Dm000002dNKAIA2' then to_date('2024-11-15') /* US Navy. Updated end date because wrong in snapshot */ 
      when opp_id = '0061R00001BAvduQAD' then to_date('2026-07-15') /* Fidelity. Updated end date because wrong in snapshot */
      when opp_id = '0061R000016leRJQAY' then to_date('2024-08-15') /* Navix. Opp replaced by new one */
+     when opp_id = '0061R000014yJQFQA2' then to_date('2024-09-15') /* GAC. End date adjustment for non-payment. 42.3k */
      when opp_id = '0061R00001A6cAuQAJ' then to_date('2024-10-15') /* End date adjustment because of open negotiations. QBE 375k */
      when opp_id = '0061R0000137Uv3QAE' then to_date('2024-10-15') /* USAC */
  --    when opp_id = '0061R00001363r8QAA' then to_date('2024-09-15') /* Border Patrol */
