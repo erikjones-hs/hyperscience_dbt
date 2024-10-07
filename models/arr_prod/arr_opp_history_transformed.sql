@@ -177,8 +177,9 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '006Dm000002cWWgIAM' then to_date('2024-11-15') /* UNUM 500k */
      when opp_id = '0061R000019Qd92QAC' then to_date('2024-11-15') /* Ascensus 225k */
      when opp_id = '006Dm000002cTxZIAU' then to_date('2024-11-15') /* AIG 528k */
-     when opp_id = '0061R000016jr2lQAA' then to_date('2024-11-15') /* MARS 155k */
+ --    when opp_id = '0061R000016jr2lQAA' then to_date('2024-11-15') /* MARS 155k */
      when opp_id = '006Dm000005jhKNIAY' then to_date('2024-11-15') /* Mutual of Omaha 272k */
+     when opp_id = '006Pm00000CKzlBIAT' then to_date('2024-10-15') /* Transflo opp replaced by a new one */ 
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
