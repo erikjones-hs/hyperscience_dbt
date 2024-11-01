@@ -16,7 +16,8 @@ select * from {{ref('arr_opp_history')}}
 /* adjusting arr to match historical finance data from ARR Google Sheet */
 raw_data_transformed as (
 select 
-CASE WHEN opp_id in ('0061R00000zBWKMQA4','0061R000013fGPFQA2','0061R000016muACQAY') then '001Dm00000D0MSLIA3'
+CASE WHEN opp_id in ('0061R00000zBWKMQA4','0061R000016muACQAY') then '001Dm00000D0MSLIA3'
+     WHEN opp_id = '0061R000013fGPFQA2' then '0011R00002TWu7lQAD'
      WHEN account_id = '0011R000026iP6rQAE' then '0013600001iRke2AAC' 
      WHEN account_id = '0013600001hWo0yAAC' then '0011R00002HKzaCQAT'
      when account_id = '0011R00002UxEwKQAV' then '0011R00002pmZ7LQAU'
@@ -109,9 +110,9 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R000014wRB4QAM' then to_date('2023-08-15') /* End date adjustment because it is wrong in SFDC. IRS 300k */ 
      when opp_id = '0061R000014wNroQAE' then to_date('2023-09-15') /* End date adjustment because it is wrong in SFDC. Pacific Life 180k */ 
      when opp_id = '006Dm000002cdEUIAY' then to_date('2023-10-15') /* End date adjustment because wrong in SFDC. VA VICCS 1.5M */ 
-     when opp_id = '0061R000019QdXAQA0' then to_date('2024-11-29') /* End date adjustment because it is wrong in SFDC. Federated Mutual 130k */
+  --   when opp_id = '0061R000019QdXAQA0' then to_date('2024-11-29') /* End date adjustment because it is wrong in SFDC. Federated Mutual 130k */
      when opp_id = '0061R00001A4pwYQAR' then to_date('2023-10-15') /* End date adjustment because it is wrong in SFDC. Unum 690k */
-     when opp_id = '0061R000019Qd92QAC' then to_date('2024-10-29') /* End date adjustment because it is wrong in SFDC. Ascensus 225k */
+  --   when opp_id = '0061R000019Qd92QAC' then to_date('2024-10-29') /* End date adjustment because it is wrong in SFDC. Ascensus 225k */
      when opp_id = '0061R000016nZwpQAE' then to_date('2023-11-15') /* End date adjustment because it is wrong in SFDC. VetsEZ 500k */
      when opp_id = '0061R00001A43h0QAB' then to_date('2023-10-15') /* End date adjustment because combined with other IRS opp. IRS 180k */
      when opp_id = '006Dm000004A3YbIAK' then to_date('2023-11-15') /* End date adjustment because combined with another opp. Caada Life 40k */
@@ -148,35 +149,36 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R00000uL8ylQAC' then to_date('2022-10-15') /* End date adjustment because of open negitotaions. PMP $0 */
      when opp_id = '0061R00000yFonNQAS' then to_date('2023-05-15') /* ENd date adjustment because of open negotiations. Metasource $0 */
      when opp_id = '0061R000019QwEZQA0' then to_date('2024-05-15') /* End date adjustment because it is wrong in SFDC. DLA 40k */
-     when opp_id = '0061R000014yHlcQAE' then to_date('2024-09-15') /* End date adjustment because of open negotiations. Transflo 1.3M */
-  --   when opp_id = '0061R00000wLePIQA0' then to_date('2024-06-15') /* End date adjustment because of open negotiations. FirstRand 500k */
-   --  when opp_id = '0061R00001BAufLQAT' then to_date('2024-06-15') /* End date adjustment because of open negotiations. MIssion Underwriting 145k */
      when opp_id = '0061R000016kGCyQAM' then to_date('2024-05-15') /* End date adjustment because failed to pay. WRK 75k */
      when opp_id = '0061R00001A6F76QAF' then to_date('2024-05-15') /* End date adjustment because failed to pay. WRk 15k */
      when opp_id = '0061R000014wK2vQAE' then to_date('2024-05-15') /* End date adjustment because of open negotiations. NRO 30.3k */
-     when opp_id = '0061R00001A6cAuQAJ' then to_date('2024-09-15') /* End date adjustment because of open negotiations. QBE 375k */
-  --   when opp_id = '0061R00001A6BeZQAV' then to_date('2024-06-15') /* End date adjustment because of open negotiations. Guarddian Life 250k */
-   --  when opp_id = '0061R00001A5eXkQAJ' then to_date('2024-07-15') /* ADP */
      when opp_id = '0061R000010O3QoQAK' then to_date('2024-07-15') /* CDCR */
-     when opp_id = '006Pm000008xmdVIAQ' then to_date('2024-09-15') /* Transflo */
-     when opp_id = '0061R00001BAvduQAD' then to_date('2024-09-15') /* Fidelity */
-     when opp_id = '006Dm000005D1cXIAS' then to_date('2024-09-15') /* Canada LIfe */
      when opp_id = '0061R00001A5kzfQAB' then to_date('2024-08-15') /* Canada Life */  
      when opp_id = '0061R000016nPUDQA2' then to_date('2024-06-15') /* End date adjustment because of early churn. FTI 130k */
      when opp_id = '006Dm000002cWmAIAU' then to_date('2024-06-15') /* End date adjustment becayse of early churn. Sentry 75k */
      when opp_id = '0061R000010QaunQAC' then to_date('2024-06-15') /* Westpac 130k. Opp replaced by new one */
      when opp_id = '0061R00001A6LOvQAN' then to_date('2024-07-15') /* Missouri Health */
-     when opp_id = '006Dm000002dALYIA2' then to_date('2024-09-15') /* SSA */
-     when opp_id = '006Dm000002ev8uIAA' then to_date('2024-09-15') /* State of New Mexico */
- --    when opp_id = '006Dm000004jmVVIAY' then to_date('2024-09-15') /* Ciphix */
-     when opp_id = '0061R00001363r8QAA' then to_date('2024-09-15') /* Border Patrol */
-     when opp_id = '0061R00000zCBtnQAG' then to_date('2024-09-15') /* Trevi Pay */
+     when opp_id = '0061R000014yM9tQAE' then to_date('2024-08-15') /* Bedag */
      when opp_id = '0061R000010POBOQA4' then to_date('2024-09-15') /* 1800 COntacts */
-     when opp_id = '0061R0000137Uv3QAE' then to_date('2024-09-15') /* USAC */
-     when opp_id = '0061R00001A5vURQAZ' then to_date('2024-09-15') /* Clean Harbors */
- --    when opp_id = '006Dm000005MfwnIAC' then to_date('2024-09-15') /* Roche */
-     when opp_id = '006Dm000002dNKAIA2' then to_date('2024-09-15') /* US Navy */ 
-     when opp_id = '0061R000014yM9tQAE' then to_date('2024-09-15') /* Bedag */ 
+     when opp_id = '006Dm000002dALYIA2' then to_date('2025-03-15') /* SSA. Updated end date becaue wrong in snapshot */
+     when opp_id = '006Dm000005D1cXIAS' then to_date('2025-03-15') /* Canada LIfe. Updated end date because it is wrong in snapshot */
+     when opp_id = '006Dm000002dNKAIA2' then to_date('2024-12-15') /* US Navy. Updated end date because wrong in snapshot */ 
+     when opp_id = '0061R00001BAvduQAD' then to_date('2026-07-15') /* Fidelity. Updated end date because wrong in snapshot */
+     when opp_id = '0061R000016leRJQAY' then to_date('2024-08-15') /* Navix. Opp replaced by new one */
+     when opp_id = '0061R00001A6cAuQAJ' then to_date('2024-10-15') /* End date adjustment because of open negotiations. QBE 375k */
+     when opp_id = '0061R0000137Uv3QAE' then to_date('2024-12-15') /* USAC */
+     when opp_id = '0061R00001CxtHbQAJ' then to_date('2024-12-15') /* USAC 6.4k */
+     when opp_id = '0061R000019RV3tQAG' then to_date('2024-12-15') /* Dept of VA 7.6M*/
+     when opp_id = '006Dm000002cWWgIAM' then to_date('2024-12-15') /* UNUM 500k */
+     when opp_id = '0061R000019Qd92QAC' then to_date('2024-12-15') /* Ascensus 225k */
+     when opp_id = '006Dm000002cTxZIAU' then to_date('2024-12-15') /* AIG 528k */
+     when opp_id = '006Dm000005jhKNIAY' then to_date('2024-12-15') /* Mutual of Omaha 272k */
+     when opp_id = '006Pm00000CKzlBIAT' then to_date('2024-10-15') /* Transflo opp replaced by a new one */
+     when opp_id = '006Dm000002fQa8IAE' then to_date('2024-12-15') /* Accerta. 154.7k */
+     when opp_id = '006Dm000002eKjzIAE' then to_date('2024-12-15') /* Almac 155k */
+     when opp_id = '0061R000019RSXSQA4' then to_date('2024-12-15') /* Aviso 225k */
+     when opp_id = '0061R000019QdXAQA0' then to_date('2024-12-15') /* Federated 130k */
+     when opp_id = '006Dm000002dwQEIAY' then to_date('2024-12-15') /* DivvyDose 130k */ 
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')

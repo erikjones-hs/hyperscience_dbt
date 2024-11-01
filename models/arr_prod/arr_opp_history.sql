@@ -230,6 +230,26 @@ UNION
 select * from {{ref('arr_opp_history_110')}}
 UNION
 select * from {{ref('arr_opp_history_111')}}
+UNION
+select * from {{ref('arr_opp_history_112')}}
+UNION
+select * from {{ref('arr_opp_history_113')}}
+UNION
+select * from {{ref('arr_opp_history_114')}}
+UNION
+select * from {{ref('arr_opp_history_115')}}
+UNION
+select * from {{ref('arr_opp_history_116')}}
+UNION
+select * from {{ref('arr_opp_history_117')}}
+UNION
+select * from {{ref('arr_opp_history_118')}}
+UNION
+select * from {{ref('arr_opp_history_119')}}
+UNION
+select * from {{ref('arr_opp_history_120')}}
+UNION
+select * from {{ref('arr_opp_history_121')}}
 order by account_id, start_dte_raw asc
 )
 

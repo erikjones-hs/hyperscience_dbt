@@ -80,7 +80,8 @@ aaa.fy_year,
 aaa.fy_qtr_year,
 aaa.qtr_end_dte,
 row_number() over (partition by aaa.account_id, aaa.fy_year order by aaa.date_month desc) as fy_row_num,
-row_number() over (partition by aaa.account_id, aaa.fy_qtr_year order by aaa.date_month desc) as fq_row_num  
+row_number() over (partition by aaa.account_id, aaa.fy_qtr_year order by aaa.date_month desc) as fq_row_num,
+CASE WHEN customer_category = 'new' then row_number() over (partition by aaa.account_id, aaa.customer_category order by aaa.date_month desc) end as win_back_fl  
 from agg_account_arr_int2 as aaa
 order by account_id, date_month asc
 )
