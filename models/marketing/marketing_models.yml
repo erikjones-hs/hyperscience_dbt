@@ -1,0 +1,112 @@
+version: 2
+
+models:
+# ACTIVATION MODELS
+  - name: campaign_members_with_activity
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+
+
+
+# INTERMEDIATE MODELS
+  - name: int_sf_sales_activites
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+  - name: int_hubspot_contacts
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+  - name: int_sf_lead
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+  - name: int_sf_contact
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+  - name: int_sf_opportunity
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+  - name: int_sf_campaign
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+  - name: int_sf_campaign_member
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+
+# STAGING MODELS
+  - name: stg_sf_lead
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+  - name: stg_sf_contact
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+  - name: stg_sf_opportunity
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+  - name: stg_sf_opportunity_contact_role
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+  - name: stg_sf_campaign
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+  - name: stg_sf_campaign_member
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+  - name: stg_sf_task
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+  - name: stg_sf_event
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+  - name: stg_hubspot_contacts
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
