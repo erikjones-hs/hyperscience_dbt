@@ -8,3 +8,8 @@ sources:
       - name: acquisition_report
       - name: acquisition_report_version_2
       - name: page_path_report
+  - name: hubspot
+    database: fivetran_database
+    schema: hubspot
+    tables:
+        - name: contact

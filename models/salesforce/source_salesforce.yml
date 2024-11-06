@@ -22,3 +22,5 @@ sources:
       - name: bizible_2_bizible_attribution_touchpoint_c
       - name: bizible_2_bizible_touchpoint_c
       - name: bizible_2_bizible_person_c
+      - name: task
+      - name: event

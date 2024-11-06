@@ -47,8 +47,8 @@ models:
         +materialized: table
 
     marketing:
-      +database: PROD
-      +schema: MARKETING
+      +database: "{{ target.database }}"
+      +schema: "{{ target.schema }}"
 
       marketing_staging:
         +materialized: view
