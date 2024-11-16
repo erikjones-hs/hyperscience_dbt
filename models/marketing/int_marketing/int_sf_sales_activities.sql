@@ -16,6 +16,11 @@ with
                 else 'Other' end as type
             ,t.subject
             ,t.description
+            ,case when subject like 'Email:%>>%' then 'Reach Out'
+                    when subject like 'LinkedIn Connect: >>%' then 'Reach Out'
+                  when subject like 'Email:%<<%' then 'Response' 
+                    when lower(subject) like '%inmail%response%' then 'Response'
+                  else 'Unknown' end as activity_direction
         from {{ ref('stg_sf_task')}} t
         left join {{ ref('int_sf_lead')}} l
             on t.who_id = l.id
@@ -39,6 +44,7 @@ with
                 ,'Meeting' as type
                 ,e.subject
                 ,e.description
+                ,'Response' as activity_direction
             from {{ ref('stg_sf_event')}} e
             left join {{ ref('int_sf_lead')}} l
                 on e.who_id = l.id
@@ -68,6 +74,7 @@ select
     ,a.type
     ,a.subject
     ,a.description
+    ,a.activity_direction
 from sales_activities a
 left join {{ ref('int_hubspot_contacts')}} hc
     on a.email = hc.email
