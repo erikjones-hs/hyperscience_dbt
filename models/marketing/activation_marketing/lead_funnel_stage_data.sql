@@ -1,3 +1,5 @@
+{{ config(materialized='table')}}
+
 with
     first_attributed_opportunities as (
         select
