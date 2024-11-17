@@ -1,3 +1,5 @@
+{{ config(materialized='table')}}
+
 with
     post_campaign_activities as (
         select

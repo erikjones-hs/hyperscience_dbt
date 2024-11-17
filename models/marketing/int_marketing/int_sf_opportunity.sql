@@ -1,3 +1,5 @@
+{{ config(materialized='table')}}
+
 with
     first_opp_contact as (
         select
