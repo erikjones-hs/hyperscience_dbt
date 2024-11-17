@@ -46,6 +46,10 @@ models:
       salesforce_marts:
         +materialized: table
 
+    marketing:
+      +database: PROD
+      +schema: MARKETING
+
       marketing_staging:
         +materialized: view
 
