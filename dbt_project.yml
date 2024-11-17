@@ -46,10 +46,6 @@ models:
       salesforce_marts:
         +materialized: table
 
-    marketing:
-      +database: "{{ target.database }}"
-      +schema: "{{ target.schema }}"
-
       marketing_staging:
         +materialized: view
 
