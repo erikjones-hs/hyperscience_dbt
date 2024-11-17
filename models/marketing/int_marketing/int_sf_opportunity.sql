@@ -20,11 +20,13 @@ with
 select
     oa.*
     ,c.email as attribution_contact_email
+    ,hc.id as attribution_hubspot_contact_id
     ,row_number() over (partition by oa.attribution_contact_id order by oa.created_date) as attribution_contact_opp_number
     ,hc.acquisition_channel_type
     ,hc.acquisition_channel
     ,hc.acquisition_channel_detail
     ,hc.acquisition_channel_campaign
+    ,hc.acquisition_channel_keyword
     ,hc.lead_creation_source_type
     ,hc.lead_create_source as lead_creation_source
     ,hc.lead_create_source_detail as lead_creation_source_detail
