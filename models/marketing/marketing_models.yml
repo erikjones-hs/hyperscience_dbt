@@ -8,6 +8,12 @@ models:
         tests:
           - not_null
           - unique
+  - name: lead_funnel_stage_data
+    columns:
+      - name: hubspot_contact_id
+        tests:
+          - not_null
+          - unique
 
 
 
