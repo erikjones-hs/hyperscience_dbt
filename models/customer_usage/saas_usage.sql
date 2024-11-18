@@ -103,11 +103,17 @@ CASE WHEN customer_int = 'irc-prod' then 'IRC'
      when customer_int = 'worldgroup-prod' then 'World Shipping'
      when customer_int = 'rts2transflo-prod' then 'RTS2 Transflo prod'
      when customer_int = 'fti' then 'FTI'
+     when customer_int = 'mckinsey-prod' then 'McKinsey'
+     when customer_int = 'frankrimerman-prod' then 'Frank Rimerman'
+     when customer_int = 'irishlife-prod' then 'Irish Life'
+     when customer_int = 'topbuild-prod' then 'Top Build'
+
      ELSE 'non-prod' end as customer 
 from "RAW"."USAGE_REPORTING"."SAAS_PROD"
 where customer_int in ('irc-prod','promomash-prod','transflo-prod','benefitmall-prod','kovack-prod','missionunderwriters-prod','cifinancial-prod',
                        'lossexpress-prod','vault-prod','resound-prod','navix-prod','rtstransflo-prod','momentum','carmax-prod','outgo-prod','cleanharbors-prod',
-                       'harborcompliance-prod','sentryfunding-prod','gac-prod','sahomeloans-prod','stryker-prod','compiq-prod','mems-prod','worldgroup-prod','rts2transflo-prod','fti')
+                       'harborcompliance-prod','sentryfunding-prod','gac-prod','sahomeloans-prod','stryker-prod','compiq-prod','mems-prod','worldgroup-prod','rts2transflo-prod','fti',
+                       'mckinsey-prod','frankrimerman-prod','irishlife-prod','topbuild-prod')
 order by customer, period_start asc
 ),
 
