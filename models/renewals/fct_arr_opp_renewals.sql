@@ -23,6 +23,7 @@ CASE WHEN aoh.opp_id = '0061R00001A4pwYQAR' then to_timestamp('2023-10-01')
      when aoh.opp_id = '0061R00001A4pwxQAB' then to_timestamp('2023-11-01')
      when aoh.opp_id = '0061R00001A4rKQQAZ' then to_timestamp('2023-11-01')
      when aoh.opp_id = '006Dm000002dhpbIAA' then to_timestamp('2024-02-01')
+     when aoh.opp_id = '0061R00001A6cAuQAJ' then to_timestamp('2024-10-01')
      else to_timestamp(date_trunc('month',aoh.end_dte_raw)) end as end_dte_raw_month,
 to_timestamp(fao.end_dte) as end_dte,
 CASE WHEN aoh.opp_id = '0061R00001A4pwYQAR' then to_timestamp('2023-10-29') 
@@ -30,6 +31,7 @@ CASE WHEN aoh.opp_id = '0061R00001A4pwYQAR' then to_timestamp('2023-10-29')
      when aoh.opp_id = '0061R00001A4pwxQAB' then to_timestamp('2023-11-29')
      when aoh.opp_id = '0061R00001A4rKQQAZ' then to_timestamp('2023-11-29')
      when aoh.opp_id = '006Dm000002dhpbIAA' then to_timestamp('2024-02-15')
+     when aoh.opp_id = '0061R00001A6cAuQAJ' then to_timestamp('2024-10-15')
      else to_timestamp(aoh.end_dte_raw) end as end_dte_raw,
 fao.mrr,
 fao.mrr_change,
