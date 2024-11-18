@@ -41,7 +41,7 @@ usl.sfdc_account_name
 from RAW.USAGE_REPORTING.ON_PREM_PROD as cd
 left join "FIVETRAN_DATABASE"."GOOGLE_SHEETS"."USAGE_SFDC_LOOKUP_ACCOUNT_LEVEL" as usl on (trim(split_part(cd.customer,'-',0)) = usl.customer_usage_data)  
 where usl.customer_usage_data IS NULL
-and customer not in ('Hyper Labs Test-001Ou000007urbtIAA','Hyper Labs, Inc. (Internal Only)-0011R00002jTW74QAG')
+and customer not in ('Hyper Labs Test-001Ou000007urbtIAA','Hyper Labs, Inc. (Internal Only)-0011R00002jTW74QAG','Hewlett Packard Enterprise (Partner)')
 group by cd.customer, usl.sfdc_account_id, usl.sfdc_account_name
 order by customer, dte desc    
 ),
