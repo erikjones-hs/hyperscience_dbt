@@ -19,7 +19,6 @@ where opp_id in (
 '0061R00000wLePIQA0', /* End date adjustment because of open negotiations. FirstRand 500k */
 '0061R00001BAufLQAT', /* End date adjustment because of open negotiations. MIssion Underwriting 145k */
 '0061R000014wK2vQAE', /* End date adjustment because of open negotiations. NRO 30.3k */
-'0061R00001A6cAuQAJ', /* End date adjustment because of open negotiations. QBE 375k */
 '0061R00001A6BeZQAV'  /* End date adjustment because of open negotiations. Guarddian Life 250k */   
 )
 )
