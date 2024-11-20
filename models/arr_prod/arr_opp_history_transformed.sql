@@ -171,12 +171,8 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R000019RV3tQAG' then to_date('2024-12-15') /* Dept of VA 7.6M*/
      when opp_id = '006Dm000002cWWgIAM' then to_date('2024-12-15') /* UNUM 500k */
      when opp_id = '0061R000019Qd92QAC' then to_date('2024-10-15') /* Ascensus 225k */
- --    when opp_id = '006Dm000002cTxZIAU' then to_date('2024-12-15') /* AIG 528k */
- --    when opp_id = '006Dm000005jhKNIAY' then to_date('2024-12-15') /* Mutual of Omaha 272k */
      when opp_id = '006Pm00000CKzlBIAT' then to_date('2024-10-15') /* Transflo opp replaced by a new one */
      when opp_id = '006Dm000002fQa8IAE' then to_date('2024-12-15') /* Accerta. 154.7k */
-  --   when opp_id = '006Dm000002eKjzIAE' then to_date('2024-12-15') /* Almac 155k */
-  --   when opp_id = '0061R000019RSXSQA4' then to_date('2024-12-15') /* Aviso 225k */
      when opp_id = '0061R000019QdXAQA0' then to_date('2024-12-15') /* Federated 130k */
      when opp_id = '006Dm000002dwQEIAY' then to_date('2024-12-15') /* DivvyDose 130k */ 
      ELSE end_dte_raw end as end_dte,
