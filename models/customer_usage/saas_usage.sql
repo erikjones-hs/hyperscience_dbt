@@ -107,7 +107,7 @@ CASE WHEN customer_int = 'irc-prod' then 'IRC'
      when customer_int = 'frankrimerman-prod' then 'Frank Rimerman'
      when customer_int = 'irishlife-prod' then 'Irish Life'
      when customer_int = 'topbuild-prod' then 'Top Build'
-
+     when customer_int = 'chs-prod' then 'CHS Inc.' 
      ELSE 'non-prod' end as customer 
 from "RAW"."USAGE_REPORTING"."SAAS_PROD"
 where customer_int in ('irc-prod','promomash-prod','transflo-prod','benefitmall-prod','kovack-prod','missionunderwriters-prod','cifinancial-prod',
