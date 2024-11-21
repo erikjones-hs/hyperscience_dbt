@@ -105,6 +105,7 @@ sfdc.instance_group_c as instance_group,
 sfdc.fqdn_c as fqdn,
 opa.date,
 opa.customer,
+SPLIT_PART(opa.software_version,'@',1) as software_version,
 sum(opa.NUMBER_OF_PAGES_CREATED) as total_pages
 from sfdc 
 left join on_prem_auto as opa on (sfdc.id = opa.environment_id)
@@ -120,8 +121,9 @@ environment_type,
 instance_group,
 fqdn,
 customer,
-sum(total_pages) over (partition by sfdc_license_key_name, environment_id, environment_type, instance_group, fqdn, customer) as total_pages_processed,
-max(date) over (partition by sfdc_license_key_name, environment_id, environment_type, instance_group, fqdn, customer) as latest_day_receiving_usage
+software_version,
+sum(total_pages) over (partition by sfdc_license_key_name, environment_id, environment_type, instance_group, fqdn, customer, software_version) as total_pages_processed,
+max(date) over (partition by sfdc_license_key_name, environment_id, environment_type, instance_group, fqdn, customer, software_version) as latest_day_receiving_usage
 from fct_combined_int
 )
 
