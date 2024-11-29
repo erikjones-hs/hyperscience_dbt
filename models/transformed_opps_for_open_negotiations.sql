@@ -13,13 +13,15 @@ from {{ref('arr_opp_history')}}
 where opp_id in (
 '0061R00000uL8ylQAC', /* End date adjustment because of open negitotaions. PMP $0 */
 '0061R00000yFonNQAS', /* ENd date adjustment because of open negotiations. Metasource $0 */    
-'0061R00001A4rKQQAZ', /* Kovack. Transformed for renewal date purposes only */
-'0061R000019QwEZQA0', /* End date adjustment because of open negotiations. DLA 40k */
-'0061R000014yHlcQAE', /* End date adjustment because of open negotiations. Transflo 1.3M */
-'0061R00000wLePIQA0', /* End date adjustment because of open negotiations. FirstRand 500k */
-'0061R00001BAufLQAT', /* End date adjustment because of open negotiations. MIssion Underwriting 145k */
-'0061R000014wK2vQAE', /* End date adjustment because of open negotiations. NRO 30.3k */
-'0061R00001A6BeZQAV'  /* End date adjustment because of open negotiations. Guarddian Life 250k */   
+'006Dm000002dNKAIA2', /* US Navy. Updated end date because wrong in snapshot */ 
+'0061R00001A6cAuQAJ', /* End date adjustment because of open negotiations. QBE 375k */
+'0061R0000137Uv3QAE',  /* USAC */
+'0061R00001CxtHbQAJ', /* USAC 6.4k */
+'0061R000019RV3tQAG', /* Dept of VA 7.6M*/
+'006Dm000002cWWgIAM', /* UNUM 500k */
+'006Dm000002fQa8IAE', /* Accerta. 154.7k */
+'0061R000019QdXAQA0', /* Federated 130k */
+'006Dm000002dwQEIAY' /* DivvyDose 130k */    
 )
 )
 
