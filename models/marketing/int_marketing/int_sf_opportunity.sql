@@ -32,6 +32,14 @@ select
     ,coalesce(oa.lead_creation_source_type_c, hc.lead_creation_source_type) as lead_create_source_type_c
     ,coalesce(oa.lead_creation_source_c, hc.lead_create_source) as lead_creation_source
     ,coalesce(oa.lead_creation_source_detail_c, hc.lead_create_source_detail) as lead_creation_source_detail
+    ,hc.latest_channel_type
+    ,hc.latest_channel
+    ,hc.latest_channel_detail
+    ,hc.latest_channel_campaign
+    ,hc.latest_channel_keyword
+    ,hc.latest_lead_source_type
+    ,hc.latest_lead_source
+    ,hc.latest_lead_source_detail
 from opps_with_attribution_contact_id oa
 left join {{ ref('int_sf_contact')}} c
     on oa.attribution_contact_id = c.id
