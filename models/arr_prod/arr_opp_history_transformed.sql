@@ -166,15 +166,20 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '0061R00001BAvduQAD' then to_date('2026-07-15') /* Fidelity. Updated end date because wrong in snapshot */
      when opp_id = '0061R000016leRJQAY' then to_date('2024-08-15') /* Navix. Opp replaced by new one */
      when opp_id = '0061R00001A6cAuQAJ' then to_date('2024-10-15') /* End date adjustment because of open negotiations. QBE 375k */
-     when opp_id = '0061R0000137Uv3QAE' then to_date('2024-12-15') /* USAC */
-     when opp_id = '0061R00001CxtHbQAJ' then to_date('2024-12-15') /* USAC 6.4k */
-     when opp_id = '0061R000019RV3tQAG' then to_date('2024-12-15') /* Dept of VA 7.6M*/
-     when opp_id = '006Dm000002cWWgIAM' then to_date('2024-12-15') /* UNUM 500k */
+     when opp_id = '0061R0000137Uv3QAE' then to_date('2025-01-15') /* USAC */
+     when opp_id = '0061R00001CxtHbQAJ' then to_date('2024-11-15') /* USAC 6.4k */
+     when opp_id = '0061R000019RV3tQAG' then to_date('2025-01-15') /* Dept of VA 7.6M*/
+     when opp_id = '006Dm000002cWWgIAM' then to_date('2025-01-15') /* UNUM 500k */
      when opp_id = '0061R000019Qd92QAC' then to_date('2024-10-15') /* Ascensus 225k */
      when opp_id = '006Pm00000CKzlBIAT' then to_date('2024-10-15') /* Transflo opp replaced by a new one */
-     when opp_id = '006Dm000002fQa8IAE' then to_date('2024-12-15') /* Accerta. 154.7k */
-     when opp_id = '0061R000019QdXAQA0' then to_date('2024-12-15') /* Federated 130k */
-     when opp_id = '006Dm000002dwQEIAY' then to_date('2024-12-15') /* DivvyDose 130k */ 
+ --    when opp_id = '006Dm000002fQa8IAE' then to_date('2024-12-15') /* Accerta. 154.7k */
+     when opp_id = '0061R000019QdXAQA0' then to_date('2024-11-15') /* Federated 130k */
+     when opp_id = '006Dm000002dwQEIAY' then to_date('2025-01-15') /* DivvyDose 130k */ 
+     when opp_id = '006Dm000002dc2eIAA' then to_date('2025-01-15') /* FM Global 125k*/
+     when opp_id = '006Dm000005jgEdIAI' then to_date('2025-01-15') /* Frank Rierman 300k */
+     when opp_id = '006Dm000002dc7ZIAQ' then to_date('2025-01-15') /* Legal General 253k */
+     when opp_id = '006Dm000005CfdRIAS' then to_date('2025-01-15') /* DISA 245k */
+     when opp_id = '006Dm000002enOzIAI' then to_date('2025-01-15') /* Vault 69.6k */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
