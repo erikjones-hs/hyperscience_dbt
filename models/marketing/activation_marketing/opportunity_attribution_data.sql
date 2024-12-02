@@ -2,6 +2,7 @@
 
 select
     id
+    ,hubspot_deal_id
     ,attribution_contact_email
     ,attribution_contact_id
     ,attribution_hubspot_contact_id
