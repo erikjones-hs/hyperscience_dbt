@@ -30,6 +30,12 @@ models:
         tests:
           - not_null
           - unique
+  - name: int_hubspot_deals
+    columns:
+      - name: deal_id
+        tests:
+          - not_null
+          - unique
   - name: int_sf_lead
     columns:
       - name: id
@@ -113,6 +119,12 @@ models:
   - name: stg_hubspot_contacts
     columns:
       - name: id
+        tests:
+          - not_null
+          - unique
+  - name: stg_hubspot_deals
+    columns:
+      - name: deal_id
         tests:
           - not_null
           - unique

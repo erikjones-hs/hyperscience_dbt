@@ -23,6 +23,7 @@ select
     oa.*
     ,c.email as attribution_contact_email
     ,hc.id as attribution_hubspot_contact_id
+    ,hd.deal_id as hubspot_deal_id
     ,row_number() over (partition by oa.attribution_contact_id order by oa.created_date) as attribution_contact_opp_number
     ,coalesce(oa.acquisition_channel_type_c, hc.acquisition_channel_type) as acquisition_channel_type
     ,coalesce(oa.acquisition_channel_c, hc.acquisition_channel) as acquisition_channel
@@ -40,8 +41,20 @@ select
     ,hc.latest_lead_source_type
     ,hc.latest_lead_source
     ,hc.latest_lead_source_detail
+    /*
+    ,coalesce(oa.latest_channel_type, hc.latest_channel_type) as latest_channel_type
+    ,coalesce(oa.latest_channel, hc.latest_channel) as latest_channel
+    ,coalesce(oa.latest_channel_detail, hc.latest_channel_detail) as latest_channel_detail
+    ,coalesce(oa.latest_channel_campaign, hc.latest_channel_campaign) as latest_channel_campaign
+    ,coalesce(oa.latest_channel_keyword, hc.latest_channel_keyword) as latest_channel_keyword
+    ,coalesce(oa.latest_lead_source_type, hc.latest_lead_source_type) as latest_lead_source_type
+    ,coalesce(oa.latest_lead_source, hc.latest_lead_source) as latest_lead_source
+    ,coalesce(oa.latest_lead_source_detail, hc.latest_lead_source_detail) as latest_lead_source_detail
+    */
 from opps_with_attribution_contact_id oa
 left join {{ ref('int_sf_contact')}} c
     on oa.attribution_contact_id = c.id
 left join {{ ref('int_hubspot_contacts')}} hc
     on c.email = hc.email
+left join {{ ref('int_hubspot_deals')}} hd
+    on oa.id = hd.hs_salesforceopportunityid
