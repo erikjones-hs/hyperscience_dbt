@@ -13,3 +13,4 @@ sources:
     schema: hubspot
     tables:
         - name: contact
+        - name: deal
