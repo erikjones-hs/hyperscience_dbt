@@ -29,7 +29,8 @@ sfdc_account_name,
 avg(total_pages_created) over (partition by customer) as mean_pages_processed,
 stddev_samp(total_pages_created) over (partition by customer) as std_dev_pages_processed,
 max(to_date(dte_month)) over (partition by customer) as latest_date_received,
-min(to_date(dte_month)) over (partition by customer) as first_date_received
+CASE WHEN total_pages_created > 0 then dte_month else null end as first_month_processing_data,
+min(to_date(first_month_processing_data)) over (partition by customer) as first_date_received
 from usage_combined
 order by customer, dte_month asc
 ),
