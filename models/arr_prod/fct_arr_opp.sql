@@ -111,6 +111,7 @@ CASE WHEN opp_id = '0063600000X36zWAAR' and to_date(joi.date_month) <= '2019-06-
      when opp_id = '0061R000014yeOrQAI' and to_date(joi.date_month) >= '2023-08-01' then 75000
      when opp_id = '0061R000014wNrtQAE' and to_date(joi.date_month) >= '2023-09-01' then 1106559
      when opp_id = '006Dm000002cWWgIAM' and to_date(joi.date_month) >= '2023-10-01' then 500000
+     when opp_id = '0061R00001A5nzwQAB' and to_date(joi.date_month) >= '2024-12-01' and to_date(joi.date_month) <= '2025-01-01' then 3746667  
      ELSE joi.mrr end as mrr
 from joined_opportunity_int as joi 
 ),
