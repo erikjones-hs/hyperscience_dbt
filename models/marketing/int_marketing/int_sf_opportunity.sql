@@ -33,24 +33,14 @@ select
     ,coalesce(oa.lead_creation_source_type_c, hc.lead_creation_source_type) as lead_create_source_type_c
     ,coalesce(oa.lead_creation_source_c, hc.lead_create_source) as lead_creation_source
     ,coalesce(oa.lead_creation_source_detail_c, hc.lead_create_source_detail) as lead_creation_source_detail
-    ,hc.latest_channel_type
-    ,hc.latest_channel
-    ,hc.latest_channel_detail
-    ,hc.latest_channel_campaign
-    ,hc.latest_channel_keyword
-    ,hc.latest_lead_source_type
-    ,hc.latest_lead_source
-    ,hc.latest_lead_source_detail
-    /*
-    ,coalesce(oa.latest_channel_type, hc.latest_channel_type) as latest_channel_type
-    ,coalesce(oa.latest_channel, hc.latest_channel) as latest_channel
-    ,coalesce(oa.latest_channel_detail, hc.latest_channel_detail) as latest_channel_detail
-    ,coalesce(oa.latest_channel_campaign, hc.latest_channel_campaign) as latest_channel_campaign
-    ,coalesce(oa.latest_channel_keyword, hc.latest_channel_keyword) as latest_channel_keyword
-    ,coalesce(oa.latest_lead_source_type, hc.latest_lead_source_type) as latest_lead_source_type
-    ,coalesce(oa.latest_lead_source, hc.latest_lead_source) as latest_lead_source
-    ,coalesce(oa.latest_lead_source_detail, hc.latest_lead_source_detail) as latest_lead_source_detail
-    */
+    ,coalesce(oa.latest_channel_type_c, hc.latest_channel_type) as latest_channel_type
+    ,coalesce(oa.latest_channel_c, hc.latest_channel) as latest_channel
+    ,coalesce(oa.latest_channel_detail_c, hc.latest_channel_detail) as latest_channel_detail
+    ,coalesce(oa.latest_channel_campaign_c, hc.latest_channel_campaign) as latest_channel_campaign
+    ,coalesce(oa.latest_channel_keyword_c, hc.latest_channel_keyword) as latest_channel_keyword
+    ,coalesce(oa.latest_lead_source_type_c, hc.latest_lead_source_type) as latest_lead_source_type
+    ,coalesce(oa.latest_lead_source_c, hc.latest_lead_source) as latest_lead_source
+    ,coalesce(oa.latest_lead_source_detail_c, hc.latest_lead_source_detail) as latest_lead_source_detail
 from opps_with_attribution_contact_id oa
 left join {{ ref('int_sf_contact')}} c
     on oa.attribution_contact_id = c.id
