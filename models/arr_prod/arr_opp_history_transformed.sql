@@ -182,8 +182,8 @@ CASE WHEN opp_id = '0063600000X36zWAAR' then to_date('2020-07-01')
      when opp_id = '006Dm000003LoDwIAK' then to_date('2025-03-15') /* CRL 262.5k */
      when opp_id = '006Pm00000ACXLpIAP' then to_date('2025-03-15') /* Mercury 20k */
      when opp_id = '006Dm000003Lp5fIAC' then to_date('2025-03-15') /* Mercury 225k */
-     when opp_id = '006Pm000004foD5IAI' then to_date('2023-03-15') /* IDA 100k */
-     when opp_id = '006Pm00000Ia5wUIAR' then to_date('2023-03-15') /* Transflo 1.05M */
+     when opp_id = '006Pm000004foD5IAI' then to_date('2025-03-15') /* IDA 100k */
+     when opp_id = '006Pm00000Ia5wUIAR' then to_date('2025-03-15') /* Transflo 1.05M */
      ELSE end_dte_raw end as end_dte,
 end_dte_raw,
 CASE WHEN opp_id = '0061R00000uINyXQAW' then to_date('2020-08-01')
