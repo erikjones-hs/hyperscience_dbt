@@ -13,5 +13,6 @@ where
     type in ('Lead','Contact')
     and email is not null
     and campaign_id in (
-        '701Pm00000Y27wMIAR'
+        '701Pm00000Y27wMIAR',
+        '701Pm00000Z2ticIAB'
     )
